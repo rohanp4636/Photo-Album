@@ -1,0 +1,13 @@
+#loginPane{
+	-fx-background-image: url("background.png");
+	
+}
+#userName{
+	-fx-background-color:#383838;
+	-fx-text-fill:#ffffff;
+}
+
+.button:pressed {
+	-fx-border-color: white;
+	-fx-border-width: 1;
+}

@@ -1,0 +1,136 @@
+@font-face{
+	src: url("BebasNeueRegular.otf");
+}
+
+
+#anchorPane{
+	-fx-background-color:  #1e1e1e;  /* #202020 */
+}
+
+#basePane{
+	-fx-background-color:  #110010;
+}
+
+#tilePane {
+		-fx-background-color:  #110010;  /*101010 */
+		/* #050510    #010811*/
+		
+}
+
+#scrollPane .scroll-bar {
+    -fx-background-color:#110010;
+}
+
+#scrollPane .scroll-bar .thumb {
+    -fx-background-color:#1e1e1e;
+   
+}
+#scrollPane .scroll-bar.increment-arrow {
+    -fx-background-color:#ea2e49;
+ }
+  
+#scrollPane .scroll-bar .decrement-arrow {
+    -fx-background-color:#ea2e49;
+  }
+  
+ #scrollPane > .corner {
+    -fx-background-color: #110010;
+}
+
+
+#scrollPane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-background-color: #110010;
+    
+}
+
+  
+.button {
+	-fx-background-color: #000000;
+	-fx-text-fill:  #ea2e49;
+	-fx-font-family: "Bebas Neue Regular";
+	-fx-font-size: 15px;
+}
+
+.button:pressed {
+	-fx-border-color: #ea2e49;
+	-fx-border-width: 1;
+}
+
+.toggle-button{
+	-fx-background-color: #000000;
+	-fx-text-fill:  #ea2e49;
+	-fx-font-family: "Bebas Neue Regular";
+	-fx-font-size: 15px;
+}
+
+.toggle-button:selected {
+	-fx-border-color: #ea2e49;
+	-fx-border-width: 3;
+}
+
+
+
+
+#logoutButton{
+	-fx-background-color: #000000;
+	-fx-text-fill:   #19b5fe;
+}
+#logoutButton:pressed {
+	-fx-border-color: #19b5fe;
+	-fx-border-width: 1;
+}
+
+#backButton{
+	-fx-background-color: #000000;
+	-fx-text-fill:   #19b5fe;
+}
+#backButton:pressed {
+	-fx-border-color: #19b5fe;
+	-fx-border-width: 1;
+}
+
+
+.text-field{
+	-fx-background-color:#000000;
+	-fx-text-fill: #ea2e49;
+}
+
+.text-area .content{
+	-fx-background-color:#000000;
+	-fx-text-fill: #ea2e49;
+	-fx-border-width: 0;
+	
+}
+
+.text-area {
+	-fx-background-color:#000000;
+	-fx-border-width: 0;
+	-fx-text-fill: #ea2e49;
+	-fx-font-family: "Bebas Neue Regular";
+	
+}
+
+.label{
+	-fx-font-family: "Bebas Neue Regular";
+	-fx-text-fill: #ea2e49;
+	
+}
+
+.tree-table-view{
+		-fx-background-color:#000000;
+		-fx-font-family: "Bebas Neue Regular";
+		-fx-text-fill: #ea2e49;
+}
+
+.tree-table-view {
+		-fx-background-color:#000000;
+		-fx-font-family: "Bebas Neue Regular";
+		-fx-text-fill: #ea2e49;
+}
+
+.tree-table-view .column-header {
+    -fx-background-color: #1e1e1e;
+}
+
+
