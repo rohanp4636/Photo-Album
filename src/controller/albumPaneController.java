@@ -14,11 +14,13 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.User;
 
-public class adminPaneController {
-	@FXML TextField userName;
-	@FXML Button searchButton;
+public class albumPaneController {
+
+	@FXML Button openButton;
 	@FXML Button createButton;
+	@FXML Button renameButton;
 	@FXML Button deleteButton;
+	@FXML Button searchButton;
 	@FXML Button logoutButton;
 	
 	@FXML TilePane tilePane;
@@ -30,27 +32,33 @@ public class adminPaneController {
 	Scene prev;
 	loginPaneController lpg;
 	
-	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg) {
+	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName) {
 		this.primaryStage = primaryStage;
 		this.users = user;
 		this.prev = prev;
 		this.lpg = lpg;
 		
-		//userName.setText("in adminPane start");
 	}
 	
-	public void searchUser(ActionEvent e){
+	public void openAlbum(ActionEvent e){
 		
 	}
 	
-	public void createUser(ActionEvent e){
+	public void createAlbum(ActionEvent e){
 		
 	}
 	
-	public void deleteUser(ActionEvent e){
+	public void renameAlbum(ActionEvent e){
 		
 	}
 	
+	public void deleteAlbum(ActionEvent e){
+		
+	}
+	
+	public void searchAlbum(ActionEvent e){
+		
+	}
 	public void logout(ActionEvent e){
 		primaryStage.setScene(prev);
 	}

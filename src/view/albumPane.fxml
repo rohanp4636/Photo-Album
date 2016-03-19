@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginPaneController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.albumPaneController">
    <children>
       <ScrollPane fx:id="scrollPane" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="655.0" prefWidth="1280.0" style="-fx-background-color: #110010;">
          <content>
@@ -17,16 +17,16 @@
       </ScrollPane>
       <ButtonBar layoutX="681.0" layoutY="17.0" prefHeight="40.0" prefWidth="351.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Open" />
-            <Button mnemonicParsing="false" text="Create" />
-            <Button mnemonicParsing="false" text="Rename" />
-            <Button mnemonicParsing="false" text="Delete" />
-            <Button fx:id="searchButton" mnemonicParsing="false" text="Search" />
+          <Button fx:id="openButton" mnemonicParsing="false" onAction="#openAlbum" text="Open" />
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#createAlbum" text="Create" />
+            <Button fx:id="renameButton" mnemonicParsing="false" onAction="#renameAlbum" text="Rename" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchAlbum" text="Search" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0">
         <buttons>
-          <Button fx:id="logoutButton" mnemonicParsing="false" text="Logout" />
+          <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="Logout" />
         </buttons>
       </ButtonBar>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">

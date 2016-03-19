@@ -9,8 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -29,24 +31,34 @@ public class loginPaneController {
 	public void start(Stage primaryStage, ArrayList<User> user) {
 		this.primaryStage = primaryStage;
 		this.users = user;
-		loginScene = primaryStage.getScene();
 	}
 	
 	
 	public void login(ActionEvent e) {
+		loginScene = primaryStage.getScene();
 		String s = userName.getText().trim();
 		FXMLLoader loader= new FXMLLoader();
-		
-
-		
+				
 		if(s.equals("admin")){
+			userName.clear();
 			adminLogin();
 		}
 		else{
 			if(users.contains(s)){
-				userLogin(s);
+				userName.clear();
+				userLogin(s);   
 			}
-		}
+			else{
+				Alert message = new Alert(AlertType.INFORMATION);
+				message.initOwner(primaryStage);
+				message.setTitle("Login Error");
+				message.setHeaderText("Cannot Login");
+				message.setContentText("Username is incorrect.");
+				message.setGraphic(null);
+				message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+				message.showAndWait();
+			}
+		}		
 		
 	}	
 	public void adminLogin() {
@@ -55,12 +67,9 @@ public class loginPaneController {
 			loader.setLocation(getClass().getResource("/view/adminPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
 			adminPaneController apg = loader.getController();
-			apg.start(primaryStage,users);
+			apg.start(primaryStage,users, loginScene,this);
 			Scene scene = new Scene(root);	
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("Photos");
 			primaryStage.setScene(scene);
-
 			root.requestFocus();
 			
 		} catch(Exception e) {
@@ -69,7 +78,19 @@ public class loginPaneController {
 	}
 	
 	public void userLogin(String name){
-		
+		try{
+			FXMLLoader loader= new FXMLLoader();
+			loader.setLocation(getClass().getResource("/view/albumPane.fxml"));
+			AnchorPane root = (AnchorPane)loader.load();
+			albumPaneController apg = loader.getController();
+			apg.start(primaryStage,users, loginScene,this, name);
+			Scene scene = new Scene(root);	
+			primaryStage.setScene(scene);
+			root.requestFocus();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 		
 		
