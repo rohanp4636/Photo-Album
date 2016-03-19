@@ -36,7 +36,7 @@ public class loginPaneController {
 	
 	public void login(ActionEvent e) {
 		loginScene = primaryStage.getScene();
-		String s = userName.getText().trim();
+		String s = userName.getText().trim().toLowerCase();
 		FXMLLoader loader= new FXMLLoader();
 				
 		if(s.equals("admin")){

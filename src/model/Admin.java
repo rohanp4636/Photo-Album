@@ -8,6 +8,7 @@ public class Admin {
 	
 	ArrayList<User> userList = new ArrayList<User>();
 	
+	
 	public ArrayList<User> getUsers(){
 		return userList;
 	}

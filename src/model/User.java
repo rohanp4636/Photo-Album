@@ -12,17 +12,25 @@ import javafx.scene.text.TextAlignment;
 
 public class User {
 
-	String userName;
+	public String userName;
 
 	ArrayList<Album> albums;
+	
 	
 	Label label;
 	Image image;
 	ImageView imageView;
 	
-	public User(){
+	public User(String name){
 		albums = new ArrayList<Album>();
+		this.userName = name;
 		label = new Label();
+		label.setId(name);
+		Boolean test = this.setUserImage();
+	}
+	
+	public Label getLabel(){
+		return label;
 	}
 	
 	public void updateAlbum(){
@@ -45,6 +53,7 @@ public class User {
 		
 		return true;
 	}
+	
 	
 	
 }

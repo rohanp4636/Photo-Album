@@ -18,9 +18,9 @@
       </ScrollPane>
       <ButtonBar layoutX="761.0" layoutY="17.0" prefHeight="40.0" prefWidth="351.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#searchUser" text="Search" />
-            <Button mnemonicParsing="false" onAction="#createUser" text="Create" />
-            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#deleteUser" prefHeight="29.0" prefWidth="75.0" text="Delete" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchUser" text="Search" />
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#createUser" text="Create" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteUser" prefHeight="29.0" prefWidth="75.0" text="Delete" />
         </buttons>
       </ButtonBar>
       <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0">
@@ -33,6 +33,6 @@
             <Image url="@title.png" />
          </image>
       </ImageView>
-      <TextField layoutX="705.0" layoutY="23.0" prefHeight="30.0" prefWidth="149.0" promptText="Enter Username" />
+      <TextField fx:id="userName" layoutX="705.0" layoutY="23.0" prefHeight="30.0" prefWidth="149.0" promptText="Enter Username" />
    </children>
 </AnchorPane>

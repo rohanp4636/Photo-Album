@@ -31,12 +31,14 @@ public class albumPaneController {
 	ArrayList<User> users;
 	Scene prev;
 	loginPaneController lpg;
+	String userName;
 	
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName) {
 		this.primaryStage = primaryStage;
 		this.users = user;
 		this.prev = prev;
 		this.lpg = lpg;
+		this.userName = userName;
 		
 	}
 	

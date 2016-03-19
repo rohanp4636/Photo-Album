@@ -12,17 +12,17 @@ public class Tag {
 	}
 	
 	public Boolean addTag(String name){
-		if(tagValue.contains(name.toUpperCase())){
+		if(tagValue.contains(name.toLowerCase())){
 			return false;
 		}
-		tagValue.add(name.toUpperCase());
+		tagValue.add(name.toLowerCase());
 		return true;
 		
 	}
 	
 	public Boolean deleteTag(String name){
 		for(String i: tagValue){
-			if(i.equals(name.toUpperCase())){
+			if(i.equals(name.toLowerCase())){
 				tagValue.remove(i);
 				return true;
 			}
