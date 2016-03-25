@@ -38,25 +38,24 @@ public class adminPaneController {
 	loginPaneController lpg;
 	
 	
-	int selectedUser;
+	static int selectedUser;
+	static String selected;
 	
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg) {
 		this.primaryStage = primaryStage;
 		this.users = user;
 		this.prev = prev;
 		this.lpg = lpg;
-		this.selectedUser = 0;
+		adminPaneController.selectedUser = 0;
 		for(int i = 0; i < users.size(); i++){
 			tilePane.getChildren().add(users.get(i).getLabel());
 		}
 	
-		/*for(int i = 0; i < this.users.size(); i++){
-			Label label = users.get(i).getLabel();
-			tilePane.getChildren().add(label);
-		}*/
 		
 		
-		//userName.setText("in adminPane start");
+		
+		
+		
 	}
 	
 	public void searchUser(ActionEvent e){
@@ -72,6 +71,8 @@ public class adminPaneController {
 			message.showAndWait();
 			return;
 		}
+		
+		//else if(users))
 		
 		//is not in list
 		

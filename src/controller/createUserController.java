@@ -42,6 +42,16 @@ public class createUserController {
 			message.showAndWait();
 			
 		}
+		else if(name.length() > 30){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Create User Error");
+			message.setHeaderText("Cannot Create User");
+			message.setContentText("Username must be 30 characters or less.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+		}
 		else if(users.contains(name.toLowerCase())){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
