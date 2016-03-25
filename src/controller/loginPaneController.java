@@ -44,11 +44,17 @@ public class loginPaneController {
 			adminLogin();
 		}
 		else{
-			if(users.contains(s)){
-				userName.clear();
-				userLogin(s);   
+			Boolean found = false;
+			for(int i = 0; i < users.size(); i++){
+				if(users.get(i).userName.equalsIgnoreCase(s)){
+					userName.clear();
+					found = true;
+					userLogin(s);
+					break;
+				}
 			}
-			else{
+		
+			if(found == false){
 				Alert message = new Alert(AlertType.INFORMATION);
 				message.initOwner(primaryStage);
 				message.setTitle("Login Error");

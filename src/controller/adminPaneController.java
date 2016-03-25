@@ -46,6 +46,10 @@ public class adminPaneController {
 		this.prev = prev;
 		this.lpg = lpg;
 		this.selectedUser = 0;
+		for(int i = 0; i < users.size(); i++){
+			tilePane.getChildren().add(users.get(i).getLabel());
+		}
+	
 		/*for(int i = 0; i < this.users.size(); i++){
 			Label label = users.get(i).getLabel();
 			tilePane.getChildren().add(label);
