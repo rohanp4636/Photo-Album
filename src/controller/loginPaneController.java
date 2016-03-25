@@ -38,8 +38,8 @@ public class loginPaneController {
 		loginScene = primaryStage.getScene();
 		String s = userName.getText().trim().toLowerCase();
 		FXMLLoader loader= new FXMLLoader();
-				
-		if(s.equals("admin")){
+		String admin = "admin";
+		if(s.equalsIgnoreCase(admin)){
 			userName.clear();
 			adminLogin();
 		}

@@ -68,6 +68,10 @@ public class adminPaneController {
 			message.showAndWait();
 			return;
 		}
+		
+		//is not in list
+		
+		//if in list then select user
 	}
 	
 	public void createUser(ActionEvent e) throws IOException{
