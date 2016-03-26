@@ -7,6 +7,7 @@ import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,33 +35,31 @@ public class adminPaneController {
 	@FXML ScrollPane scrollPane;
 	
 	Stage primaryStage;
-	ArrayList<User> users;
+	public static ArrayList<User> users;
 	Scene prev;
 	loginPaneController lpg;
 	
 	
-	static int selectedUser;
-	static String selected;
+	public static String selected;
+	public static Boolean isSelected = false;
 	
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg) {
 		this.primaryStage = primaryStage;
-		this.users = user;
+		adminPaneController.users = user;
 		this.prev = prev;
 		this.lpg = lpg;
-		adminPaneController.selectedUser = 0;
+		selected = null;
+		isSelected = false;
 		for(int i = 0; i < users.size(); i++){
 			tilePane.getChildren().add(users.get(i).getLabel());
 		}
-	
-		
-		
-		
-		
 		
 	}
 	
-	public void searchUser(ActionEvent e){
-		String name = userName.getText();
+	public void searchUser(ActionEvent e){  // fix search dd select sometimes does sometimes doesnt.  select something and search for another.
+		deselect();
+		String name = userName.getText().trim();
+		userName.clear();
 		if(name.isEmpty()){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(primaryStage);
@@ -71,15 +71,59 @@ public class adminPaneController {
 			message.showAndWait();
 			return;
 		}
+		else{
+			Boolean found = false;
+			int select = 0;
+			 for(int i = 0; i < users.size(); i++){
+				   if(users.get(i).userName.equalsIgnoreCase(name)){ 
+					   select = i;
+					   found = true;
+					   break;
+				   }
+			   }
+			 if(found){
+				 
+				 	Bounds vp = scrollPane.getViewportBounds();
+				 	double height = scrollPane.getContent().getBoundsInLocal().getHeight();
+				 	double width = scrollPane.getContent().getBoundsInLocal().getWidth();
+				 	double labelLow = ((Label)tilePane.getChildren().get(select)).getBoundsInParent().getMinY();
+				 	double labelHigh = 0;
+				 	for(int i = 0; i < tilePane.getChildren().size(); i++){
+				 		double x = ((Label)tilePane.getChildren().get(i)).getBoundsInParent().getMaxX();
+				 		if(x > labelHigh){
+				 			labelHigh = x;
+				 		}
+					}
+				 	double vpLow = (height - vp.getHeight()) * scrollPane.getVvalue();
+				 	double vpHigh = vpLow + vp.getHeight();
+				 	
+				 	 if (labelLow < vpLow) {
+				 		scrollPane.setVvalue(labelLow / (height - vp.getHeight()));
+					 }
+				 	 else if (labelHigh > vpHigh) {
+					   	scrollPane.setVvalue((labelHigh - vp.getHeight()) / (height - vp.getHeight()));
+					    users.get(select).selectImage();
+					}
+				 
+			 }
+			 else{
+				 Alert message = new Alert(AlertType.INFORMATION);
+				 message.initOwner(primaryStage);
+				 message.setTitle("Search Error");
+				 message.setHeaderText("Search Completed");
+				 message.setContentText("Username was not found.");
+				 message.setGraphic(null);
+				 message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+				 message.showAndWait();
+				 return;
+			 }
+		}
 		
-		//else if(users))
 		
-		//is not in list
-		
-		//if in list then select user
 	}
 	
 	public void createUser(ActionEvent e) throws IOException{
+			deselect();
 		   Stage stageAdd = new Stage();
 		   
 		   FXMLLoader load = new FXMLLoader();
@@ -96,9 +140,11 @@ public class adminPaneController {
 		   stageAdd.initOwner(primaryStage);
 		   root.requestFocus();
 		   stageAdd.showAndWait();
+		   
 	}
 	
 	public void deleteUser(ActionEvent e) throws IOException{
+		
 		if(users.size() == 0){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(primaryStage);
@@ -110,7 +156,7 @@ public class adminPaneController {
 			message.showAndWait();
 			return;
 		}
-		if(selectedUser == -1){
+		if(getSelectedUser() == -1){
 			return;
 		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -130,23 +176,56 @@ public class adminPaneController {
 			   message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			   message.setGraphic(null);
 			   message.showAndWait();
+			   int userIndex = getSelectedUser();
 			   for(int i = 0; i < tilePane.getChildren().size(); i++){
 				   Label label = (Label) tilePane.getChildren().get(i);
-				   if(label.getId().equalsIgnoreCase(users.get(selectedUser).userName)){
+				   if(label.getId().equalsIgnoreCase(users.get(userIndex).userName)){
 					   tilePane.getChildren().remove(i);
-					   users.remove(selectedUser);
+					   users.remove(userIndex);
 				   }
 			   }
+		   
 	
 			   			   
 			   
 		   }
+		deselect();
 	}
 	
 	public void logout(ActionEvent e){
+		deselect();
 		primaryStage.setScene(prev);
 	}
 	
+	
+	public int getSelectedUser(){
+		if(!isSelected && selected != null){
+			return -1;
+		}
+		for(int i = 0; i < tilePane.getChildren().size(); i++){
+			if(tilePane.getChildren().get(i).getId().equalsIgnoreCase(selected)){
+				return i;
+			}
+		}
+		return -1;
+		
+	}
+	
+	public void deselect(){
+		int x = getSelectedUser();
+		if(x == -1){
+			selected = null;
+			isSelected = false;
+			return;
+		}
+		if(isSelected && x >= 0 && x < users.size()){
+			if(((Label)tilePane.getChildren().get(x)).getStylesheets().size() == 2){
+				((Label)tilePane.getChildren().get(x)).getStylesheets().remove(1);
+			}
+		}
+		selected = null;
+		isSelected = false;
+	}
 	
 	
 	

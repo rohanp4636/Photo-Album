@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.adminPaneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -25,6 +26,9 @@ public class User {
 	Image image;
 	ImageView imageView;
 	
+	Image image2;
+	ImageView imageView2;
+	
 	public User(String name){
 		albums = new ArrayList<Album>();
 		this.userName = name;
@@ -40,7 +44,7 @@ public class User {
 	public void updateAlbum(){
 		for(Album i: albums){
 			i.label.setId(i.toString());
-		}
+		} 
 	}
 	
 	
@@ -49,21 +53,31 @@ public class User {
 		imageView = new ImageView(image);
 		imageView.setFitWidth(300);
 		imageView.setFitHeight(300);
-		//imageView.setPreserveRatio(true);
+		imageView.setPreserveRatio(true);
 		imageView.setId(this.userName);
 		imageView.setPickOnBounds(true);	
-		imageView.setOnMouseClicked(e -> adminPaneController.selected);
+			
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
 		label.setTextAlignment(TextAlignment.CENTER);
 		label.setContentDisplay(ContentDisplay.TOP);
 		label.setStyle("-fx-text-fill: white");
 		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
-		label.setPadding(new Insets(10,10,10,10));
-		
+		label.setPadding(new Insets(5,5,5,5));
+		label.setOnMouseClicked(e -> selectImage());
 		return true;
 	}
 	
-	
+	public void selectImage(){
+		for(int i = 0; i < adminPaneController.users.size(); i++){
+			if(adminPaneController.users.get(i).label.getStylesheets().size() == 2){
+				adminPaneController.users.get(i).label.getStylesheets().remove(1);
+			}
+		}
+		adminPaneController.selected = userName; 
+		adminPaneController.isSelected= true; 
+		label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+	}
+
 	
 }
