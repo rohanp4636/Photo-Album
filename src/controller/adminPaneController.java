@@ -56,7 +56,7 @@ public class adminPaneController {
 		
 	}
 	
-	public void searchUser(ActionEvent e){  // fix search dd select sometimes does sometimes doesnt.  select something and search for another.
+	public void searchUser(ActionEvent e){  
 		deselect();
 		String name = userName.getText().trim();
 		userName.clear();
@@ -82,18 +82,13 @@ public class adminPaneController {
 				   }
 			   }
 			 if(found){
-				 
+				 	users.get(select).selectImage();
 				 	Bounds vp = scrollPane.getViewportBounds();
 				 	double height = scrollPane.getContent().getBoundsInLocal().getHeight();
 				 	double width = scrollPane.getContent().getBoundsInLocal().getWidth();
 				 	double labelLow = ((Label)tilePane.getChildren().get(select)).getBoundsInParent().getMinY();
-				 	double labelHigh = 0;
-				 	for(int i = 0; i < tilePane.getChildren().size(); i++){
-				 		double x = ((Label)tilePane.getChildren().get(i)).getBoundsInParent().getMaxX();
-				 		if(x > labelHigh){
-				 			labelHigh = x;
-				 		}
-					}
+				 	double labelHigh =  ((Label)tilePane.getChildren().get(select)).getBoundsInParent().getMaxY();
+				 		
 				 	double vpLow = (height - vp.getHeight()) * scrollPane.getVvalue();
 				 	double vpHigh = vpLow + vp.getHeight();
 				 	
@@ -102,8 +97,8 @@ public class adminPaneController {
 					 }
 				 	 else if (labelHigh > vpHigh) {
 					   	scrollPane.setVvalue((labelHigh - vp.getHeight()) / (height - vp.getHeight()));
-					    users.get(select).selectImage();
 					}
+				 
 				 
 			 }
 			 else{
@@ -221,6 +216,7 @@ public class adminPaneController {
 		if(isSelected && x >= 0 && x < users.size()){
 			if(((Label)tilePane.getChildren().get(x)).getStylesheets().size() == 2){
 				((Label)tilePane.getChildren().get(x)).getStylesheets().remove(1);
+				((Label)tilePane.getChildren().get(x)).getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
 			}
 		}
 		selected = null;

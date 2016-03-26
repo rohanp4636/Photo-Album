@@ -49,10 +49,18 @@ public class User {
 	
 	
 	public boolean setUserImage(){
-		image = new Image("/view/user.png");
+		if(adminPaneController.users.isEmpty()){
+			image = new Image("/view/user.png");
+		}
+		else if(adminPaneController.users.size() % 2 == 0){
+			image = new Image("/view/user.png");
+		}
+		else{
+			image = new Image("/view/user2.png");
+		}
 		imageView = new ImageView(image);
-		imageView.setFitWidth(300);
-		imageView.setFitHeight(300);
+		imageView.setFitWidth(280);
+		imageView.setFitHeight(280);
 		imageView.setPreserveRatio(true);
 		imageView.setId(this.userName);
 		imageView.setPickOnBounds(true);	
@@ -63,7 +71,8 @@ public class User {
 		label.setContentDisplay(ContentDisplay.TOP);
 		label.setStyle("-fx-text-fill: white");
 		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
-		label.setPadding(new Insets(5,5,5,5));
+		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		label.setPadding(new Insets(5,16,5,16));
 		label.setOnMouseClicked(e -> selectImage());
 		return true;
 	}
@@ -72,11 +81,17 @@ public class User {
 		for(int i = 0; i < adminPaneController.users.size(); i++){
 			if(adminPaneController.users.get(i).label.getStylesheets().size() == 2){
 				adminPaneController.users.get(i).label.getStylesheets().remove(1);
+				if(adminPaneController.users.get(i).userName.equalsIgnoreCase(this.userName)){
+					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+				}
+				else{
+					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+				}
 			}
 		}
 		adminPaneController.selected = userName; 
 		adminPaneController.isSelected= true; 
-		label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+
 	}
 
 	

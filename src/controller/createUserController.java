@@ -52,7 +52,7 @@ public class createUserController {
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
 		}
-		else if(users.contains(name.toLowerCase())){
+		else if(userExists(name.toLowerCase())){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
 			message.setTitle("Create User Error");
@@ -66,7 +66,7 @@ public class createUserController {
 		else{ // put in sorted order if you want.
 			User newUser = new User(name);
 			users.add(0, newUser);
-			apc.tilePane.getChildren().add(newUser.getLabel());
+			apc.tilePane.getChildren().add(0, newUser.getLabel());
 		}
 		localStage.close();
 		
@@ -74,6 +74,18 @@ public class createUserController {
 
 	public void createCancel(ActionEvent e){
 		localStage.close();
+	}
+	
+	public Boolean userExists(String name){
+		if(users.isEmpty()){
+			return false;
+		}
+		for(int i = 0; i < users.size(); i ++){
+			if(users.get(i).userName.equalsIgnoreCase(name)){
+				return true;
+			}
+		}
+		return false;
 	}
 		
 }
