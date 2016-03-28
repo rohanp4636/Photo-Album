@@ -33,17 +33,25 @@
     -fx-background-color:#ea2e49;
   }
   
+ 
+  
  #scrollPane > .corner {
     -fx-background-color: #110010;
 }
 
 
-#scrollPane .scroll-bar:horizontal {
+/*#scrollPane .scroll-bar:horizontal {
     -fx-opacity: 0;
     -fx-background-color: #110010;
     
-}
+}*/
 
+#paneTitle {
+	
+	-fx-font-family: "Bebas Neue Regular";
+	-fx-font-size: 32px;
+	-fx-text-fill:  #000000;
+}
   
 .button {
 	-fx-background-color: #000000;
@@ -94,6 +102,7 @@
 .text-field{
 	-fx-background-color:#000000;
 	-fx-text-fill: #ea2e49;
+	
 }
 
 .text-area .content{

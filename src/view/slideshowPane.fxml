@@ -2,27 +2,36 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.71" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.test">
+<AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.test">
    <children>
-      <ButtonBar layoutX="761.0" layoutY="17.0" prefHeight="40.0" prefWidth="351.0">
+      <ButtonBar layoutX="761.0" layoutY="17.0" prefHeight="40.0" prefWidth="351.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="17.0">
          <buttons>
             <ToggleButton mnemonicParsing="false" prefHeight="29.0" prefWidth="121.0" text="Auto Slideshow" />
          </buttons></ButtonBar>
-      <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0">
+      <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="17.0">
         <buttons>
           <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
         </buttons>
       </ButtonBar>
-      <AnchorPane fx:id="basePane" layoutY="67.0" prefHeight="655.0" prefWidth="1280.0" style="-fx-background-color: #110010;">
+      <AnchorPane fx:id="basePane" layoutY="67.0" style="-fx-background-color: #110010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
          <children>
-            <ImageView fitHeight="654.0" fitWidth="1132.0" layoutX="74.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="prevButton" layoutX="20.0" layoutY="310.0" mnemonicParsing="false" text="&lt;" />
-            <Button fx:id="nextButton" layoutX="1234.0" layoutY="314.0" mnemonicParsing="false" text="&gt;" />
+            <ImageView fitHeight="636.0" fitWidth="1132.0" layoutX="79.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="9.0" />
+            <ButtonBar buttonMinWidth="26.0" layoutX="15.0" layoutY="310.0" prefHeight="29.0" prefWidth="26.0" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="310.0">
+               <buttons>
+                  <Button fx:id="prevButton" minWidth="16.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="26.0" text="&lt;" />
+               </buttons>
+            </ButtonBar>
+            <ButtonBar buttonMinWidth="26.0" layoutX="1231.0" layoutY="308.0" prefHeight="40.0" prefWidth="9.0" AnchorPane.bottomAnchor="305.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="308.0">
+               <buttons>
+                  <Button fx:id="nextButton1" minWidth="16.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="26.0" text="&gt;" />
+               </buttons>
+            </ButtonBar>
          </children>
       </AnchorPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
@@ -30,5 +39,6 @@
             <Image url="@title.png" />
          </image>
       </ImageView>
+      <Label id="paneTitle" contentDisplay="TOP" layoutX="181.0" layoutY="24.0" prefHeight="39.0" prefWidth="167.0" text="SlideShow View" textOverrun="CLIP" />
    </children>
 </AnchorPane>

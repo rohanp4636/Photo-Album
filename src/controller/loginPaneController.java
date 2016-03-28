@@ -31,6 +31,7 @@ public class loginPaneController {
 	public void start(Stage primaryStage, ArrayList<User> user) {
 		this.primaryStage = primaryStage;
 		this.users = user;
+		
 	}
 	
 	

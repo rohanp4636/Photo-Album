@@ -53,10 +53,13 @@ public class adminPaneController {
 		for(int i = 0; i < users.size(); i++){
 			tilePane.getChildren().add(users.get(i).getLabel());
 		}
+		primaryStage.setResizable(true);
+		
 		
 	}
 	
 	public void searchUser(ActionEvent e){  
+		
 		deselect();
 		String name = userName.getText().trim();
 		userName.clear();
@@ -134,7 +137,11 @@ public class adminPaneController {
 		   stageAdd.initModality(Modality.WINDOW_MODAL);
 		   stageAdd.initOwner(primaryStage);
 		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
 		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
+
 		   
 	}
 	
@@ -189,6 +196,8 @@ public class adminPaneController {
 	
 	public void logout(ActionEvent e){
 		deselect();
+		primaryStage.setResizable(false);
+
 		primaryStage.setScene(prev);
 	}
 	

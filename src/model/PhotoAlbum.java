@@ -29,9 +29,9 @@ public class PhotoAlbum extends Application {
 			root.requestFocus();
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Photos");
+			primaryStage.setMinHeight(720);
+			primaryStage.setMinWidth(1280);
 			primaryStage.setScene(scene);
-
-
 			primaryStage.show();
 		
 
