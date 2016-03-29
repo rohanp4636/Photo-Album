@@ -57,25 +57,25 @@ public class Album {
 	public void selectImage(){
 		for(int i = 0; i < photoPaneController.albums.size(); i++){
 			if(photoPaneController.albums.get(i).label.getStylesheets().size() == 2){
-				adminPaneController.users.get(i).label.getStylesheets().remove(1);
-				if(adminPaneController.users.get(i).userName.equalsIgnoreCase(this.albumName)){
-					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+				photoPaneController.albums.get(i).label.getStylesheets().remove(1);
+				if(photoPaneController.albums.get(i).albumName.equalsIgnoreCase(this.albumName)){
+					photoPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
 				}
 				else{
-					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+					photoPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
 				}
 			}
 		}
-		adminPaneController.selected = albumName; 
-		adminPaneController.isSelected= true; 
+		photoPaneController.selected = albumName; 
+		photoPaneController.isSelected= true; 
 
 	}
 	
-	public setTimes(){
-		for(int i = 0; i < photos.size(); i++){
+	//public setTimes(){
+		//for(int i = 0; i < photos.size(); i++){
 			
-		}
-	}
+	//	}
+//	}
 	
 	public String toString(){
 		String s = albumName + "  -  " + numPhotos + " photos\n";
