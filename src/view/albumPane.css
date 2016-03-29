@@ -8,17 +8,17 @@
 }
 
 #basePane{
-	-fx-background-color:  #110010;
+	-fx-background-color:  #101010;
 }
 
 #tilePane {
-		-fx-background-color:  #110010;  /*101010 */
-		/* #050510    #010811*/
+		-fx-background-color:  #101010;  /*101010 */
+		/* #050510    #010811    101010*/
 		
 }
 
 #scrollPane .scroll-bar {
-    -fx-background-color:#110010;
+    -fx-background-color:#101010;
 }
 
 #scrollPane .scroll-bar .thumb {
@@ -36,23 +36,17 @@
  
   
  #scrollPane > .corner {
-    -fx-background-color: #110010;
+    -fx-background-color: #101010;
 }
 
 
 /*#scrollPane .scroll-bar:horizontal {
     -fx-opacity: 0;
-    -fx-background-color: #110010;
+    -fx-background-color: #101010;
     
 }*/
 
-#paneTitle {
-	
-	-fx-font-family: "Bebas Neue Regular";
-	-fx-font-size: 32px;
-	-fx-text-fill:  #000000;
-}
-  
+
 .button {
 	-fx-background-color: #000000;
 	-fx-text-fill:  #ea2e49;

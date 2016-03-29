@@ -36,7 +36,9 @@ public class User {
 		label.setId(name);
 		Boolean test = this.setUserImage();
 	}
-	
+	public ArrayList<Album> getAlbums(){
+		return albums;
+	}
 	public Label getLabel(){
 		return label;
 	}

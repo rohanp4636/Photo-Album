@@ -30,7 +30,7 @@ public class PhotoAlbum extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Photos");
 			primaryStage.setMinHeight(720);
-			primaryStage.setMinWidth(1280);
+			primaryStage.setMinWidth(1296);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		

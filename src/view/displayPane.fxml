@@ -11,14 +11,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.test">
+<AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.71" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.test">
    <children>
       <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="17.0">
         <buttons>
           <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
         </buttons>
       </ButtonBar>
-      <AnchorPane fx:id="basePane" layoutY="67.0" style="-fx-background-color: #110010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+      <AnchorPane fx:id="basePane" layoutY="67.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
          <children>
             <ImageView fitHeight="500.0" fitWidth="866.0" layoutX="90.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="83.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="70.0" />
             <Label layoutX="1033.0" layoutY="30.0" text="Caption" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="30.0" />
@@ -48,11 +48,10 @@
             </ButtonBar>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
+      <ImageView fitHeight="50.0" fitWidth="450.0" layoutX="-58.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-58.0" AnchorPane.topAnchor="9.0">
          <image>
-            <Image url="@title.png" />
+            <Image url="@titleDisplay.png" />
          </image>
       </ImageView>
-      <Label id="paneTitle" contentDisplay="TOP" layoutX="181.0" layoutY="24.0" prefHeight="39.0" prefWidth="138.0" text="Display View" textOverrun="CLIP" />
    </children>
 </AnchorPane>

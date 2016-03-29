@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import controller.adminPaneController;
+import controller.photoPaneController;
+import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,19 +30,51 @@ public class Album {
 		photos = new ArrayList<Photo>();
 		label = new Label();
 	}
-	
+	public Label getLabel(){
+		return label;
+	}
 	public boolean setAlbumCover(){
 		image = new Image("/view/albumIcon.png");
 		imageView = new ImageView(image);
 		imageView.setFitWidth(400);
 		imageView.setFitHeight(250);
+		imageView.setPreserveRatio(true);
 		imageView.setId(this.toString());
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
 		label.setTextAlignment(TextAlignment.CENTER);
 		label.setContentDisplay(ContentDisplay.TOP);
-		
+		label.setId(this.albumName);
+		label.setStyle("-fx-text-fill: white");
+		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
+		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		label.setPadding(new Insets(5,16,5,16));
+		label.setOnMouseClicked(e -> selectImage());
 		return true;
+	}
+		
+	
+	public void selectImage(){
+		for(int i = 0; i < photoPaneController.albums.size(); i++){
+			if(photoPaneController.albums.get(i).label.getStylesheets().size() == 2){
+				adminPaneController.users.get(i).label.getStylesheets().remove(1);
+				if(adminPaneController.users.get(i).userName.equalsIgnoreCase(this.albumName)){
+					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+				}
+				else{
+					adminPaneController.users.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+				}
+			}
+		}
+		adminPaneController.selected = albumName; 
+		adminPaneController.isSelected= true; 
+
+	}
+	
+	public setTimes(){
+		for(int i = 0; i < photos.size(); i++){
+			
+		}
 	}
 	
 	public String toString(){

@@ -194,7 +194,7 @@ public class adminPaneController {
 		deselect();
 	}
 	
-	public void logout(ActionEvent e){
+	public void logout(ActionEvent e){  // serialize??
 		deselect();
 		primaryStage.setResizable(false);
 
