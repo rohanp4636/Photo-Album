@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import controller.adminPaneController;
 import controller.photoPaneController;
+import controller.albumPaneController;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
