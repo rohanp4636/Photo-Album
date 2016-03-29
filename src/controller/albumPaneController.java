@@ -57,6 +57,11 @@ public class albumPaneController {
 		this.userIndex=uIndex;
 		selected=null;
 		isSelected=false;
+		for(int i = 0; i < albums.size(); i++){
+			tilePane.getChildren().add(albums.get(i).getLabel());
+		}
+		primaryStage.setResizable(true);
+
 		
 	}
 	

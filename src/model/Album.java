@@ -30,6 +30,7 @@ public class Album {
 		numPhotos = 0;
 		photos = new ArrayList<Photo>();
 		label = new Label();
+		Boolean test = setAlbumCover();
 	}
 	public Label getLabel(){
 		return label;
@@ -85,7 +86,7 @@ public class Album {
 	public String toString(){
 		String s = albumName + "  -  " + numPhotos + " photos\n";
 		if(oldest == null && newest == null){
-			return s;
+			return s + "\n";
 		}
 		String dates = oldest.MONTH +"/"+oldest.DAY_OF_MONTH + "/" + oldest.DAY_OF_YEAR + " - " +newest.MONTH +"/"+newest.DAY_OF_MONTH + "/" + newest.DAY_OF_YEAR;
 		return s + dates;
