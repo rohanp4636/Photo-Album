@@ -14,7 +14,7 @@
             <Font name="BebasNeueRegular" size="26.0" />
          </font>
       </Label>
-      <TextField fx:id="name" layoutX="28.0" layoutY="99.0" prefHeight="40.0" prefWidth="344.0" promptText="Enter Album Name" />
+      <TextField fx:id="albumName" layoutX="28.0" layoutY="99.0" prefHeight="40.0" prefWidth="344.0" promptText="Enter Album Name" />
       <ButtonBar layoutX="77.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="okButton" mnemonicParsing="false" onAction="#createOK" text="Ok" />

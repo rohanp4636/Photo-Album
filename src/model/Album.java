@@ -34,6 +34,10 @@ public class Album {
 	public Label getLabel(){
 		return label;
 	}
+	public String getAlbumName()
+	{
+		return albumName;
+	}
 	public boolean setAlbumCover(){
 		image = new Image("/view/albumIcon.png");
 		imageView = new ImageView(image);

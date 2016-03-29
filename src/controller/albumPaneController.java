@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
 import model.User;
@@ -102,8 +104,27 @@ public class albumPaneController {
 		
 	}
 	
-	public void createAlbum(ActionEvent e){
-		
+	public void createAlbum(ActionEvent e) throws IOException{
+		deselect();
+		   Stage stageAdd = new Stage();
+		   
+		   FXMLLoader load = new FXMLLoader();
+		   load.setLocation(getClass().getResource("/view/create.fxml"));
+		   AnchorPane root = (AnchorPane)load.load();
+		   createAlbumController cac= load.getController();
+		   cac.start(stageAdd,this,albums);
+		   
+		   Scene add = new Scene(root);
+		   stageAdd.setScene(add);
+		   stageAdd.setTitle("Create User");
+		   stageAdd.setResizable(false);
+		   stageAdd.initModality(Modality.WINDOW_MODAL);
+		   stageAdd.initOwner(primaryStage);
+		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
+		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
 	}
 	
 	public void renameAlbum(ActionEvent e){
