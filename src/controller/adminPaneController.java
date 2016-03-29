@@ -159,6 +159,14 @@ public class adminPaneController {
 			return;
 		}
 		if(getSelectedUser() == -1){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Delete User");
+			message.setHeaderText("Cannot Delete User");
+			message.setContentText("You musst first select a user to delete.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
 			return;
 		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);

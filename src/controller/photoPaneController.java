@@ -25,20 +25,20 @@ public class photoPaneController {
 	int userIndex;
 	Scene prev;
 	albumPaneController apc;
-	String userName;
+	Album album;
 	
 	public static String selected;
 	public static Boolean isSelected = false;
 	
-	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, String userName) {
+	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, Album album) {
 		this.primaryStage = primaryStage;
 		this.users = user;
-		this.albums = currentUser.getAlbums();
+		photoPaneController.albums = currentUser.getAlbums();
 		this.currentUser = currentUser;
 		this.prev = prev;
 		this.userIndex = index;
 		this.apc = apc;
-		this.userName = userName;
+		this.album = album;
 		selected = null;
 		isSelected = false;
 		for(int i = 0; i < albums.size(); i++){
