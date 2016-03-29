@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import model.Album;
 import model.User;
 
 
@@ -50,7 +51,7 @@ public class loginPaneController {
 				if(users.get(i).userName.equalsIgnoreCase(s)){
 					userName.clear();
 					found = true;
-					userLogin(s);
+					userLogin(s, users.get(i).getAlbums(), users.get(i), i);
 					break;
 				}
 			}
@@ -84,13 +85,14 @@ public class loginPaneController {
 		}
 	}
 	
-	public void userLogin(String name){
+	public void userLogin(String name, ArrayList<Album> album, User user, int index){
 		try{
 			FXMLLoader loader= new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/albumPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
 			albumPaneController apg = loader.getController();
-			apg.start(primaryStage,users, loginScene,this, name);
+			
+			apg.start(primaryStage,users, loginScene,this, name, album, user, index);
 			Scene scene = new Scene(root);	
 			primaryStage.setScene(scene);
 			root.requestFocus();
