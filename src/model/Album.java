@@ -55,19 +55,19 @@ public class Album {
 		
 	
 	public void selectImage(){
-		for(int i = 0; i < photoPaneController.albums.size(); i++){
-			if(photoPaneController.albums.get(i).label.getStylesheets().size() == 2){
-				photoPaneController.albums.get(i).label.getStylesheets().remove(1);
-				if(photoPaneController.albums.get(i).albumName.equalsIgnoreCase(this.albumName)){
-					photoPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
+		for(int i = 0; i < albumPaneController.albums.size(); i++){
+			if(albumPaneController.albums.get(i).label.getStylesheets().size() == 2){
+				albumPaneController.albums.get(i).label.getStylesheets().remove(1);
+				if(albumPaneController.albums.get(i).albumName.equalsIgnoreCase(this.albumName)){
+					albumPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/border.css").toExternalForm());
 				}
 				else{
-					photoPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+					albumPaneController.albums.get(i).label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
 				}
 			}
 		}
-		photoPaneController.selected = albumName; 
-		photoPaneController.isSelected= true; 
+		albumPaneController.selected = albumName; 
+		albumPaneController.isSelected= true; 
 
 	}
 	
