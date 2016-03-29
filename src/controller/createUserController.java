@@ -36,7 +36,7 @@ public class createUserController {
 			message.initOwner(localStage);
 			message.setTitle("Create User Error");
 			message.setHeaderText("Cannot Create User");
-			message.setContentText("Username was not entered.");
+			message.setContentText("Usern was not entered.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
