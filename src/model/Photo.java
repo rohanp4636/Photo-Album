@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Photo {
 
 	String path;
@@ -10,6 +14,10 @@ public class Photo {
 	String caption;
 	
 	Calendar dateTime;
+	
+	Label label;
+	Image image;
+	ImageView imageView;
 	
 	ArrayList<Tag> tags;
 	

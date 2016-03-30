@@ -93,11 +93,13 @@ public class albumPaneController {
 		if(isSelected)
 		{
 			try{
+				
 				FXMLLoader load = new FXMLLoader();
 				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
 				AnchorPane root = (AnchorPane)load.load();
 				photoPaneController ppc = load.getController();
 				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()));
+				deselect();
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				root.requestFocus();
@@ -110,7 +112,7 @@ public class albumPaneController {
 	}
 	
 	public void createAlbum(ActionEvent e) throws IOException{
-		deselect();
+			deselect();
 		   Stage stageAdd = new Stage();
 		   
 		   FXMLLoader load = new FXMLLoader();
@@ -166,7 +168,7 @@ public class albumPaneController {
 			isSelected = false;
 			return;
 		}
-		if(isSelected && x >= 0 && x < users.size()){
+		if(isSelected && x >= 0 && x < albums.size()){
 			if(((Label)tilePane.getChildren().get(x)).getStylesheets().size() == 2){
 				((Label)tilePane.getChildren().get(x)).getStylesheets().remove(1);
 				((Label)tilePane.getChildren().get(x)).getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());

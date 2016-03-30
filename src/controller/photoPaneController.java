@@ -86,6 +86,12 @@ public class photoPaneController {
 	public void back(ActionEvent e){
 		deselect();
 		primaryStage.setScene(prev);
+		if(apc.tilePane.getChildren().size() == 0){
+			for(int i = 0; i < albums.size(); i++){
+				apc.tilePane.getChildren().add(0,albums.get(i).getLabel());
+			}
+		}
+		
 	}
 	
 	
