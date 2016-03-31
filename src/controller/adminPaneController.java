@@ -204,9 +204,9 @@ public class adminPaneController {
 	
 	public void logout(ActionEvent e){  // serialize??
 		deselect();
-		primaryStage.setResizable(false);
-
 		primaryStage.setScene(prev);
+		primaryStage.centerOnScreen();
+		primaryStage.setResizable(false);
 	}
 	
 	

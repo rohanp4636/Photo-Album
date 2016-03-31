@@ -101,7 +101,13 @@ public class albumPaneController {
 				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()));
 				deselect();
 				Scene scene = new Scene(root);
+				double w = primaryStage.getWidth();
+				double h = primaryStage.getHeight();
+				System.out.print(w);
 				primaryStage.setScene(scene);
+				primaryStage.setWidth(w);
+				primaryStage.setHeight(h);
+				
 				root.requestFocus();
 				
 			}catch(Exception ee){
@@ -147,6 +153,10 @@ public class albumPaneController {
 	}
 	public void logout(ActionEvent e){
 		primaryStage.setScene(prev);
+		primaryStage.setWidth(1296);
+		primaryStage.setHeight(720);
+		primaryStage.centerOnScreen();
+		primaryStage.setResizable(false);
 	}
 	public int getSelectedAlbum(){
 		if(!isSelected && selected != null){
