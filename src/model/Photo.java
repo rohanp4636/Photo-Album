@@ -27,4 +27,8 @@ public class Photo {
 		//set time and date in dateTime
 	}
 	
+	public Label getLabel(){
+		return label;
+	}
+	
 }

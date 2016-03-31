@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.Album;
+import model.Photo;
 import model.User;
 
 public class photoPaneController {
@@ -20,7 +21,7 @@ public class photoPaneController {
 	
 	Stage primaryStage;
 	ArrayList<User> users;
-	public static ArrayList<Album> albums;
+	public static ArrayList<Photo> photos;
 	User currentUser;
 	int userIndex;
 	Scene prev;
@@ -33,7 +34,7 @@ public class photoPaneController {
 	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, Album album) {
 		this.primaryStage = primaryStage;
 		this.users = user;
-		photoPaneController.albums = currentUser.getAlbums();
+		photoPaneController.photos = album.getPhotos();
 		this.currentUser = currentUser;
 		this.prev = prev;
 		this.userIndex = index;
@@ -41,8 +42,8 @@ public class photoPaneController {
 		this.album = album;
 		selected = null;
 		isSelected = false;
-		for(int i = 0; i < albums.size(); i++){
-			tilePane.getChildren().add(albums.get(i).getLabel());
+		for(int i = 0; i < photos.size(); i++){
+			tilePane.getChildren().add(photos.get(i).getLabel()); 
 		}
 		primaryStage.setResizable(true);
 		
@@ -87,8 +88,8 @@ public class photoPaneController {
 		deselect();
 		primaryStage.setScene(prev);
 		if(apc.tilePane.getChildren().size() == 0){
-			for(int i = 0; i < albums.size(); i++){
-				apc.tilePane.getChildren().add(0,albums.get(i).getLabel());
+			for(int i = 0; i < currentUser.getAlbums().size(); i++){
+				apc.tilePane.getChildren().add(0,currentUser.getAlbums().get(i).getLabel());
 			}
 		}
 		

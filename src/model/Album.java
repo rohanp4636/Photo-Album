@@ -39,6 +39,10 @@ public class Album {
 	{
 		return albumName;
 	}
+	
+	public ArrayList<Photo> getPhotos(){
+		return photos;
+	}
 	public boolean setAlbumCover(){
 		image = new Image("/view/albumIcon.png");
 		imageView = new ImageView(image);
