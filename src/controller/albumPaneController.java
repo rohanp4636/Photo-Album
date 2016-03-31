@@ -154,7 +154,7 @@ public class albumPaneController {
 	public void logout(ActionEvent e){
 		primaryStage.setScene(prev);
 		primaryStage.setWidth(1296);
-		primaryStage.setHeight(720);
+		primaryStage.setHeight(760);
 		primaryStage.centerOnScreen();
 		primaryStage.setResizable(false);
 	}

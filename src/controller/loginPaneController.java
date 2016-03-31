@@ -37,6 +37,8 @@ public class loginPaneController {
 	
 	
 	public void login(ActionEvent e) {
+		System.out.println(primaryStage.getHeight());
+		System.out.println(primaryStage.getWidth() + " " + primaryStage.getHeight());
 		loginScene = primaryStage.getScene();
 		String s = userName.getText().trim().toLowerCase();
 		FXMLLoader loader= new FXMLLoader();
