@@ -130,7 +130,7 @@ public class albumPaneController {
 		   
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);
-		   stageAdd.setTitle("Create User");
+		   stageAdd.setTitle("Create Album");
 		   stageAdd.setResizable(false);
 		   stageAdd.initModality(Modality.WINDOW_MODAL);
 		   stageAdd.initOwner(primaryStage);

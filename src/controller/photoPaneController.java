@@ -7,14 +7,17 @@ import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Album;
@@ -149,8 +152,52 @@ public class photoPaneController {
 		deselect();
 	}
 	
-	public void captionPhoto(ActionEvent e){
-		
+	public void captionPhoto(ActionEvent e) throws IOException{
+		if(photos.size() == 0){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Caption Photo");
+			message.setHeaderText("Cannot Caption Photo");
+			message.setContentText("There are no photos to caption.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
+		}
+		if(getSelectedUser() == -1){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Caption Photo");
+			message.setHeaderText("Cannot Caption Photo");
+			message.setContentText("You musst first select a photo to caption.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
+		}
+		   Stage stageAdd = new Stage();
+		   
+		   FXMLLoader load = new FXMLLoader();
+		   load.setLocation(getClass().getResource("/view/caption.fxml"));
+		   AnchorPane root = (AnchorPane)load.load();
+		   captionController cuc= load.getController();
+		   Boolean isRecaption = false;
+		   if(!photos.get(getSelectedUser()).getCaption().isEmpty()){
+			   isRecaption = true;
+		   }
+		   cuc.start(stageAdd,this,photos.get(getSelectedUser()), isRecaption,this.tilePane);
+		   
+		   Scene add = new Scene(root);
+		   stageAdd.setScene(add);
+		   stageAdd.setTitle("Caption Photo");
+		   stageAdd.setResizable(false);
+		   stageAdd.initModality(Modality.WINDOW_MODAL);
+		   stageAdd.initOwner(primaryStage);
+		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
+		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
 	}
 	
 	public void displayPhoto(ActionEvent e){
