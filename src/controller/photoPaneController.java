@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -8,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
@@ -50,7 +54,22 @@ public class photoPaneController {
 	}
 	
 	public void addPhoto(ActionEvent e){
-		
+		deselect();
+		FileChooser filechooser = new FileChooser();
+		filechooser.getExtensionFilters().add(
+				new ExtensionFilter("Images", "*.png", "*.jpg"));
+		File file = filechooser.showOpenDialog(null);
+		if(file != null){
+			System.out.println(file.getAbsolutePath());
+			try {
+				System.out.println(file.getCanonicalPath());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println(file.getPath());
+
+		}
 	}
 	
 	public void removePhoto(ActionEvent e){

@@ -103,7 +103,6 @@ public class albumPaneController {
 				Scene scene = new Scene(root);
 				double w = primaryStage.getWidth();
 				double h = primaryStage.getHeight();
-				System.out.print(w);
 				primaryStage.setScene(scene);
 				primaryStage.setWidth(w);
 				primaryStage.setHeight(h);

@@ -46,8 +46,8 @@ public class Album {
 	public boolean setAlbumCover(){
 		image = new Image("/view/albumIcon.png");
 		imageView = new ImageView(image);
-		imageView.setFitWidth(400);
-		imageView.setFitHeight(250);
+		imageView.setFitWidth(280);
+		imageView.setFitHeight(280);
 		imageView.setPreserveRatio(true);
 		imageView.setId(this.toString());
 		label.setText(imageView.getId());
