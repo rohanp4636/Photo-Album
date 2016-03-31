@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 public class PhotoAlbum extends Application {
 	ArrayList<User> users;
 
-	
+	//when saving make all static selection var false or nulll. also check other static stuff;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

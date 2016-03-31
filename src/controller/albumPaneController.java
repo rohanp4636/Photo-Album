@@ -153,6 +153,7 @@ public class albumPaneController {
 		
 	}
 	public void logout(ActionEvent e){
+		deselect();
 		primaryStage.setScene(prev);
 		primaryStage.setWidth(1296);
 		primaryStage.setHeight(760);
