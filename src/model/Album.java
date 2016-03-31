@@ -16,7 +16,7 @@ import javafx.scene.text.TextAlignment;
 public class Album {
 	
 	String albumName;
-	int numPhotos;
+	public int numPhotos;
 	Calendar oldest = null;   // when new photo is added compare time as well as date
 	Calendar newest = null;
 	ArrayList<Photo> photos;
@@ -39,6 +39,7 @@ public class Album {
 	{
 		return albumName;
 	}
+	
 	
 	public ArrayList<Photo> getPhotos(){
 		return photos;
@@ -76,7 +77,7 @@ public class Album {
 				}
 			}
 		}
-		albumPaneController.selected = albumName; 
+		albumPaneController.selected = this.albumName; 
 		albumPaneController.isSelected= true; 
 
 	}

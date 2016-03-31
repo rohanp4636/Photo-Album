@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,9 +14,9 @@ import javafx.scene.text.TextAlignment;
 
 public class Photo {
 
-	String path = "";
+	String path;   // when reading from dat file. change file path to new path.
 	
-	String caption = "";
+	String caption;
 	
 	Calendar dateTime;
 	
@@ -25,10 +26,13 @@ public class Photo {
 	
 	ArrayList<Tag> tags;
 	
-	public Photo(String path){    //date and time stuff
-		this.path = path;
+	public Photo(File file, Album album){    //date and time stuff
+		this.path = file.getAbsolutePath();
+		this.caption = "This is a test caption";
 		tags = new ArrayList<Tag>();
+		label = new Label();
 		boolean test = setPhotoThumbnail();
+		album.numPhotos++;
 		//set time and date in dateTime
 	}
 	
@@ -44,11 +48,18 @@ public class Photo {
 		this.caption = s;
 	}
 	
+	public String getPath(){
+		return path;
+	}
+	public void setPath(String s){
+		this.path = s;
+	}
+	
 	public boolean setPhotoThumbnail(){
-		image = new Image("/view/albumIcon.png");
+		image = new Image("file:"+this.path);
 		imageView = new ImageView(image);
-		imageView.setFitWidth(280);
-		imageView.setFitHeight(280);
+		imageView.setFitWidth(300);
+		imageView.setFitHeight(200);
 		imageView.setPreserveRatio(true);
 		imageView.setId(this.caption);
 		label.setText(imageView.getId());
@@ -59,7 +70,7 @@ public class Photo {
 		label.setStyle("-fx-text-fill: white");
 		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
 		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
-		label.setPadding(new Insets(5,16,5,16));
+		label.setPadding(new Insets(5,5,5,5));
 		label.setOnMouseClicked(e -> selectImage());
 		return true;
 	}

@@ -211,7 +211,7 @@ public class adminPaneController {
 	
 	
 	public int getSelectedUser(){
-		if(!isSelected && selected != null){
+		if(!isSelected && selected == null){
 			return -1;
 		}
 		for(int i = 0; i < tilePane.getChildren().size(); i++){

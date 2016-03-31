@@ -3,12 +3,16 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -53,27 +57,96 @@ public class photoPaneController {
 		
 	}
 	
-	public void addPhoto(ActionEvent e){
+	public void addPhoto(ActionEvent e){  //use absolute path .. when using demo to submit create it from star???
 		deselect();
 		FileChooser filechooser = new FileChooser();
 		filechooser.getExtensionFilters().add(
 				new ExtensionFilter("Images", "*.png", "*.jpg"));
 		File file = filechooser.showOpenDialog(null);
 		if(file != null){
-			System.out.println(file.getAbsolutePath());
-			try {
-				System.out.println(file.getCanonicalPath());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			for(int i = 0; i < photos.size(); i++){
+				if(photos.get(i).getPath().equalsIgnoreCase(file.getAbsolutePath())){
+					primaryStage.setResizable(false);
+					Alert message = new Alert(AlertType.INFORMATION);
+					message.initOwner(primaryStage);
+					message.setTitle("Add Photo");
+					message.setHeaderText("Cannot Add Photo");
+					message.setContentText("Photo already exists in album.");
+					message.setGraphic(null);
+					message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+					message.showAndWait();
+					primaryStage.setResizable(true);
+					return;
+				}
 			}
-			System.out.println(file.getPath());
+			//System.out.println(file.lastModified());
+			
+			Photo photo = new Photo(file, album);
+			photos.add(0, photo);
+			tilePane.getChildren().add(0, photo.getLabel());
+			currentUser.updateAlbum(apc, album);
+			
 
 		}
 	}
 	
 	public void removePhoto(ActionEvent e){
-			
+		if(photos.size() == 0){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Remove Photo");
+			message.setHeaderText("Cannot Remove Photo");
+			message.setContentText("There are no photos to remove.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
+		}
+		if(getSelectedUser() == -1){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Remove Photo");
+			message.setHeaderText("Cannot Remove Photo");
+			message.setContentText("You musst first select a photo to remove.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
+		}
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.initOwner(primaryStage);
+		alert.setTitle("Remove Photo");
+		alert.setHeaderText("Confirm Remove");
+		alert.setContentText("Are you sure you want to remove this photo?");
+		alert.getDialogPane().getStylesheets().add("/view/loginPane.css");
+		alert.setGraphic(null);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) { 
+			  Alert message = new Alert(AlertType.INFORMATION);
+			   message.initOwner(primaryStage);
+			   message.setTitle("Remove Photo");
+			   message.setHeaderText("Remove Complete");
+			   message.setContentText("The selected photo has been removed");
+			   message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			   message.setGraphic(null);
+			   message.showAndWait();
+			   int userIndex = getSelectedUser();
+			   for(int i = 0; i < tilePane.getChildren().size(); i++){
+				   Label label = (Label) tilePane.getChildren().get(i);
+				   if(label.getId().equalsIgnoreCase(photos.get(userIndex).getPath())){
+					   tilePane.getChildren().remove(i);
+					   photos.remove(userIndex);
+					   album.numPhotos--;
+					   currentUser.updateAlbum(apc, album);
+					   break;
+				   }
+			   }
+		   
+	
+			   			   
+			   
+		   }
+		deselect();
 	}
 	
 	public void captionPhoto(ActionEvent e){
@@ -92,9 +165,6 @@ public class photoPaneController {
 		
 	}
 	
-	public void deletePhoto(ActionEvent e){
-		
-	}
 	public void slideshow(ActionEvent e){
 			
 	}
@@ -116,7 +186,7 @@ public class photoPaneController {
 	
 	
 	public int getSelectedUser(){
-		if(!isSelected && selected != null){
+		if(!isSelected && selected == null){
 			return -1;
 		}
 		for(int i = 0; i < tilePane.getChildren().size(); i++){

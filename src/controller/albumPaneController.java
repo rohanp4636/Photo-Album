@@ -76,6 +76,7 @@ public class albumPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		if(getSelectedAlbum()==-1)
@@ -88,6 +89,7 @@ public class albumPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		if(isSelected)
@@ -113,7 +115,7 @@ public class albumPaneController {
 				ee.printStackTrace();
 			}
 		}
-		
+		deselect();
 	}
 	
 	public void createAlbum(ActionEvent e) throws IOException{
@@ -158,7 +160,7 @@ public class albumPaneController {
 		primaryStage.setResizable(false);
 	}
 	public int getSelectedAlbum(){
-		if(!isSelected && selected != null){
+		if(!isSelected && selected == null){
 			return -1;
 		}
 		for(int i = 0; i < tilePane.getChildren().size(); i++){
@@ -168,6 +170,10 @@ public class albumPaneController {
 		}
 		return -1;
 		
+	}
+	
+	public TilePane getTPane(){
+		return this.tilePane;
 	}
 	
 	public void deselect(){

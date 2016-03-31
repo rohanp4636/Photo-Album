@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 
 import controller.adminPaneController;
+import controller.albumPaneController;
+import controller.photoPaneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -43,10 +45,11 @@ public class User {
 		return label;
 	}
 	
-	public void updateAlbum(){
+	public void updateAlbum(albumPaneController apc, Album album){
 		for(Album i: albums){
-			i.label.setId(i.toString());
+			i.label.setText(i.toString());
 		} 
+		
 	}
 	
 	
