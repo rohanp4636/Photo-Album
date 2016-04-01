@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Admin;
 import model.Album;
 import model.Photo;
 import model.User;
@@ -40,7 +41,7 @@ public class albumPaneController {
 	Scene prev;
 	loginPaneController lpg;
 	String userName;
-	
+	Admin admin;
 	public static ArrayList<Album> albums;
 	User currentUser;
 	int userIndex;
@@ -48,7 +49,7 @@ public class albumPaneController {
 	public static String selected;
 	public static Boolean isSelected = false;
 	
-	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName, ArrayList<Album> aList, User cUser, int uIndex) {
+	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName, ArrayList<Album> aList, User cUser, int uIndex, Admin admin) {
 		this.primaryStage = primaryStage;
 		this.users = user;
 		this.prev = prev;
@@ -57,6 +58,7 @@ public class albumPaneController {
 		this.currentUser = cUser;
 		albums=aList;
 		this.userIndex=uIndex;
+		this.admin = admin;
 		selected=null;
 		isSelected=false;
 		for(int j = 0; j < albums.size(); j++){
@@ -158,8 +160,9 @@ public class albumPaneController {
 	public void searchAlbum(ActionEvent e){
 		
 	}
-	public void logout(ActionEvent e){
+	public void logout(ActionEvent e) throws IOException{
 		deselect();
+		Admin.writeAdmin(admin);
 		primaryStage.setScene(prev);
 		primaryStage.setWidth(1296);
 		primaryStage.setHeight(760);

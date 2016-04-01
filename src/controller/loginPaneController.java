@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import model.Admin;
 import model.Album;
 import model.User;
 
@@ -26,12 +27,13 @@ public class loginPaneController {
 	
 	Stage primaryStage;
 	ArrayList<User> users;
-	
+	Admin admin;
 	Scene loginScene;
 	
-	public void start(Stage primaryStage, ArrayList<User> user) {
+	public void start(Stage primaryStage, ArrayList<User> user, Admin admin) {
 		this.primaryStage = primaryStage;
 		this.users = user;
+		this.admin = admin;
 		
 	}
 	
@@ -75,7 +77,7 @@ public class loginPaneController {
 			loader.setLocation(getClass().getResource("/view/adminPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
 			adminPaneController apg = loader.getController();
-			apg.start(primaryStage,users, loginScene,this);
+			apg.start(primaryStage,users, loginScene,this, admin);
 			Scene scene = new Scene(root);	
 			primaryStage.setScene(scene);
 			root.requestFocus();
@@ -92,7 +94,7 @@ public class loginPaneController {
 			AnchorPane root = (AnchorPane)loader.load();
 			albumPaneController apg = loader.getController();
 			
-			apg.start(primaryStage,users, loginScene,this, name, album, user, index);
+			apg.start(primaryStage,users, loginScene,this, name, album, user, index, admin);
 			Scene scene = new Scene(root);	
 			primaryStage.setScene(scene);
 			root.requestFocus();

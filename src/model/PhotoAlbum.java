@@ -34,7 +34,7 @@ public class PhotoAlbum extends Application {
 			loader.setLocation(getClass().getResource("/view/loginPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
 			loginPaneController lpg = loader.getController();
-			lpg.start(primaryStage,admin.userList);
+			lpg.start(primaryStage,admin.userList, admin);
 			Scene scene = new Scene(root);
 			
 			root.requestFocus();

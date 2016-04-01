@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Admin;
 import model.Album;
 import model.Photo;
 import model.User;
@@ -36,7 +37,7 @@ public class adminPaneController {
 	@FXML TilePane tilePane;
 	
 	@FXML ScrollPane scrollPane;
-	
+	Admin admin;
 	Stage primaryStage;
 	public static ArrayList<User> users;
 	Scene prev;
@@ -46,13 +47,14 @@ public class adminPaneController {
 	public static String selected;
 	public static Boolean isSelected = false;
 	
-	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg) {
+	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, Admin admin) {
 		this.primaryStage = primaryStage;
 		adminPaneController.users = user;
 		this.prev = prev;
 		this.lpg = lpg;
 		selected = null;
 		isSelected = false;
+		this.admin = admin;
 		for(int i = 0; i < users.size(); i++){
 			users.get(i).setUserImage();
 		}
@@ -208,8 +210,9 @@ public class adminPaneController {
 		deselect();
 	}
 	
-	public void logout(ActionEvent e){  // serialize??
+	public void logout(ActionEvent e) throws IOException{  
 		deselect();
+		Admin.writeAdmin(admin);
 		primaryStage.setScene(prev);
 		primaryStage.centerOnScreen();
 		primaryStage.setResizable(false);
