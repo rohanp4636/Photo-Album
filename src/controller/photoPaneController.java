@@ -53,6 +53,14 @@ public class photoPaneController {
 		this.album = album;
 		selected = null;
 		isSelected = false;
+		for(int k = 0; k < photos.size(); k++){
+			photos.get(k).setPhotoThumbnail();
+			File file = new File(photos.get(k).getPath());
+			if(file.exists()){
+				photos.get(k).setPath(file.getAbsolutePath()); 
+			}
+			
+		}
 		for(int i = 0; i < photos.size(); i++){
 			tilePane.getChildren().add(photos.get(i).getLabel()); 
 		}
@@ -64,7 +72,7 @@ public class photoPaneController {
 		deselect();
 		FileChooser filechooser = new FileChooser();
 		filechooser.getExtensionFilters().add(
-				new ExtensionFilter("Images", "*.png", "*.jpg"));
+				new ExtensionFilter("Images (PNG,JPG)", "*.png", "*.jpg"));
 		File file = filechooser.showOpenDialog(null);
 		if(file != null){
 			for(int i = 0; i < photos.size(); i++){

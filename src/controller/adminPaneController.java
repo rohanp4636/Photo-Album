@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,6 +22,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Album;
+import model.Photo;
 import model.User;
 
 public class adminPaneController {
@@ -50,6 +53,9 @@ public class adminPaneController {
 		this.lpg = lpg;
 		selected = null;
 		isSelected = false;
+		for(int i = 0; i < users.size(); i++){
+			users.get(i).setUserImage();
+		}
 		for(int i = 0; i < users.size(); i++){
 			tilePane.getChildren().add(users.get(i).getLabel());
 		}

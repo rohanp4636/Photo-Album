@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import controller.adminPaneController;
@@ -17,19 +18,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextAlignment;
 
-public class User {
+public class User implements Serializable {
 
 	public String userName;
 
 	ArrayList<Album> albums;
+		
+	String path = "";
 	
+	transient Label label;
+	transient Image image;
+	transient ImageView imageView;
 	
-	Label label;
-	Image image;
-	ImageView imageView;
-	
-	Image image2;
-	ImageView imageView2;
+
 	
 	public User(String name){
 		albums = new ArrayList<Album>();
@@ -54,14 +55,26 @@ public class User {
 	
 	
 	public boolean setUserImage(){
-		if(adminPaneController.users.isEmpty()){
-			image = new Image("/view/user.png");
-		}
-		else if(adminPaneController.users.size() % 2 == 0){
-			image = new Image("/view/user.png");
+		if(path.isEmpty()){
+			if(adminPaneController.users.isEmpty()){
+				path = "/view/user.png";
+				image = new Image("/view/user.png");
+			}
+			else if(adminPaneController.users.size() % 2 == 0){
+				path = "/view/user.png";
+				image = new Image("/view/user.png");
+			}
+			else{
+				path = "/view/user2.png";
+				image = new Image("/view/user2.png");
+			}
 		}
 		else{
-			image = new Image("/view/user2.png");
+			image = new Image(path);
+		}
+		if(label == null){
+			label = new Label();
+			label.setId(this.userName);
 		}
 		imageView = new ImageView(image);
 		imageView.setFitWidth(280);
@@ -69,7 +82,7 @@ public class User {
 		imageView.setPreserveRatio(true);
 		imageView.setId(this.userName);
 		imageView.setPickOnBounds(true);	
-			
+		String s = imageView.getId();	
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
 		label.setTextAlignment(TextAlignment.CENTER);

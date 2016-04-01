@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Album;
+import model.Photo;
 import model.User;
 
 public class albumPaneController {
@@ -57,6 +59,10 @@ public class albumPaneController {
 		this.userIndex=uIndex;
 		selected=null;
 		isSelected=false;
+		for(int j = 0; j < albums.size(); j++){
+			albums.get(j).setAlbumCover();	
+		}
+		
 		for(int i = 0; i < albums.size(); i++){
 			tilePane.getChildren().add(albums.get(i).getLabel());
 		}

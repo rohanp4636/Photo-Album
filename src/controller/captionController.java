@@ -25,27 +25,34 @@ public class captionController {
 	private photoPaneController ppc;
 	Photo photo;
 	TilePane tilePane;
+	Boolean recaption = false;
 		
 	public void start(Stage localStage, photoPaneController ppc, Photo photo, boolean recaption, TilePane tilePane) {
 		this.tilePane = tilePane;
 		this.localStage = localStage;
 		this.ppc = ppc;
 		this.photo = photo;
+		caption.setWrapText(true);
+		this.recaption = recaption;
 		if(recaption){
 			caption.setText(photo.getCaption());
 		}
+		else{
+			caption.setPromptText("Enter a caption here.");
+		}
+		
 		
 	}
 	
 	
 	public void okCaption(ActionEvent e) {
 		String cap = caption.getText().trim();
-		if(cap.isEmpty()){
+		if(cap.isEmpty() && !recaption){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
 			message.setTitle("Caption");
-			message.setHeaderText("Cannot Create User");
-			message.setContentText("Usern was not entered.");
+			message.setHeaderText("Cannot Caption Photo");
+			message.setContentText("Caption was not entered.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
@@ -54,9 +61,9 @@ public class captionController {
 		else if(caption.getText().length() > 140){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
-			message.setTitle("Create User Error");
-			message.setHeaderText("Cannot Create User");
-			message.setContentText("Username must be 30 characters or less.");
+			message.setTitle("Caption");
+			message.setHeaderText("Cannot Caption Photo");
+			message.setContentText("Caption must be 140 characters or less.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();

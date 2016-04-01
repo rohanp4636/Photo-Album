@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextAlignment;
 
-public class Photo {
+public class Photo implements Serializable{
 
 	String path;   // when reading from dat file. change file path to new path.
 	
@@ -21,9 +22,9 @@ public class Photo {
 	
 	Calendar dateTime;
 	
-	Label label;
-	Image image;
-	ImageView imageView;
+	transient Label label;
+	transient Image image;
+	transient ImageView imageView;
 	
 	ArrayList<Tag> tags;
 	
@@ -64,6 +65,9 @@ public class Photo {
 		imageView.setFitWidth(300);
 		imageView.setFitHeight(200);
 		imageView.setId(this.caption);
+		if(label == null){
+			label = new Label();
+		}
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
 		label.setTextAlignment(TextAlignment.CENTER);

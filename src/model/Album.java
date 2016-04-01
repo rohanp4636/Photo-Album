@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,16 +14,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextAlignment;
 
-public class Album {
+public class Album implements Serializable{
 	
 	String albumName;
 	public int numPhotos;
 	Calendar oldest = null;   // when new photo is added compare time as well as date
 	Calendar newest = null;
 	ArrayList<Photo> photos;
-	Label label;
-	Image image;
-	ImageView imageView;
+	String path = "";
+	
+	transient Label label;
+	transient Image image;
+	transient ImageView imageView;
 	
 	
 	public Album(String name){
@@ -45,7 +48,16 @@ public class Album {
 		return photos;
 	}
 	public boolean setAlbumCover(){
-		image = new Image("/view/albumIcon.png");
+		if(path.isEmpty()){
+			path = "/view/albumIcon.png";
+			image = new Image("/view/albumIcon.png");
+		}
+		else{
+			image = new Image(path);
+		}
+		if(label == null){
+			label = new Label();
+		}
 		imageView = new ImageView(image);
 		imageView.setFitWidth(280);
 		imageView.setFitHeight(280);

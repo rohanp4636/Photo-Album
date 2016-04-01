@@ -1,5 +1,6 @@
 package model;
 	
+import java.io.File;
 import java.util.ArrayList;
 
 import controller.loginPaneController;
@@ -12,18 +13,28 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class PhotoAlbum extends Application {
-	ArrayList<User> users;
+	Admin admin;
+	
 
+	
+	public void init() throws Exception{
+		admin = Admin.readAdmin();
+		
+	}
+	
 	//when saving make all static selection var false or nulll. also check other static stuff;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			ArrayList<User> users = new ArrayList<User>();
+			if(admin.userList == null){
+				admin.userList = new ArrayList<User>();
+			}
+			
 			FXMLLoader loader= new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/loginPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
 			loginPaneController lpg = loader.getController();
-			lpg.start(primaryStage,users);
+			lpg.start(primaryStage,admin.userList);
 			Scene scene = new Scene(root);
 			
 			root.requestFocus();
@@ -38,6 +49,10 @@ public class PhotoAlbum extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void stop() throws Exception{
+		Admin.writeAdmin(admin);
 	}
 	
 	public static void main(String[] args) {
