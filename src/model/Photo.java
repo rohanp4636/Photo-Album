@@ -60,6 +60,7 @@ public class Photo implements Serializable{
 	}
 	
 	public boolean setPhotoThumbnail(){
+		Boolean create = false;
 		image = new Image("file:"+this.path);
 		imageView = new ImageView(image);
 		imageView.setFitWidth(300);
@@ -67,6 +68,7 @@ public class Photo implements Serializable{
 		imageView.setId(this.caption);
 		if(label == null){
 			label = new Label();
+			create = true;
 		}
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
@@ -74,8 +76,10 @@ public class Photo implements Serializable{
 		label.setContentDisplay(ContentDisplay.TOP);
 		label.setId(this.path);
 		label.setStyle("-fx-text-fill: white");
-		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
-		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		if(create){
+			label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
+			label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		}
 		label.setPadding(new Insets(5,5,5,5));
 		label.setMaxSize(label.getWidth(), label.getHeight());
 		label.setTextOverrun(OverrunStyle.ELLIPSIS);

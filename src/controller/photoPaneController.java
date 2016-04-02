@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -13,8 +14,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -30,6 +35,7 @@ public class photoPaneController {
 	
 	@FXML ScrollPane scrollPane;
 	
+	@FXML Button createAlbumButton;
 	Stage primaryStage;
 	ArrayList<User> users;
 	public static ArrayList<Photo> photos;
@@ -38,11 +44,11 @@ public class photoPaneController {
 	Scene prev;
 	albumPaneController apc;
 	Album album;
-	
+	Boolean search;
 	public static String selected;
 	public static Boolean isSelected = false;
 	
-	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, Album album) {
+	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, Album album, Boolean search) {
 		this.primaryStage = primaryStage;
 		this.users = user;
 		photoPaneController.photos = album.getPhotos();
@@ -51,6 +57,10 @@ public class photoPaneController {
 		this.userIndex = index;
 		this.apc = apc;
 		this.album = album;
+		this.search = search;
+		if(!this.search){
+			createAlbumButton.setVisible(false);
+		}
 		selected = null;
 		isSelected = false;
 		for(int k = 0; k < photos.size(); k++){
@@ -73,31 +83,55 @@ public class photoPaneController {
 		FileChooser filechooser = new FileChooser();
 		filechooser.getExtensionFilters().add(
 				new ExtensionFilter("Images (PNG,JPG)", "*.png", "*.jpg"));
-		File file = filechooser.showOpenDialog(null);
-		if(file != null){
-			for(int i = 0; i < photos.size(); i++){
-				if(photos.get(i).getPath().equalsIgnoreCase(file.getAbsolutePath())){
-					primaryStage.setResizable(false);
-					Alert message = new Alert(AlertType.INFORMATION);
-					message.initOwner(primaryStage);
-					message.setTitle("Add Photo");
-					message.setHeaderText("Cannot Add Photo");
-					message.setContentText("Photo already exists in album.");
-					message.setGraphic(null);
-					message.getDialogPane().getStylesheets().add("/view/loginPane.css");
-					message.showAndWait();
-					primaryStage.setResizable(true);
-					return;
+		List<File> files = filechooser.showOpenMultipleDialog(primaryStage);
+		if(files == null){
+			return;
+		}
+		ArrayList<File> filesThatExist = new ArrayList<File>();
+		for(int j = 0; j < files.size(); j++){
+			File file = files.get(j);
+			if(file != null){
+				Boolean add = true;
+				for(int i = 0; i < photos.size(); i++){
+					if(photos.get(i).getPath().equalsIgnoreCase(file.getAbsolutePath())){
+						filesThatExist.add(file);
+						add = false;
+						break;
+					}
+				}
+				//System.out.println(file.lastModified());
+				if(add){
+					Photo photo = new Photo(file, album);
+					photos.add(0, photo);
+					tilePane.getChildren().add(0, photo.getLabel());
+					currentUser.updateAlbum(apc, album);
 				}
 			}
-			//System.out.println(file.lastModified());
-			
-			Photo photo = new Photo(file, album);
-			photos.add(0, photo);
-			tilePane.getChildren().add(0, photo.getLabel());
-			currentUser.updateAlbum(apc, album);
-			
-
+		}
+		if(!filesThatExist.isEmpty()){
+			primaryStage.setResizable(false);
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Add Photo");
+			message.setHeaderText("Cannot Add Photo");
+			message.setContentText("Photo already exists in album. Could not add the following files:");
+			message.setGraphic(null);
+			String photoPaths = "";
+			for(int i = 0; i < filesThatExist.size(); i++){
+				photoPaths= photoPaths + filesThatExist.get(i).getAbsolutePath()+"\n";
+			}
+			TextArea ta = new TextArea(photoPaths);
+			ta.setEditable(false);
+			ta.setMaxWidth(Double.MAX_VALUE);
+			ta.setMaxHeight(Double.MAX_VALUE);
+			GridPane gp = new GridPane();
+		
+			gp.add(ta, 0, 0);
+			message.getDialogPane().setExpandableContent(gp);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			primaryStage.setResizable(true);
+			return;
 		}
 	}
 	

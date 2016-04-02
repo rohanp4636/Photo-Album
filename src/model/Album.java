@@ -48,6 +48,7 @@ public class Album implements Serializable{
 		return photos;
 	}
 	public boolean setAlbumCover(){
+		Boolean create = false;
 		if(path.isEmpty()){
 			path = "/view/albumIcon.png";
 			image = new Image("/view/albumIcon.png");
@@ -57,6 +58,7 @@ public class Album implements Serializable{
 		}
 		if(label == null){
 			label = new Label();
+			create = true;
 		}
 		imageView = new ImageView(image);
 		imageView.setFitWidth(280);
@@ -69,8 +71,10 @@ public class Album implements Serializable{
 		label.setContentDisplay(ContentDisplay.TOP);
 		label.setId(this.albumName);
 		label.setStyle("-fx-text-fill: white");
-		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
-		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		if(create){
+			label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
+			label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		}
 		label.setPadding(new Insets(5,16,5,16));
 		label.setOnMouseClicked(e -> selectImage());
 		return true;

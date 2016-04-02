@@ -108,7 +108,7 @@ public class albumPaneController {
 				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
 				AnchorPane root = (AnchorPane)load.load();
 				photoPaneController ppc = load.getController();
-				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()));
+				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()), false);
 				deselect();
 				Scene scene = new Scene(root);
 				double w = primaryStage.getWidth();
@@ -157,7 +157,7 @@ public class albumPaneController {
 		
 	}
 	
-	public void searchAlbum(ActionEvent e){
+	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.
 		
 	}
 	public void logout(ActionEvent e) throws IOException{

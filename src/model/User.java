@@ -55,6 +55,7 @@ public class User implements Serializable {
 	
 	
 	public boolean setUserImage(){
+		Boolean create = false;
 		if(path.isEmpty()){
 			if(adminPaneController.users.isEmpty()){
 				path = "/view/user.png";
@@ -75,6 +76,7 @@ public class User implements Serializable {
 		if(label == null){
 			label = new Label();
 			label.setId(this.userName);
+			create = true;
 		}
 		imageView = new ImageView(image);
 		imageView.setFitWidth(280);
@@ -88,8 +90,10 @@ public class User implements Serializable {
 		label.setTextAlignment(TextAlignment.CENTER);
 		label.setContentDisplay(ContentDisplay.TOP);
 		label.setStyle("-fx-text-fill: white");
-		label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
-		label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		if(create){
+			label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
+			label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
+		}
 		label.setPadding(new Insets(5,16,5,16));
 		label.setOnMouseClicked(e -> selectImage());
 		return true;

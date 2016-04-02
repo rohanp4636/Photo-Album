@@ -44,3 +44,38 @@
 		-fx-font-size: 15px;
 }
 
+.text-area .content{
+	-fx-background-color:#000000;
+	-fx-text-fill: #ea2e49;
+	-fx-border-width: 0;
+	
+}
+
+.text-area {
+	-fx-background-color:#000000;
+	-fx-border-width: 0;
+	-fx-text-fill: #ea2e49;
+	-fx-font-family: "System";
+	
+	
+}
+
+.text-area .scroll-bar {
+    -fx-background-color:#101010;
+}
+
+.text-area .scroll-bar .thumb {
+    -fx-background-color:#1e1e1e;
+   
+}
+.text-area .scroll-bar.increment-arrow {
+    -fx-background-color:#ea2e49;
+ }
+  
+.text-area .scroll-bar .decrement-arrow {
+    -fx-background-color:#ea2e49;
+  }
+  
+ .text-area > .corner {
+    -fx-background-color: #101010;
+}
