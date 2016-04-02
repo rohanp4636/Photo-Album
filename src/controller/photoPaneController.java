@@ -145,6 +145,7 @@ public class photoPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		if(getSelectedUser() == -1){
@@ -156,6 +157,7 @@ public class photoPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -204,6 +206,7 @@ public class photoPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		if(getSelectedUser() == -1){
@@ -215,6 +218,7 @@ public class photoPaneController {
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
+			deselect();
 			return;
 		}
 		   Stage stageAdd = new Stage();
@@ -240,6 +244,7 @@ public class photoPaneController {
 
 		   stageAdd.showAndWait();
 			primaryStage.setResizable(true);
+			deselect();
 	}
 	
 	public void displayPhoto(ActionEvent e){
@@ -294,7 +299,7 @@ public class photoPaneController {
 			isSelected = false;
 			return;
 		}
-		if(isSelected && x >= 0 && x < users.size()){
+		if(isSelected && x >= 0 && x < photos.size()){
 			if(((Label)tilePane.getChildren().get(x)).getStylesheets().size() == 2){
 				((Label)tilePane.getChildren().get(x)).getStylesheets().remove(1);
 				((Label)tilePane.getChildren().get(x)).getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());

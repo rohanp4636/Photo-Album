@@ -80,7 +80,7 @@ public class Photo implements Serializable{
 			label.getStylesheets().add(getClass().getResource("/view/font.css").toExternalForm());
 			label.getStylesheets().add(getClass().getResource("/view/emptyBorder.css").toExternalForm());
 		}
-		label.setPadding(new Insets(5,5,5,5));
+		label.setPadding(new Insets(5,6,5,6));
 		label.setMaxSize(label.getWidth(), label.getHeight());
 		label.setTextOverrun(OverrunStyle.ELLIPSIS);
 		label.setOnMouseClicked(e -> selectImage());
