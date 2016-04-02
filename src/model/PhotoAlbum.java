@@ -18,7 +18,13 @@ public class PhotoAlbum extends Application {
 
 	
 	public void init() throws Exception{
-		admin = Admin.readAdmin();
+		try{
+			admin = Admin.readAdmin();
+
+		}
+		catch(Exception e){
+			admin = new Admin();
+		}
 		
 	}
 	

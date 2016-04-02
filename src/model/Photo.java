@@ -22,6 +22,7 @@ public class Photo implements Serializable{
 	
 	Calendar dateTime;
 	
+	transient Boolean create = false;
 	transient Label label;
 	transient Image image;
 	transient ImageView imageView;
@@ -33,6 +34,7 @@ public class Photo implements Serializable{
 		this.caption = "";
 		tags = new ArrayList<Tag>();
 		label = new Label();
+		create = true;
 		boolean test = setPhotoThumbnail();
 		album.numPhotos++;
 		//set time and date in dateTime
@@ -60,7 +62,6 @@ public class Photo implements Serializable{
 	}
 	
 	public boolean setPhotoThumbnail(){
-		Boolean create = false;
 		image = new Image("file:"+this.path);
 		imageView = new ImageView(image);
 		imageView.setFitWidth(300);
@@ -84,6 +85,7 @@ public class Photo implements Serializable{
 		label.setMaxSize(label.getWidth(), label.getHeight());
 		label.setTextOverrun(OverrunStyle.ELLIPSIS);
 		label.setOnMouseClicked(e -> selectImage());
+		create = false;
 		return true;
 	}
 		

@@ -26,6 +26,7 @@ public class User implements Serializable {
 		
 	String path = "";
 	
+	transient Boolean create = false;
 	transient Label label;
 	transient Image image;
 	transient ImageView imageView;
@@ -37,6 +38,7 @@ public class User implements Serializable {
 		this.userName = name;
 		label = new Label();
 		label.setId(name);
+		create = true;
 		Boolean test = this.setUserImage();
 	}
 	public ArrayList<Album> getAlbums(){
@@ -55,7 +57,6 @@ public class User implements Serializable {
 	
 	
 	public boolean setUserImage(){
-		Boolean create = false;
 		if(path.isEmpty()){
 			if(adminPaneController.users.isEmpty()){
 				path = "/view/user.png";
@@ -96,6 +97,7 @@ public class User implements Serializable {
 		}
 		label.setPadding(new Insets(5,16,5,16));
 		label.setOnMouseClicked(e -> selectImage());
+		create = false;
 		return true;
 	}
 	

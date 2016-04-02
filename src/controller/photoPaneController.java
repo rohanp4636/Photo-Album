@@ -263,6 +263,9 @@ public class photoPaneController {
 			
 	}
 	public void createAlbum(ActionEvent e){
+		if(!this.search){
+			return;
+		}
 		
 	}
 	

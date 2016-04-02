@@ -23,6 +23,7 @@ public class Album implements Serializable{
 	ArrayList<Photo> photos;
 	String path = "";
 	
+	transient Boolean create = false;
 	transient Label label;
 	transient Image image;
 	transient ImageView imageView;
@@ -33,6 +34,7 @@ public class Album implements Serializable{
 		numPhotos = 0;
 		photos = new ArrayList<Photo>();
 		label = new Label();
+		create = true;
 		Boolean test = setAlbumCover();
 	}
 	public Label getLabel(){
@@ -48,7 +50,6 @@ public class Album implements Serializable{
 		return photos;
 	}
 	public boolean setAlbumCover(){
-		Boolean create = false;
 		if(path.isEmpty()){
 			path = "/view/albumIcon.png";
 			image = new Image("/view/albumIcon.png");
@@ -77,6 +78,7 @@ public class Album implements Serializable{
 		}
 		label.setPadding(new Insets(5,16,5,16));
 		label.setOnMouseClicked(e -> selectImage());
+		create = false;
 		return true;
 	}
 		
