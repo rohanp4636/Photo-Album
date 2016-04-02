@@ -63,6 +63,15 @@ public class albumPaneController {
 		isSelected=false;
 		for(int j = 0; j < albums.size(); j++){
 			albums.get(j).setAlbumCover();	
+			for(int k = 0; k < albums.get(j).getPhotos().size(); k++){  // fix this
+				File file = new File(albums.get(j).getPhotos().get(k).getPath());
+				if(!file.exists()){
+					albums.get(j).getPhotos().remove(k);
+					k--;
+					albums.get(j).numPhotos--;
+				}
+
+			}
 		}
 		
 		for(int i = 0; i < albums.size(); i++){
@@ -157,7 +166,7 @@ public class albumPaneController {
 		
 	}
 	
-	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.
+	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.  all check milisecond
 		
 	}
 	public void logout(ActionEvent e) throws IOException{

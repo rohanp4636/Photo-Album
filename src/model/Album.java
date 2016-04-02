@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,8 +32,8 @@ public class Album implements Serializable{
 	
 	public Album(String name){
 		this.albumName = name;
-		numPhotos = 0;
 		photos = new ArrayList<Photo>();
+		numPhotos = photos.size();
 		label = new Label();
 		create = true;
 		Boolean test = setAlbumCover();
@@ -45,6 +46,23 @@ public class Album implements Serializable{
 		return albumName;
 	}
 	
+	public void updateDates(){
+		if(photos.isEmpty()){
+			oldest = null;
+			newest = null;
+		}
+		oldest = photos.get(0).dateTime;
+		newest = photos.get(0).dateTime;
+		
+		for(int i = 0; i < photos.size(); i++){
+			if(photos.get(i).dateTime.before(oldest)){
+				oldest = photos.get(i).dateTime;
+			}
+			if(photos.get(i).dateTime.after(newest)){
+				newest = photos.get(i).dateTime;
+			}
+		}
+	}
 	
 	public ArrayList<Photo> getPhotos(){
 		return photos;
@@ -107,11 +125,11 @@ public class Album implements Serializable{
 //	}
 	
 	public String toString(){
-		String s = albumName + "  -  " + numPhotos + " photos\n";
+		String s = albumName + "  -  " + photos.size() + " photos\n";
 		if(oldest == null && newest == null){
 			return s + "\n";
 		}
-		String dates = oldest.MONTH +"/"+oldest.DAY_OF_MONTH + "/" + oldest.DAY_OF_YEAR + " - " +newest.MONTH +"/"+newest.DAY_OF_MONTH + "/" + newest.DAY_OF_YEAR;
+		String dates = new SimpleDateFormat("MM/dd/yyyy").format(oldest.getTime()) + " - " + new SimpleDateFormat("MM/dd/yyyy").format(newest.getTime());
 		return s + dates;
 		
 	}

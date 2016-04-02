@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,13 +64,17 @@ public class photoPaneController {
 		}
 		selected = null;
 		isSelected = false;
-		for(int k = 0; k < photos.size(); k++){
-			photos.get(k).setPhotoThumbnail();
+		for(int k = 0; k < photos.size(); k++){  // fix this
 			File file = new File(photos.get(k).getPath());
-			if(file.exists()){
-				photos.get(k).setPath(file.getAbsolutePath()); 
+			if(!file.exists()){
+				photos.remove(k);
+				k--;
+				album.numPhotos--;
 			}
-			
+			else{
+				photos.get(k).setPhotoThumbnail();	
+			}
+
 		}
 		for(int i = 0; i < photos.size(); i++){
 			tilePane.getChildren().add(photos.get(i).getLabel()); 
@@ -101,10 +106,12 @@ public class photoPaneController {
 				}
 				//System.out.println(file.lastModified());
 				if(add){
-					Photo photo = new Photo(file, album);
+					Photo photo = new Photo(file, album, false, file.getAbsolutePath());
 					photos.add(0, photo);
 					tilePane.getChildren().add(0, photo.getLabel());
+					album.updateDates();
 					currentUser.updateAlbum(apc, album);
+					
 				}
 			}
 		}
@@ -114,7 +121,7 @@ public class photoPaneController {
 			message.initOwner(primaryStage);
 			message.setTitle("Add Photo");
 			message.setHeaderText("Cannot Add Photo");
-			message.setContentText("Photo already exists in album. Could not add the following files:");
+			message.setContentText("Some selected photos may already exists in album. Could not add the following files:");
 			message.setGraphic(null);
 			String photoPaths = "";
 			for(int i = 0; i < filesThatExist.size(); i++){
@@ -124,7 +131,10 @@ public class photoPaneController {
 			ta.setEditable(false);
 			ta.setMaxWidth(Double.MAX_VALUE);
 			ta.setMaxHeight(Double.MAX_VALUE);
+			GridPane.setVgrow(ta, Priority.ALWAYS);
+			GridPane.setHgrow(ta, Priority.ALWAYS);
 			GridPane gp = new GridPane();
+			
 		
 			gp.add(ta, 0, 0);
 			message.getDialogPane().setExpandableContent(gp);
@@ -184,7 +194,9 @@ public class photoPaneController {
 					   tilePane.getChildren().remove(i);
 					   photos.remove(userIndex);
 					   album.numPhotos--;
+					   album.updateDates();
 					   currentUser.updateAlbum(apc, album);
+					   
 					   break;
 				   }
 			   }
@@ -272,6 +284,8 @@ public class photoPaneController {
 	
 	public void back(ActionEvent e){
 		deselect();
+		album.updateDates();
+		currentUser.updateAlbum(apc, album);
 		primaryStage.setScene(prev);
 		if(apc.tilePane.getChildren().size() == 0){
 			for(int i = 0; i < currentUser.getAlbums().size(); i++){

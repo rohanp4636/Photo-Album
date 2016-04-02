@@ -35,7 +35,7 @@ public class PhotoAlbum extends Application {
 			if(admin.userList == null){
 				admin.userList = new ArrayList<User>();
 			}
-			
+			 
 			FXMLLoader loader= new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/loginPane.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();

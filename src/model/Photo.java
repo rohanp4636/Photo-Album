@@ -22,6 +22,8 @@ public class Photo implements Serializable{
 	
 	Calendar dateTime;
 	
+	Boolean isDemoPhoto;
+	
 	transient Boolean create = false;
 	transient Label label;
 	transient Image image;
@@ -29,12 +31,23 @@ public class Photo implements Serializable{
 	
 	ArrayList<Tag> tags;
 	
-	public Photo(File file, Album album){    //date and time stuff
-		this.path = file.getAbsolutePath();
+	public Photo(File file, Album album, Boolean demo, String demoPath){    //date and time stuff
+		if(demo){
+			this.path = file.getAbsolutePath();
+		}
+		else{
+			this.path = demoPath;
+		}
 		this.caption = "";
 		tags = new ArrayList<Tag>();
 		label = new Label();
 		create = true;
+		this.isDemoPhoto = demo;
+		this.dateTime = Calendar.getInstance();
+		this.dateTime.setTimeInMillis(file.lastModified());
+		this.dateTime.set(Calendar.MILLISECOND, 0);
+
+		
 		boolean test = setPhotoThumbnail();
 		album.numPhotos++;
 		//set time and date in dateTime
@@ -62,7 +75,12 @@ public class Photo implements Serializable{
 	}
 	
 	public boolean setPhotoThumbnail(){
-		image = new Image("file:"+this.path);
+		if(isDemoPhoto){
+			image = new Image("");  // put relative path here for photos in date folder
+		}
+		else{
+			image = new Image("file:"+this.path);
+		}
 		imageView = new ImageView(image);
 		imageView.setFitWidth(300);
 		imageView.setFitHeight(200);
