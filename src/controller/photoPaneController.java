@@ -260,7 +260,56 @@ public class photoPaneController {
 	}
 	
 	public void displayPhoto(ActionEvent e){
-		
+		/*if(albums.size()==0)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Open Album");
+			message.setHeaderText("Cannot Open Album");
+			message.setContentText("There are no albums to open");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedAlbum()==-1)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Open Album");
+			message.setHeaderText("Cannot Open Album");
+			message.setContentText("You must first select an Album");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(isSelected)
+		{
+			try{
+				
+				FXMLLoader load = new FXMLLoader();
+				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
+				AnchorPane root = (AnchorPane)load.load();
+				photoPaneController ppc = load.getController();
+				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()), false);
+				deselect();
+				Scene scene = new Scene(root);
+				double w = primaryStage.getWidth();
+				double h = primaryStage.getHeight();
+				primaryStage.setScene(scene);
+				primaryStage.setWidth(w);
+				primaryStage.setHeight(h);
+				
+				root.requestFocus();
+				
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}
+		deselect();*/
 	}
 	
 	public void tagPhoto(ActionEvent e){
@@ -278,6 +327,7 @@ public class photoPaneController {
 		if(!this.search){
 			return;
 		}
+		
 		
 	}
 	

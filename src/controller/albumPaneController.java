@@ -62,7 +62,6 @@ public class albumPaneController {
 		selected=null;
 		isSelected=false;
 		for(int j = 0; j < albums.size(); j++){
-			albums.get(j).setAlbumCover();	
 			for(int k = 0; k < albums.get(j).getPhotos().size(); k++){  // fix this
 				File file = new File(albums.get(j).getPhotos().get(k).getPath());
 				if(!file.exists()){
@@ -72,6 +71,7 @@ public class albumPaneController {
 				}
 
 			}
+			albums.get(j).setAlbumCover();	
 		}
 		
 		for(int i = 0; i < albums.size(); i++){
