@@ -11,39 +11,39 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.test">
+<AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.71" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.displayPaneController">
    <children>
       <ButtonBar layoutX="1166.0" layoutY="17.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="17.0">
         <buttons>
-          <Button fx:id="backButton" mnemonicParsing="false" text="Back" />
+          <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" />
         </buttons>
       </ButtonBar>
       <AnchorPane fx:id="basePane" layoutY="67.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
          <children>
-            <ImageView fitHeight="500.0" fitWidth="866.0" layoutX="90.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="83.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="70.0" />
+            <ImageView fx:id="image" fitHeight="500.0" fitWidth="866.0" layoutX="90.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="83.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="70.0" />
             <Label layoutX="1033.0" layoutY="30.0" text="Caption" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="30.0" />
-            <TextArea editable="false" layoutX="1032.0" layoutY="56.0" prefHeight="96.0" prefWidth="227.0" text="&#10;&#10;" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="56.0" />
-            <TextField editable="false" layoutX="1032.0" layoutY="196.0" prefHeight="29.0" prefWidth="227.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="196.0" />
-            <TextField editable="false" layoutX="1032.0" layoutY="267.0" prefHeight="29.0" prefWidth="227.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="267.0" />
+            <TextArea fx:id="caption" editable="false" layoutX="1032.0" layoutY="56.0" prefHeight="96.0" prefWidth="227.0" text="&#10;&#10;" wrapText="true" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="56.0" />
+            <TextField fx:id="dateCapture" editable="false" layoutX="1032.0" layoutY="196.0" prefHeight="29.0" prefWidth="227.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="196.0" />
+            <TextField fx:id="timeCapture" editable="false" layoutX="1032.0" layoutY="267.0" prefHeight="29.0" prefWidth="227.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="267.0" />
             <Label layoutX="1033.0" layoutY="171.0" text="Date of Capture" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="171.0" />
             <Label layoutX="1033.0" layoutY="244.0" text="Time of Capture" AnchorPane.rightAnchor="185.0" AnchorPane.topAnchor="244.0" />
             <AnchorPane layoutX="1032.0" layoutY="318.0" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="318.0">
                <children>
                   <TreeTableView prefHeight="307.0" prefWidth="227.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TreeTableColumn editable="false" prefWidth="226.0" text="Tags" />
+                      <TreeTableColumn fx:id="tags" editable="false" prefWidth="226.0" text="Tags" />
                     </columns>
                   </TreeTableView>
                </children>
             </AnchorPane>
             <ButtonBar buttonMinWidth="26.0" layoutX="976.0" layoutY="301.0" prefHeight="40.0" prefWidth="9.0" AnchorPane.bottomAnchor="312.0" AnchorPane.rightAnchor="268.0" AnchorPane.topAnchor="301.0">
                <buttons>
-                  <Button fx:id="nextButton" minWidth="16.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="26.0" text="&gt;" />
+                  <Button fx:id="nextButton" minWidth="16.0" mnemonicParsing="false" onAction="#nextPic" prefHeight="29.0" prefWidth="26.0" text="&gt;" />
                </buttons>
             </ButtonBar>
             <ButtonBar buttonMinWidth="26.0" layoutX="22.0" layoutY="307.0" prefHeight="29.0" prefWidth="26.0" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="307.0">
               <buttons>
-                  <Button fx:id="prevButton" minWidth="16.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="26.0" text="&lt;" />
+                  <Button fx:id="prevButton" minWidth="16.0" mnemonicParsing="false" onAction="#prevPic" prefHeight="29.0" prefWidth="26.0" text="&lt;" />
               </buttons>
             </ButtonBar>
          </children>

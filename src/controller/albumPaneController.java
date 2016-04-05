@@ -71,6 +71,7 @@ public class albumPaneController {
 				}
 
 			}
+			albums.get(j).updateDates();
 			albums.get(j).setAlbumCover();	
 		}
 		

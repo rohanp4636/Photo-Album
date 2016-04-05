@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -74,6 +75,26 @@ public class Photo implements Serializable{
 		this.path = s;
 	}
 	
+	public String getDate(){
+		if(dateTime == null){
+			return "";
+		}
+		String s = new SimpleDateFormat("MM/dd/yyyy").format(dateTime.getTime());
+		return s;
+	}
+	public String getTime(){
+		if(dateTime == null){
+			return "";
+		}
+		String s = new SimpleDateFormat("hh:mm:ss aa").format(dateTime.getTime());
+		return s;
+		
+	}
+	
+	public Image getImage(){
+		return image;
+	}
+	
 	public boolean setPhotoThumbnail(){
 		if(isDemoPhoto){
 			image = new Image("");  // put relative path here for photos in date folder
@@ -106,7 +127,8 @@ public class Photo implements Serializable{
 		create = false;
 		return true;
 	}
-		
+	
+	
 	
 	public void selectImage(){
 		for(int i = 0; i < photoPaneController.photos.size(); i++){

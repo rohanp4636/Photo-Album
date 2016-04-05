@@ -50,6 +50,7 @@ public class Album implements Serializable{
 		if(photos.isEmpty()){
 			oldest = null;
 			newest = null;
+			return;
 		}
 		oldest = photos.get(0).dateTime;
 		newest = photos.get(0).dateTime;

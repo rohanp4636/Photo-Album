@@ -105,6 +105,7 @@ public class photoPaneController {
 					}
 				}
 				//System.out.println(file.lastModified());
+				//check parent if in data and if it is make demo photo.
 				if(add){
 					Photo photo = new Photo(file, album, false, file.getAbsolutePath());
 					photos.add(0, photo);
@@ -260,26 +261,26 @@ public class photoPaneController {
 	}
 	
 	public void displayPhoto(ActionEvent e){
-		/*if(albums.size()==0)
+		if(photos.size()==0)
 		{
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(primaryStage);
-			message.setTitle("Open Album");
-			message.setHeaderText("Cannot Open Album");
-			message.setContentText("There are no albums to open");
+			message.setTitle("Display Photo");
+			message.setHeaderText("Cannot Display Photo");
+			message.setContentText("There are no photos to display");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
 			deselect();
 			return;
 		}
-		if(getSelectedAlbum()==-1)
+		if(getSelectedUser()==-1)
 		{
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(primaryStage);
-			message.setTitle("Open Album");
-			message.setHeaderText("Cannot Open Album");
-			message.setContentText("You must first select an Album");
+			message.setTitle("Display Photo");
+			message.setHeaderText("Cannot Display Photo");
+			message.setContentText("You must first select an photo");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
@@ -291,10 +292,10 @@ public class photoPaneController {
 			try{
 				
 				FXMLLoader load = new FXMLLoader();
-				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
+				load.setLocation(getClass().getResource("/view/displayPane.fxml"));
 				AnchorPane root = (AnchorPane)load.load();
-				photoPaneController ppc = load.getController();
-				ppc.start(primaryStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()), false);
+				displayPaneController dpc = load.getController();
+				dpc.start(primaryStage,photos, primaryStage.getScene(),this,getSelectedUser());
 				deselect();
 				Scene scene = new Scene(root);
 				double w = primaryStage.getWidth();
@@ -309,7 +310,7 @@ public class photoPaneController {
 				ee.printStackTrace();
 			}
 		}
-		deselect();*/
+		deselect();
 	}
 	
 	public void tagPhoto(ActionEvent e){
@@ -323,7 +324,7 @@ public class photoPaneController {
 	public void slideshow(ActionEvent e){
 			
 	}
-	public void createAlbum(ActionEvent e){
+	public void createAlbum(ActionEvent e){ // create new album from searched photos.
 		if(!this.search){
 			return;
 		}
