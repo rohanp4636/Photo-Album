@@ -12,7 +12,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
@@ -20,7 +20,7 @@ import model.User;
 
 public class displayPaneController {
 	
-	@FXML Pane imagePane;
+	@FXML HBox imageBox;
 	@FXML TextArea caption;
 	@FXML TextField dateCapture;
 	@FXML TextField timeCapture;
@@ -51,8 +51,9 @@ public class displayPaneController {
 		if(i != null){
 			image.setImage(i);	
 			image.setPreserveRatio(true);
-			image.fitHeightProperty().bind(imagePane.heightProperty());
-			image.fitWidthProperty().bind(imagePane.widthProperty());
+			image.fitHeightProperty().bind(imageBox.heightProperty());
+			image.fitWidthProperty().bind(imageBox.widthProperty());
+		
 		}
 	
 		

@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.71" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.displayPaneController">
    <children>
@@ -46,11 +46,11 @@
                   <Button fx:id="prevButton" minWidth="16.0" mnemonicParsing="false" onAction="#prevPic" prefHeight="29.0" prefWidth="26.0" text="&lt;" />
               </buttons>
             </ButtonBar>
-            <Pane fx:id="imagePane" layoutX="90.0" layoutY="70.0" prefHeight="500.0" prefWidth="866.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="70.0">
+            <HBox fx:id="imageBox" alignment="CENTER" layoutX="90.0" layoutY="70.0" prefHeight="500.0" prefWidth="866.0" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="324.0" AnchorPane.topAnchor="70.0">
                <children>
                   <ImageView fx:id="image" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </Pane>
+            </HBox>
          </children>
       </AnchorPane>
       <ImageView fitHeight="50.0" fitWidth="450.0" layoutX="-58.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-58.0" AnchorPane.topAnchor="9.0">
