@@ -280,7 +280,7 @@ public class photoPaneController {
 			message.initOwner(primaryStage);
 			message.setTitle("Display Photo");
 			message.setHeaderText("Cannot Display Photo");
-			message.setContentText("You must first select an photo");
+			message.setContentText("You must first select a photo");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();

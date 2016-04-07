@@ -71,7 +71,7 @@ public class captionController {
 		else{ // put in sorted order if you want.
 			photo.setCaption(caption.getText());
 			int index = tilePane.getChildren().indexOf(photo.getLabel());
-			((Label)tilePane.getChildren().get(index)).setText(caption.getText());
+			((Label)tilePane.getChildren().get(index)).setText(photo.getCaption());
 		}
 		localStage.close();
 		

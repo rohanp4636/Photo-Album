@@ -65,7 +65,7 @@ public class Photo implements Serializable{
 	}
 	
 	public void setCaption(String s){
-		this.caption = s;
+		this.caption = s.trim();
 	}
 	
 	public String getPath(){
