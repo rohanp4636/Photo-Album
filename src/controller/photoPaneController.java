@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -313,8 +314,99 @@ public class photoPaneController {
 		deselect();
 	}
 	
-	public void tagPhoto(ActionEvent e){
-		
+	public void tagPhoto(ActionEvent e) throws IOException{
+		if(photos.size() == 0){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Tag Photo");
+			message.setHeaderText("Cannot Tag Photo");
+			message.setContentText("There are no photos to tag.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedUser() == -1){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Tag Photo");
+			message.setHeaderText("Cannot Tag Photo");
+			message.setContentText("You musst first select a photo to tag.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		  
+		  Alert message = new Alert(AlertType.CONFIRMATION);
+		  message.initOwner(primaryStage);
+		  message.setTitle("Tag Photo");
+		  message.setHeaderText("Do you want to Add or Delete Tags");
+		  message.setContentText("Select an option below.");
+		  message.setGraphic(null);
+		  message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+		  ButtonType addB = new ButtonType("ADD");
+		  ButtonType deleteB = new ButtonType("DELETE");
+		  ButtonType cancel = new ButtonType("CANCEL", ButtonData.CANCEL_CLOSE);
+		  
+		  message.getButtonTypes().setAll(addB,deleteB,cancel);
+		  int x = -1;
+		  Optional<ButtonType> res = message.showAndWait();
+		  if(res.get() == addB){
+			  x = 0;
+		  }
+		  else if(res.get() == deleteB){
+			  if(photos.get(getSelectedUser()).getTags().isEmpty()){
+				  	Alert message2 = new Alert(AlertType.INFORMATION);
+				  	message2.initOwner(primaryStage);
+					message2.setTitle("Tag Photo");
+					message2.setHeaderText("Cannot Delete Tags.");
+					message2.setContentText("There are no tags to delete.");
+					message2.setGraphic(null);
+					message2.getDialogPane().getStylesheets().add("/view/loginPane.css");
+					message2.showAndWait();
+					deselect();
+
+					return;
+			  }
+			  x = 1;
+		  }
+		  else{
+			  primaryStage.setResizable(true);
+			  deselect();
+			  return;
+		  }		
+		  Stage stageAdd = new Stage();
+		   FXMLLoader load = new FXMLLoader();
+		   AnchorPane root;
+		   if(x == 0){
+			   load.setLocation(getClass().getResource("/view/addTag.fxml"));
+			   root = (AnchorPane)load.load();
+			   tagAddController tpc= load.getController();
+			   tpc.start(stageAdd,photos.get(getSelectedUser()));
+		   }
+		   else{
+			   load.setLocation(getClass().getResource("/view/deleteTag.fxml"));
+			   root = (AnchorPane)load.load();
+			   tagPaneController tpc= load.getController();
+			   tpc.start(stageAdd,photos.get(getSelectedUser()));
+		   }
+		    
+		   Scene add = new Scene(root);
+		   stageAdd.setScene(add);
+		   stageAdd.setTitle("Tag Photo");
+		   stageAdd.setResizable(false);
+		   stageAdd.initModality(Modality.WINDOW_MODAL);
+		   stageAdd.initOwner(primaryStage);
+		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
+		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
+			deselect();
+	
 	}
 	
 	public void movePhoto(ActionEvent e){

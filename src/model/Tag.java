@@ -12,24 +12,33 @@ public class Tag implements Serializable{
 		tagValue = new ArrayList<String>();
 	}
 	
+	public ArrayList<String> getValue(){
+		return tagValue;
+	}
+	
 	public Boolean addTag(String name){
-		if(tagValue.contains(name.toLowerCase())){
-			return false;
+		for(String i : tagValue){
+			if(i.equalsIgnoreCase(name)){
+				return false;
+			}
 		}
-		tagValue.add(name.toLowerCase());
+		tagValue.add(name);
 		return true;
 		
 	}
 	
 	public Boolean deleteTag(String name){
 		for(String i: tagValue){
-			if(i.equals(name.toLowerCase())){
+			if(i.equalsIgnoreCase(name)){
 				tagValue.remove(i);
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
+	public String toString(){
+		return tagType;
+	}
 }
 
