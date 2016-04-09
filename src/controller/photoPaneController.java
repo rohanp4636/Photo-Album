@@ -340,60 +340,14 @@ public class photoPaneController {
 			return;
 		}
 		  
-		  Alert message = new Alert(AlertType.CONFIRMATION);
-		  message.initOwner(primaryStage);
-		  message.setTitle("Tag Photo");
-		  message.setHeaderText("Do you want to Add or Delete Tags");
-		  message.setContentText("Select an option below.");
-		  message.setGraphic(null);
-		  message.getDialogPane().getStylesheets().add("/view/loginPane.css");
-		  ButtonType addB = new ButtonType("ADD");
-		  ButtonType deleteB = new ButtonType("DELETE");
-		  ButtonType cancel = new ButtonType("CANCEL", ButtonData.CANCEL_CLOSE);
-		  
-		  message.getButtonTypes().setAll(addB,deleteB,cancel);
-		  int x = -1;
-		  Optional<ButtonType> res = message.showAndWait();
-		  if(res.get() == addB){
-			  x = 0;
-		  }
-		  else if(res.get() == deleteB){
-			  if(photos.get(getSelectedUser()).getTags().isEmpty()){
-				  	Alert message2 = new Alert(AlertType.INFORMATION);
-				  	message2.initOwner(primaryStage);
-					message2.setTitle("Tag Photo");
-					message2.setHeaderText("Cannot Delete Tags.");
-					message2.setContentText("There are no tags to delete.");
-					message2.setGraphic(null);
-					message2.getDialogPane().getStylesheets().add("/view/loginPane.css");
-					message2.showAndWait();
-					deselect();
-
-					return;
-			  }
-			  x = 1;
-		  }
-		  else{
-			  primaryStage.setResizable(true);
-			  deselect();
-			  return;
-		  }		
+		 
 		  Stage stageAdd = new Stage();
 		   FXMLLoader load = new FXMLLoader();
 		   AnchorPane root;
-		   if(x == 0){
-			   load.setLocation(getClass().getResource("/view/addTag.fxml"));
-			   root = (AnchorPane)load.load();
-			   tagAddController tpc= load.getController();
-			   tpc.start(stageAdd,photos.get(getSelectedUser()));
-		   }
-		   else{
-			   load.setLocation(getClass().getResource("/view/deleteTag.fxml"));
-			   root = (AnchorPane)load.load();
-			   tagPaneController tpc= load.getController();
-			   tpc.start(stageAdd,photos.get(getSelectedUser()));
-		   }
-		    
+		   load.setLocation(getClass().getResource("/view/Tag.fxml"));
+		   root = (AnchorPane)load.load();
+			tagPaneController tpc= load.getController();
+			tpc.start(stageAdd,photos.get(getSelectedUser())); 
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);
 		   stageAdd.setTitle("Tag Photo");

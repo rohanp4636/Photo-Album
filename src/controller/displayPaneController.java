@@ -8,8 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -24,7 +26,7 @@ public class displayPaneController {
 	@FXML TextArea caption;
 	@FXML TextField dateCapture;
 	@FXML TextField timeCapture;
-	@FXML TreeTableColumn<String,String> tag;
+	@FXML TreeView<String>  treeView;
 	@FXML ImageView image;
 	Stage primaryStage;
 	public ArrayList<Photo> photos;
@@ -38,7 +40,7 @@ public class displayPaneController {
 		this.prev = prev;
 		this.ppc = ppc;
 		this.index = index;
-		setPhoto();
+		setPhoto();		
 		primaryStage.setResizable(true);
 		
 	}
@@ -54,6 +56,18 @@ public class displayPaneController {
 			image.fitHeightProperty().bind(imageBox.heightProperty());
 			image.fitWidthProperty().bind(imageBox.widthProperty());
 		
+		}
+		TreeItem<String> dumb = new TreeItem<String>("dumb");
+		dumb.setExpanded(true);
+		treeView.setRoot(dumb);
+		treeView.setShowRoot(false);
+		for(int i1 = 0; i1 < photos.get(index).getTags().size(); i1++){
+			TreeItem<String> tagT = new TreeItem<String>(photos.get(index).getTags().get(i1).toString());
+			for(int j = 0; j < photos.get(index).getTags().get(i1).getValue().size(); j++){
+				TreeItem<String> tagV = new TreeItem<String>(photos.get(index).getTags().get(i1).getValue().get(j));
+				tagT.getChildren().add(tagV);
+			}
+			dumb.getChildren().add(tagT);
 		}
 	
 		

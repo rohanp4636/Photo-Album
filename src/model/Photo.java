@@ -79,6 +79,10 @@ public class Photo implements Serializable{
 		return tags;
 	}
 	
+	public void setTags(ArrayList<Tag> t){
+		this.tags = t;
+	}
+	
 	public String getDate(){
 		if(dateTime == null){
 			return "";

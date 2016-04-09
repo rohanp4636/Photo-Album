@@ -142,16 +142,41 @@
 	
 }
 
-.tree-table-view{
+.tree-view{
+		-fx-background-color:#000000;
+	
+}
+
+.tree-cell{
 		-fx-background-color:#000000;
 		-fx-font-family: "System";
 		-fx-text-fill: #ea2e49;
 }
+.tree-cell:hover{
+	-fx-text-fill:white;
+}
 
+.tree-cell:selected{
+	-fx-text-fill:white;
+	-fx-background-color: #101010
+}
 
-
-.tree-table-view .column-header {
-    -fx-background-color: #1e1e1e;
+.tree-view .scroll-bar {
+    -fx-background-color:#101010;
+}
+.tree-view .scroll-bar .thumb {
+    -fx-background-color:#1e1e1e;
+   
+}
+.tree-view .scroll-bar.increment-arrow {
+    -fx-background-color:#ea2e49;
+ }
+  
+.tree-view .scroll-bar .decrement-arrow {
+    -fx-background-color:#ea2e49;
+  }
+.tree-view > .corner {
+    -fx-background-color: #101010;
 }
 
 

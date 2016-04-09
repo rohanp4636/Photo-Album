@@ -12,6 +12,10 @@ public class Tag implements Serializable{
 		tagValue = new ArrayList<String>();
 	}
 	
+	public String getType(){
+		return tagType;
+	}
+	
 	public ArrayList<String> getValue(){
 		return tagValue;
 	}
@@ -22,8 +26,25 @@ public class Tag implements Serializable{
 				return false;
 			}
 		}
-		tagValue.add(name);
+		if(tagValue.isEmpty()){
+			tagValue.add(name);
+			return true;
+		}
+		else{
+			for(int i = 0;  i < tagValue.size(); i ++){
+				if(tagValue.get(i).compareToIgnoreCase(name) > 0 ){
+					tagValue.add(i,name);
+					return true;
+				}
+				else if(tagValue.size()-1 == i && tagValue.get(i).compareToIgnoreCase(name) < 0){
+					tagValue.add(name);
+					return true;
+				}
+			}
+		}
 		return true;
+		
+
 		
 	}
 	
