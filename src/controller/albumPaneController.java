@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -137,7 +139,7 @@ public class albumPaneController {
 	}
 	
 	public void createAlbum(ActionEvent e) throws IOException{
-			deselect();
+		   deselect();
 		   Stage stageAdd = new Stage();
 		   
 		   FXMLLoader load = new FXMLLoader();
@@ -160,15 +162,180 @@ public class albumPaneController {
 	}
 	
 	public void renameAlbum(ActionEvent e){
-		
+		if(albums.size()==0)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Rename Album");
+			message.setHeaderText("Cannot Rename Album");
+			message.setContentText("There are no albums to Rename");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedAlbum()==-1)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Rename Album");
+			message.setHeaderText("Cannot Rename Album");
+			message.setContentText("You must first select an Album");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(isSelected)
+		{
+			try{
+				Stage stageAdd = new Stage();
+				FXMLLoader load = new FXMLLoader();
+				load.setLocation(getClass().getResource("/view/rename.fxml"));
+				AnchorPane root = (AnchorPane)load.load();
+				renameController rc= load.getController();
+				rc.start(stageAdd,this, albums, getSelectedAlbum());
+				deselect(); 
+			    Scene add = new Scene(root);
+			    stageAdd.setScene(add);
+			    stageAdd.setTitle("Rename Album");
+			    stageAdd.setResizable(false);
+			    stageAdd.initModality(Modality.WINDOW_MODAL);
+			    stageAdd.initOwner(primaryStage);
+			    root.requestFocus();
+			    primaryStage.setResizable(false);
+			    stageAdd.showAndWait();
+				primaryStage.setResizable(true);
+				
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}
+		deselect();
 	}
 	
 	public void deleteAlbum(ActionEvent e){
-		
+		if(albums.size()==0)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Delete Album");
+			message.setHeaderText("Cannot Delete Album");
+			message.setContentText("There are no albums to Delete");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedAlbum()==-1)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Delete Album");
+			message.setHeaderText("Cannot Delete Album");
+			message.setContentText("You must first select an Album");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(isSelected)
+		{
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.initOwner(primaryStage);
+			alert.setTitle("Delete Album");
+			alert.setHeaderText("Confirm Delete");
+			alert.setContentText("Are you sure you want to Delete this photo?");
+			alert.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			alert.setGraphic(null);
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) { 
+				  Alert message = new Alert(AlertType.INFORMATION);
+				   message.initOwner(primaryStage);
+				   message.setTitle("Delete Photo");
+				   message.setHeaderText("Delete Complete");
+				   message.setContentText("The selected Album has been Deleted");
+				   message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+				   message.setGraphic(null);
+				   message.showAndWait();
+				   int index = getSelectedAlbum();
+				   for(int i = 0; i < tilePane.getChildren().size(); i++){
+					   Label label = (Label) tilePane.getChildren().get(i);
+					   if(label.getId().equalsIgnoreCase(albums.get(index).getAlbumName())){
+						   tilePane.getChildren().remove(i);
+						   albums.remove(index);
+						 
+						   break;
+					   }
+				   }
+			   }
+			  deselect();
+		}
 	}
 	
-	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.  all check milisecond
-		
+	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.  also check milisecond
+		if(albums.size()==0)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Search Album");
+			message.setHeaderText("Cannot Sea Album");
+			message.setContentText("There are no albums to Delete");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedAlbum()==-1)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Delete Album");
+			message.setHeaderText("Cannot Delete Album");
+			message.setContentText("You must first select an Album");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(isSelected)
+		{
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.initOwner(primaryStage);
+			alert.setTitle("Delete Album");
+			alert.setHeaderText("Confirm Delete");
+			alert.setContentText("Are you sure you want to Delete this photo?");
+			alert.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			alert.setGraphic(null);
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) { 
+				  Alert message = new Alert(AlertType.INFORMATION);
+				   message.initOwner(primaryStage);
+				   message.setTitle("Delete Photo");
+				   message.setHeaderText("Delete Complete");
+				   message.setContentText("The selected Album has been Deleted");
+				   message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+				   message.setGraphic(null);
+				   message.showAndWait();
+				   int index = getSelectedAlbum();
+				   for(int i = 0; i < tilePane.getChildren().size(); i++){
+					   Label label = (Label) tilePane.getChildren().get(i);
+					   if(label.getId().equalsIgnoreCase(albums.get(index).getAlbumName())){
+						   tilePane.getChildren().remove(i);
+						   albums.remove(index);
+						 
+						   break;
+					   }
+				   }
+			   }
+			  deselect();
+		}
 	}
 	public void logout(ActionEvent e) throws IOException{
 		deselect();

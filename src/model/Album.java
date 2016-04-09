@@ -45,7 +45,10 @@ public class Album implements Serializable{
 	{
 		return albumName;
 	}
-	
+	public void setAlbum(String name)
+	{
+		albumName = name;
+	}
 	public void updateDates(){
 		if(photos.isEmpty()){
 			oldest = null;

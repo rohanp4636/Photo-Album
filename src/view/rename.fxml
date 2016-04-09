@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #101010;" stylesheets="@search.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: #101010;" stylesheets="@search.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.renameController">
    <children>
       <Label layoutX="163.0" layoutY="33.0" text="Rename" textFill="#ea2e49">
          <font>
             <Font name="BebasNeueRegular" size="26.0" />
          </font>
       </Label>
-      <TextField layoutX="28.0" layoutY="99.0" prefHeight="40.0" prefWidth="344.0" />
+      <TextField fx:id="albumName" layoutX="28.0" layoutY="99.0" prefHeight="40.0" prefWidth="344.0" />
       <ButtonBar layoutX="77.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Ok" />
-            <Button mnemonicParsing="false" text="Cancel" />
+          <Button fx:id="createOK" mnemonicParsing="false" onAction="#createOK" text="Ok" />
+            <Button fx:id="createCancel" mnemonicParsing="false" onAction="#createCancel" text="Cancel" />
         </buttons>
       </ButtonBar>
    </children>

@@ -51,7 +51,7 @@ public class User implements Serializable {
 	public void updateAlbum(albumPaneController apc, Album album){
 		for(Album i: albums){
 			i.label.setText(i.toString());
-			
+			i.label.setId(i.albumName);
 		} 
 		
 	}
