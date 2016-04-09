@@ -33,7 +33,7 @@ public class Photo implements Serializable{
 	ArrayList<Tag> tags;
 	
 	public Photo(File file, Album album, Boolean demo, String demoPath){    //date and time stuff
-		if(demo){
+		if(!demo){
 			this.path = file.getAbsolutePath();
 		}
 		else{
@@ -105,7 +105,7 @@ public class Photo implements Serializable{
 	
 	public boolean setPhotoThumbnail(){
 		if(isDemoPhoto){
-			image = new Image("");   // put relative path here for photos in date folder
+			image = new Image("file:" +this.path);   // put relative path here for photos in date folder
 		}
 		else{
 			image = new Image("file:"+this.path);

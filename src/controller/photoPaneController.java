@@ -98,6 +98,7 @@ public class photoPaneController {
 			File file = files.get(j);
 			if(file != null){
 				Boolean add = true;
+				String demoPath = "data/demoImagesIDRohanDaivik01/";
 				for(int i = 0; i < photos.size(); i++){
 					if(photos.get(i).getPath().equalsIgnoreCase(file.getAbsolutePath())){
 						filesThatExist.add(file);
@@ -108,7 +109,15 @@ public class photoPaneController {
 				//System.out.println(file.lastModified());
 				//check parent if in data and if it is make demo photo.
 				if(add){
-					Photo photo = new Photo(file, album, false, file.getAbsolutePath());
+					Photo photo = null;
+					if(file.getParentFile().getName().equals("demoImagesIDRohanDaivik01")){
+						if(file.getParentFile().getParentFile().getName().equals("data")){
+							photo = new Photo(file,album,true,demoPath+file.getName());
+						}
+					}
+					else{
+						photo = new Photo(file, album, false, file.getAbsolutePath());
+					}
 					photos.add(0, photo);
 					tilePane.getChildren().add(0, photo.getLabel());
 					album.updateDates();
@@ -228,7 +237,7 @@ public class photoPaneController {
 			message.initOwner(primaryStage);
 			message.setTitle("Caption Photo");
 			message.setHeaderText("Cannot Caption Photo");
-			message.setContentText("You musst first select a photo to caption.");
+			message.setContentText("You must first select a photo to caption.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
@@ -363,8 +372,52 @@ public class photoPaneController {
 	
 	}
 	
-	public void movePhoto(ActionEvent e){
+	public void movePhoto(ActionEvent e) throws IOException{
+		if(photos.size() == 0){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Move Photo");
+			message.setHeaderText("Cannot Move Photo");
+			message.setContentText("There are no photos to move.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedUser() == -1){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("Move Photo");
+			message.setHeaderText("Cannot Move Photo");
+			message.setContentText("You must first select a photo to move.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		   Stage stageAdd = new Stage();
+		   
+		   FXMLLoader load = new FXMLLoader();
+		   load.setLocation(getClass().getResource("/view/move.fxml"));
+		   AnchorPane root = (AnchorPane)load.load();
+		   movePhotoController mpc= load.getController();
 		
+		   mpc.start(stageAdd,this,photos.get(getSelectedUser()),this.tilePane);
+		   
+		   Scene add = new Scene(root);
+		   stageAdd.setScene(add);
+		   stageAdd.setTitle("Move Photo");
+		   stageAdd.setResizable(false);
+		   stageAdd.initModality(Modality.WINDOW_MODAL);
+		   stageAdd.initOwner(primaryStage);
+		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
+		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
+			deselect();
 	}
 	
 	public void slideshow(ActionEvent e){
