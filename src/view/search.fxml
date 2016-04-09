@@ -4,10 +4,8 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -32,20 +30,13 @@
             <Font name="BebasNeueRegular" size="26.0" />
          </font>
       </Label>
-      <MenuButton layoutX="27.0" layoutY="271.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="344.0" text="Choose Tag Type" textFill="#ea2e49">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
-      <TextField layoutX="27.0" layoutY="320.0" prefHeight="25.0" prefWidth="344.0" promptText="Tag Value" />
-      <TextArea editable="false" layoutX="27.0" layoutY="407.0" prefHeight="73.0" prefWidth="344.0" />
-      <Button layoutX="163.0" layoutY="363.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="61.0" text="Add Tag" />
       <ButtonBar layoutX="74.0" layoutY="526.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button mnemonicParsing="false" text="Search" />
             <Button mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>
+      <TreeView fx:id="treeView" layoutX="27.0" layoutY="299.0" prefHeight="215.0" prefWidth="344.0" />
+      <TextField alignment="CENTER" editable="false" layoutX="27.0" layoutY="273.0" prefHeight="25.0" prefWidth="344.0" style="-fx-background-color: #1e1e1e;" text="Tags" />
    </children>
 </AnchorPane>
