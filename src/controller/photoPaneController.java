@@ -98,7 +98,7 @@ public class photoPaneController {
 			File file = files.get(j);
 			if(file != null){
 				Boolean add = true;
-				String demoPath = "\\data\\demoImagesIDRohanDaivik01\\";
+				String demoPath = "data/demoImagesIDRohanDaivik01/";
 				for(int i = 0; i < photos.size(); i++){
 					if(photos.get(i).getPath().equalsIgnoreCase(file.getAbsolutePath())){
 						filesThatExist.add(file);

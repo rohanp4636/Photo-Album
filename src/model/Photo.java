@@ -105,8 +105,10 @@ public class Photo implements Serializable{
 	
 	public boolean setPhotoThumbnail(){
 		if(isDemoPhoto){
-			
-			image = new Image("file:"+System.getProperty("user.dir")+path);   // put relative path here for photos in date folder
+			File f = new File(path);
+			String s = f.getPath();
+			 
+			image = new Image("file:"+System.getProperty("user.dir")+"\\"+s);   // put relative path here for photos in date folder
 		}
 		else{
 			image = new Image("file:"+this.path);
