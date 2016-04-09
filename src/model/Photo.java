@@ -113,7 +113,7 @@ public class Photo implements Serializable{
 		imageView = new ImageView(image);
 		imageView.setFitWidth(300);
 		imageView.setFitHeight(200);
-		imageView.setId(this.caption);
+		imageView.setId(this.caption + " ");
 		if(label == null){
 			label = new Label();
 			create = true;
