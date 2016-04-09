@@ -56,15 +56,29 @@ public class createAlbumController {
 		else if(albumExists(name.toLowerCase())){
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
-			message.setTitle("Create User Error");
-			message.setHeaderText("Cannot Create User");
+			message.setTitle("Create Album Error");
+			message.setHeaderText("Cannot Create Album");
 			message.setContentText("Album already exists.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
 			
 		}
+		else if(name.equalsIgnoreCase("Move to a new album"))
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Create Album Error");
+			message.setHeaderText("Cannot Create Album");
+			message.setContentText("Album Name Invalid. You cannot create a new album with the name: 'Move to a new album'.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			
+		}
+		
 		else{ // put in sorted order if you want.
+			
 			Album newAlbum = new Album(name);
 			albums.add(0, newAlbum);
 			apc.tilePane.getChildren().add(0, newAlbum.getLabel());
