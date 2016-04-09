@@ -68,7 +68,7 @@ public class captionController {
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
 			message.showAndWait();
 		}
-		else{ // put in sorted order if you want.
+		else{ // put in sorted order if you  want.
 			photo.setCaption(caption.getText());
 			int index = tilePane.getChildren().indexOf(photo.getLabel());
 			((Label)tilePane.getChildren().get(index)).setText(photo.getCaption()+" ");
