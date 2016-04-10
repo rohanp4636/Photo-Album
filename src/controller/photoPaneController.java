@@ -493,8 +493,6 @@ public class photoPaneController {
 		if(!this.search){
 			return;
 		}
-		
-		
 	}
 	
 	
@@ -508,7 +506,6 @@ public class photoPaneController {
 				apc.tilePane.getChildren().add(0,currentUser.getAlbums().get(i).getLabel());
 			}
 		}
-		
 	}
 	
 	

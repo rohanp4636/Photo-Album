@@ -43,10 +43,6 @@ public class slideShowController {
 		this.photos=p;
 		this.prev=prev;
 		this.ppc=ppc;
-		if(userIndex==-1)
-		{
-			this.userIndex=0;
-		}
 		this.userIndex=i;
 		this.photo=pho;
 		setPhoto();
@@ -61,7 +57,6 @@ public class slideShowController {
 			this.userIndex++;
 		}
 		setPhoto();
-		
 	}
 	
 	public void prevPhoto(ActionEvent e){

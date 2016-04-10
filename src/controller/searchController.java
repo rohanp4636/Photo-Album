@@ -89,8 +89,7 @@ public class searchController {
 			Photo currPhoto;
 			
 			//incomplete dates
-			
-			
+
 			for(int x=0; x<album.size();x++)
 			{
 				currAlbum = album.get(x);
