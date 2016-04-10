@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ import model.Photo;
 
 public class slideShowController {
 	
+	@FXML HBox imageBox;
 	@FXML ToggleButton auto;
 	@FXML Button backButton;
 	@FXML Button prevButton;
@@ -71,6 +73,8 @@ public class slideShowController {
 		if(i != null){
 			imageView.setImage(i);	
 			imageView.setPreserveRatio(true);
+			imageView.fitHeightProperty().bind(imageBox.heightProperty());
+			imageView.fitWidthProperty().bind(imageBox.widthProperty());
 			FadeTransition fade = new FadeTransition();
 			fade.setNode(imageView);
 	        fade.setFromValue(0.0);
@@ -104,7 +108,6 @@ public class slideShowController {
 			nextButton.setVisible(false);
 			prevButton.setVisible(false);
 			t.schedule(new slideShowTimer(), 5000);
-			
 		}
 		else
 		{
