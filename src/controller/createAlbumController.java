@@ -74,7 +74,9 @@ public class createAlbumController {
 				newAlbum.getPhotos().add(0,mpc.photo);
 				mpc.album.getPhotos().remove(mpc.photo);
 				mpc.tilePane.getChildren().remove(mpc.photo.getLabel());
-
+				newAlbum.updateDates();
+				mpc.album.updateDates();
+				apc.currentUser.updateAlbum(apc, newAlbum);
 			}
 			apc.tilePane.getChildren().add(0, newAlbum.getLabel());
 		}

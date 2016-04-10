@@ -97,6 +97,9 @@ public class movePhotoController {
 			albums.get(index).getPhotos().add(0,photo);
 			album.getPhotos().remove(photo);
 			tilePane.getChildren().remove(photo.getLabel());
+			album.updateDates();
+			albums.get(index).updateDates();
+			ppc.currentUser.updateAlbum(ppc.apc, album);
 			localStage.close();
 		}
 		else{
