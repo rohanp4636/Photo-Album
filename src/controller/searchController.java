@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -16,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Album;
 import model.Tag;
@@ -51,34 +54,90 @@ public class searchController {
 	public void createOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
-		/*String fromD;
-		String toD;
-		fromD=from.getValue().toString();
-		toD=to.getValue().toString();
-		fromDate = sdf.parse(fromD);
-		toDate = sdf.parse(toD);
 		
-*/		
-		//"MM/dd/yyyy"
-		Calendar fd = Calendar.getInstance();
-		fd.set(from.getValue().getMonthValue(),from.getValue().getDayOfMonth(),from.getValue().getYear());
-		fd.set(Calendar.MILLISECOND, 0);
-		
-		Calendar td = Calendar.getInstance();
-		td.set(to.getValue().getMonthValue(),to.getValue().getDayOfMonth(),to.getValue().getYear());
-		td.set(Calendar.MILLISECOND, 0);
-		
-		
-		
-		for(int x=0; x<album.size();x++)
+		//Check if incomplete search query.
+		if((from.getValue()!=null && to.getValue()==null) || (from.getValue()==null && to.getValue()!=null))
 		{
-			for(int y=0; y<album.get(x).getPhotos().size(); y++)
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Search Album");
+			message.setHeaderText("Cannot Search Album");
+			message.setContentText("Please enter both From and To dates.");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
+		}
+		else if(from.getValue()==null && to.getValue()==null)
+		{
+			//ONLY SEARCH FOR TAGS
+		}
+		//CHECK FOR IF ONLY DATES
+		
+		//IT IS BOTH DATES AND TAGS. 
+		else 
+		{
+			Calendar fd = Calendar.getInstance();
+			fd.set(from.getValue().getYear(), from.getValue().getMonthValue()-1, from.getValue().getDayOfMonth());
+			fd.set(Calendar.MILLISECOND, 0);
+			
+			Calendar td = Calendar.getInstance();
+			td.set(to.getValue().getYear(), to.getValue().getMonthValue()-1, to.getValue().getDayOfMonth());
+			td.set(Calendar.MILLISECOND, 0);
+			
+			ArrayList<Photo> temp = new ArrayList<Photo>();
+			Album currAlbum;
+			Photo currPhoto;
+			
+			//incomplete dates
+			
+			
+			for(int x=0; x<album.size();x++)
 			{
-								
+				currAlbum = album.get(x);
+				for(int y=0; y<album.get(x).getPhotos().size(); y++)
+				{
+					currPhoto= currAlbum.getPhotos().get(y);
+					if(currPhoto.getCal().before(td.getTime()) && currPhoto.getCal().after(fd))
+					{
+						if(!temp.contains(currPhoto.getPath()))
+						{
+							temp.add(currPhoto);
+						}
+						
+					}
+				}
+				
 			}
+			/*
+			for(int x=0;x<temp.size();x++)
+			{
+				//TAGS
+			}*/
+			
+			/*try{
+				
+				FXMLLoader load = new FXMLLoader();
+				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
+				AnchorPane root = (AnchorPane)load.load();
+				photoPaneController ppc = load.getController();
+				ppc.start(primaryStage, user, currentUser, index, prev, apc, album, search);
+				ppc.start(localStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()), false);
+				deselect();
+				Scene scene = new Scene(root);
+				double w = primaryStage.getWidth();
+				double h = primaryStage.getHeight();
+				primaryStage.setScene(scene);
+				primaryStage.setWidth(w);
+				primaryStage.setHeight(h);
+				
+				root.requestFocus();
+				
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}*/
 			
 		}
-		
 		//check if tags are selected
 		//checjk
 		localStage.close();
@@ -87,7 +146,7 @@ public class searchController {
 
 
 	public void createCancel(ActionEvent e){
-		
+		localStage.close();
 	}
 	
 		
