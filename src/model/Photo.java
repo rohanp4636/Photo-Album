@@ -53,7 +53,10 @@ public class Photo implements Serializable{
 		album.numPhotos++;
 		//set time and date in dateTime
 	}
-	
+	public Calendar getCal()
+	{
+		return this.dateTime;
+	}
 	
 	
 	public Label getLabel(){
