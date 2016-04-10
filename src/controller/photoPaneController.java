@@ -166,6 +166,7 @@ public class photoPaneController {
 			primaryStage.setResizable(true);
 			return;
 		}
+		deselect();
 	}
 	
 	public Photo checkAlbums(String temp, File file){
@@ -222,6 +223,7 @@ public class photoPaneController {
 			   message.setGraphic(null);
 			   message.showAndWait();
 			   int userIndex = getSelectedUser();
+			   deselect();
 			   for(int i = 0; i < tilePane.getChildren().size(); i++){
 				   Label label = (Label) tilePane.getChildren().get(i);
 				   if(label.getId().equalsIgnoreCase(photos.get(userIndex).getPath())){
@@ -426,8 +428,9 @@ public class photoPaneController {
 		   load.setLocation(getClass().getResource("/view/move.fxml"));
 		   AnchorPane root = (AnchorPane)load.load();
 		   movePhotoController mpc= load.getController();
-		
-		   mpc.start(stageAdd,this,photos.get(getSelectedUser()),this.tilePane,currentUser.getAlbums(), album);
+		   int index = getSelectedUser();
+		   deselect();
+		   mpc.start(stageAdd,this,photos.get(index),this.tilePane,currentUser.getAlbums(), album);
 		   
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);

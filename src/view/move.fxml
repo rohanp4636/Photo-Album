@@ -14,8 +14,9 @@
             <Font name="BebasNeueRegular" size="26.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="77.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="57.0" layoutY="177.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
+            <Button mnemonicParsing="false" onAction="#newAlbum" text="New Album" />
           <Button mnemonicParsing="false" onAction="#okMove" text="Ok" />
             <Button mnemonicParsing="false" onAction="#cancelMove" text="Cancel" />
         </buttons>

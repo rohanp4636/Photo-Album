@@ -22,11 +22,13 @@ public class createAlbumController {
 	private Stage localStage;
 	private albumPaneController apc;
 	ArrayList<Album> albums;
-		
-	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums) {
+	movePhotoController mpc;
+	
+	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums, movePhotoController mpc) {
 		this.localStage = localStage;
 		this.apc = apc;
 		this.albums = albums;
+		this.mpc = mpc;
 	}
 	
 	
