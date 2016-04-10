@@ -54,44 +54,61 @@ public class searchController {
 		this.album=a;
 		ArrayList<Tag> treeTags = new ArrayList<Tag>();
 		searchTag = new ArrayList<Tag>();
-		for(int x = 0; x< a.size(); x++)
-		{
-			ArrayList<Photo> tempPhotos = a.get(x).getPhotos();
-			for(int y = 0; y < tempPhotos.size();y++)
+		
+		for(int albumIndex = 0; albumIndex < this.album.size(); albumIndex++){
+			ArrayList<Photo> tempPhotos = this.album.get(albumIndex).getPhotos();
+			for(int photoIndex = 0; photoIndex < tempPhotos.size();photoIndex++)
 			{
-				ArrayList<Tag> temp = tempPhotos.get(y).getTags(); 
-				for(int i = 0; i < temp.size(); i++){
-					if(!treeTags.contains(temp.get(i)))
+				ArrayList<Tag> tags = tempPhotos.get(photoIndex).getTags(); 
+				for(int tagIndex = 0; tagIndex < tags.size(); tagIndex++){
+					Boolean foundTag = false;
+					for(int treeTagIndex = 0; treeTagIndex < treeTags.size(); treeTagIndex++){
+						if(treeTags.get(tagIndex).getType().equalsIgnoreCase(tags.get(tagIndex).getType())){
+							foundTag = true;
+						}
+					}
+					if(!foundTag)
 					{
-						treeTags.add(temp.get(i));					
+						Tag nTag = new Tag(tags.get(tagIndex).getType());
+						nTag.getValue().addAll(tags.get(tagIndex).getValue());
+						treeTags.add(nTag);					
 					}
 					else
 					{
-						ArrayList<String> val = temp.get(i).getValue();
-						for(int z=0; z<val.size();z++)
+						ArrayList<String> val = tags.get(tagIndex).getValue();
+						for(int valueIndex=0; valueIndex<val.size();valueIndex++)
 						{
-							int index=treeTags.indexOf(temp.get(i));
+							int index=indexTag(tags.get(tagIndex).getType(),tags);
 							Boolean found = false;
 							for(int k = 0; k < treeTags.get(index).getValue().size(); k++){
-								if(!treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(z)))
+								if(!treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(valueIndex)))
 								{
 									found = true;
 									break;
 								}
 							}
 							if(!found){
-								treeTags.get(index).getValue().add(val.get(z));
+								treeTags.get(index).getValue().add(val.get(valueIndex));
 							}
-							
-							
 						}
 					}
 				}
 			}
 		}
+		
+	
 		tagType.setItems(FXCollections.observableArrayList(treeTags));
 		tagType.getSelectionModel().selectedItemProperty().addListener((obs,oldVal,newVal)->selectVal());
 		tagValue.setVisible(false);
+	}
+	
+	public int indexTag(String type, ArrayList<Tag> tags){
+		for(int i = 0; i < tags.size(); i ++){
+			if(tags.get(i).getType().equalsIgnoreCase(type)){
+				return i;
+			}
+		}
+		return -1;
 	}
 	public void selectVal()
 	{
