@@ -447,7 +447,56 @@ public class photoPaneController {
 	}
 	
 	public void slideshow(ActionEvent e){
-			
+		if(photos.size()==0)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("SlideShow");
+			message.setHeaderText("Cannot Display SlideShow");
+			message.setContentText("There are no photos to display");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(getSelectedUser()==-1)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(primaryStage);
+			message.setTitle("SlideShow");
+			message.setHeaderText("Cannot Display SlideShow");
+			message.setContentText("You must first select a photo");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			deselect();
+			return;
+		}
+		if(isSelected)
+		{
+			try{
+				
+				FXMLLoader load = new FXMLLoader();
+				load.setLocation(getClass().getResource("/view/slideshowPane.fxml"));
+				AnchorPane root = (AnchorPane)load.load();
+				slideShowController dpc = load.getController();
+				dpc.start(primaryStage,photos, primaryStage.getScene(),this,getSelectedUser(),photos.get(getSelectedUser()));
+				deselect();
+				Scene scene = new Scene(root);
+				double w = primaryStage.getWidth();
+				double h = primaryStage.getHeight();
+				primaryStage.setScene(scene);
+				primaryStage.setWidth(w);
+				primaryStage.setHeight(h);
+				
+				root.requestFocus();
+				
+			}catch(Exception ee){
+				ee.printStackTrace();
+			}
+		}
+		deselect();
 	}
 	public void createAlbum(ActionEvent e){ // create new album from searched photos.
 		if(!this.search){
