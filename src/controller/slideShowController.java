@@ -36,15 +36,22 @@ public class slideShowController {
 	photoPaneController ppc;
 	int userIndex;
 	Photo photo;
+	Timer t;
 	
 	public void start(Stage ps,ArrayList<Photo> p, Scene prev,photoPaneController ppc,int i,Photo pho) {
 		this.primaryStage=ps;
 		this.photos=p;
 		this.prev=prev;
 		this.ppc=ppc;
+		if(userIndex==-1)
+		{
+			this.userIndex=0;
+		}
 		this.userIndex=i;
 		this.photo=pho;
 		setPhoto();
+		t=new Timer();
+		
 	}
 	public void nextPhoto(ActionEvent e){
 		if(this.userIndex == (photos.size()-1)){
@@ -79,7 +86,7 @@ public class slideShowController {
 			fade.setNode(imageView);
 	        fade.setFromValue(0.0);
 	        fade.setToValue(1.0);
-	        fade.setRate(0.1);
+	        fade.setRate(0.2);
 	        fade.play();
 		}
 	}
@@ -98,15 +105,21 @@ public class slideShowController {
 			this.userIndex++;
 		}
 		setPhoto();
+		nextButton.setVisible(false);
+		prevButton.setVisible(false);
+		t=new Timer();
+		t.schedule(new slideShowTimer(), 5000);
 	}
 	
 	public void autoSlideshow(ActionEvent e) throws InterruptedException
 	{
-		Timer t = new Timer();
+		
 		if(auto.isSelected())
 		{
+			
 			nextButton.setVisible(false);
 			prevButton.setVisible(false);
+			t=new Timer();
 			t.schedule(new slideShowTimer(), 5000);
 		}
 		else
@@ -118,6 +131,10 @@ public class slideShowController {
 		}
 	}
 	public void back(ActionEvent e){
+		t.cancel();
+		t.purge();
+		nextButton.setVisible(true);
+		prevButton.setVisible(true);
 		primaryStage.setScene(prev);
 		if(ppc.tilePane.getChildren().size() == 0){
 			for(int i = 0; i < photos.size(); i++){

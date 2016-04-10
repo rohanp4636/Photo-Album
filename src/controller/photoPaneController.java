@@ -460,41 +460,32 @@ public class photoPaneController {
 			deselect();
 			return;
 		}
-		if(getSelectedUser()==-1)
-		{
-			Alert message = new Alert(AlertType.INFORMATION);
-			message.initOwner(primaryStage);
-			message.setTitle("SlideShow");
-			message.setHeaderText("Cannot Display SlideShow");
-			message.setContentText("You must first select a photo");
-			message.setGraphic(null);
-			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
-			message.showAndWait();
-			deselect();
-			return;
-		}
-		if(isSelected)
-		{
-			try{
+		
+		try{
 				
-				FXMLLoader load = new FXMLLoader();
-				load.setLocation(getClass().getResource("/view/slideshowPane.fxml"));
-				AnchorPane root = (AnchorPane)load.load();
-				slideShowController dpc = load.getController();
+			FXMLLoader load = new FXMLLoader();
+			load.setLocation(getClass().getResource("/view/slideshowPane.fxml"));
+			AnchorPane root = (AnchorPane)load.load();
+			slideShowController dpc = load.getController();
+			if(getSelectedUser()==-1)
+			{
+				dpc.start(primaryStage,photos, primaryStage.getScene(),this,0,photos.get(0));
+			}
+			else
+			{
 				dpc.start(primaryStage,photos, primaryStage.getScene(),this,getSelectedUser(),photos.get(getSelectedUser()));
 				deselect();
-				Scene scene = new Scene(root);
-				double w = primaryStage.getWidth();
-				double h = primaryStage.getHeight();
-				primaryStage.setScene(scene);
-				primaryStage.setWidth(w);
-				primaryStage.setHeight(h);
-				
-				root.requestFocus();
-				
-			}catch(Exception ee){
-				ee.printStackTrace();
 			}
+			Scene scene = new Scene(root);
+			double w = primaryStage.getWidth();
+			double h = primaryStage.getHeight();
+			primaryStage.setScene(scene);
+			primaryStage.setWidth(w);
+			primaryStage.setHeight(h);
+			root.requestFocus();
+			
+		}catch(Exception ee){
+			ee.printStackTrace();
 		}
 		deselect();
 	}
