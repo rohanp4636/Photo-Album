@@ -185,7 +185,7 @@ public class searchController {
 	public void searchOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
-		
+		ArrayList<Photo> output = new ArrayList<Photo>();
 		//Check if incomplete search query.
 		if((from.getValue()!=null && to.getValue()==null) || (from.getValue()==null && to.getValue()!=null))
 		{
@@ -212,19 +212,30 @@ public class searchController {
 				for(int y=0; y<album.get(x).getPhotos().size(); y++)
 				{
 					currPhoto= currAlbum.getPhotos().get(y);
-					if()
+					for(int z=0;z<currPhoto.getTags().size();z++)
 					{
-						if(!temp.contains(currPhoto))
+						for(int a=0;a<searchTag.size();a++)
 						{
-							temp.add(currPhoto);
+							if(currPhoto.getTags().get(z).getType().equalsIgnoreCase(searchTag.get(a).getType()))
+							{
+								for(int b = 0; b < searchTag.get(a).getValue().size();b++){
+									if(currPhoto.getTags().get(z).getValue().contains(searchTag.get(a).getValue().get(b)))
+									{
+										if(!tag.contains(currPhoto))
+										{
+											tag.add(currPhoto);
+										}
+									}
+								}
+							}
 						}
-						
 					}
 				}
 			}
+			output.addAll(tag);
 		}
 		//CHECK FOR IF ONLY DATES
-		if(searchTag.isEmpty())
+		if((from.getValue()!=null && to.getValue()!=null))
 		{
 			Calendar fd = Calendar.getInstance();
 			fd.set(from.getValue().getYear(), from.getValue().getMonthValue()-1, from.getValue().getDayOfMonth());
@@ -234,7 +245,7 @@ public class searchController {
 			td.set(to.getValue().getYear(), to.getValue().getMonthValue()-1, to.getValue().getDayOfMonth());
 			td.set(Calendar.MILLISECOND, 0);
 			
-		
+			ArrayList<Photo> date = new ArrayList<Photo>();
 			Album currAlbum;
 			Photo currPhoto;
 			
@@ -244,23 +255,67 @@ public class searchController {
 				for(int y=0; y<album.get(x).getPhotos().size(); y++)
 				{
 					currPhoto= currAlbum.getPhotos().get(y);
-					if((currPhoto.getCal().before(td.getTime()) && currPhoto.getCal().after(fd)) ||())
+					if(( (currPhoto.getCal().before(td.getTime()) || isSameDay(currPhoto,td)) && (currPhoto.getCal().after(fd))|| isSameDay(currPhoto,fd) ) )
 					{
-						if(!temp.contains(currPhoto))
+						if(!date.contains(currPhoto))
 						{
-							temp.add(currPhoto);
+							date.add(currPhoto);
 						}
 						
 					}
 				}
 			}
+			if(output.isEmpty())
+			{
+				output.addAll(date);
+			}
+			else
+			{
+				for(int x=0;x<date.size();x++)
+				{
+					if(!output.contains(date.get(x)))
+					{
+						output.add(date.get(x));
+					}
+				}
+			}
 		}
-		
+		try{
+			
+			FXMLLoader load = new FXMLLoader();
+			load.setLocation(getClass().getResource("/view/photoPane.fxml"));
+			AnchorPane root = (AnchorPane)load.load();
+			photoPaneController ppc = load.getController();
+			Album aa = new Album("search album");
+			aa.getPhotos().addAll(output);
+			ppc.start(apc.primaryStage,apc.users, apc.currentUser, apc.userIndex, apc.primaryStage.getScene(),apc,aa, true);
+			Scene scene = new Scene(root);
+			double w = apc.primaryStage.getWidth();
+			double h = apc.primaryStage.getHeight();
+			apc.primaryStage.setScene(scene);
+			apc.primaryStage.setWidth(w);
+			apc.primaryStage.setHeight(h);
+			localStage.close();
+			root.requestFocus();
+			
+		}catch(Exception ee){
+			ee.printStackTrace();
+		}
+
+
 		
 		localStage.close();
 	}
 		
-
+	public Boolean isSameDay(Photo currPhoto, Calendar day)
+	{
+		String date = new SimpleDateFormat("MM/dd/yyyy").format(day.getTime());
+		if(currPhoto.getDate().equalsIgnoreCase(date))
+		{
+			return true;
+		}
+		return false;
+	}
 
 	public void searchCancel(ActionEvent e){
 		localStage.close();
