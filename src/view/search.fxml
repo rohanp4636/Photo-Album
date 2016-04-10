@@ -11,6 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+ 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #101010;" stylesheets="@search.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.searchController">
    <children>
       <Label layoutX="27.0" layoutY="68.0" text="Date" textFill="#ea2e49">
@@ -19,7 +20,7 @@
          </font>
       </Label>
       <DatePicker fx:id="from" editable="false" layoutX="27.0" layoutY="99.0" prefHeight="25.0" prefWidth="344.0" promptText="From" style="-fx-background-color: #000000;" />
-      <DatePicker editable="false" layoutX="27.0" layoutY="158.0" onAction="#to" prefHeight="25.0" prefWidth="344.0" promptText="To" style="-fx-background-color: #000000;" />
+      <DatePicker fx:id="to" editable="false" layoutX="27.0" layoutY="158.0" prefHeight="25.0" prefWidth="344.0" promptText="To" style="-fx-background-color: #000000;" />
       <Label layoutX="27.0" layoutY="240.0" text="Tags" textFill="#ea2e49">
          <font>
             <Font name="BebasNeueRegular" size="18.0" />
@@ -37,7 +38,7 @@
       <ButtonBar layoutX="74.0" layoutY="526.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#searchOK" text="Search" />
-            <Button mnemonicParsing="false" onAction="#cancelOK" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#searchCancel" text="Cancel" />
         </buttons>
       </ButtonBar>
       <ComboBox fx:id="tagType" layoutX="27.0" layoutY="271.0" prefHeight="25.0" prefWidth="344.0" promptText="Choose Tag Type" />
