@@ -110,16 +110,27 @@ public class photoPaneController {
 				//check parent if in data and if it is make demo photo.
 				if(add){
 					Photo photo = null;
+					
 					if(file.getParentFile().getName().equals("demoImagesIDRohanDaivik01")){
 						if(file.getParentFile().getParentFile().getName().equals("data")){
-							photo = new Photo(file,album,true,demoPath+file.getName());
-							
+							photo = checkAlbums(demoPath+file.getName(),file);
+							if(photo == null){
+								photo = new Photo(file,album,true,demoPath+file.getName());
+							}
 						}
 					}
 					else{
-						photo = new Photo(file, album, false, file.getAbsolutePath());
+						photo = checkAlbums(file.getAbsolutePath(),file);
+						if(photo == null){
+							photo = new Photo(file, album, false, file.getAbsolutePath());
+						}
+						
 					}
+				
 					photos.add(0, photo);
+					if(photo.getLabel() == null){
+						photo.setPhotoThumbnail();
+					}
 					tilePane.getChildren().add(0, photo.getLabel());
 					album.updateDates();
 					currentUser.updateAlbum(apc, album);
@@ -155,6 +166,18 @@ public class photoPaneController {
 			primaryStage.setResizable(true);
 			return;
 		}
+		deselect();
+	}
+	
+	public Photo checkAlbums(String temp, File file){
+		for(int k = 0; k < currentUser.getAlbums().size(); k++){
+			for(int m = 0; m < currentUser.getAlbums().get(k).getPhotos().size(); m++){
+				if(currentUser.getAlbums().get(k).getPhotos().get(m).getPath().equals(temp)){
+					return currentUser.getAlbums().get(k).getPhotos().get(m);
+				}
+			}
+		}
+		return null;
 	}
 	
 	public void removePhoto(ActionEvent e){
@@ -200,6 +223,7 @@ public class photoPaneController {
 			   message.setGraphic(null);
 			   message.showAndWait();
 			   int userIndex = getSelectedUser();
+			   deselect();
 			   for(int i = 0; i < tilePane.getChildren().size(); i++){
 				   Label label = (Label) tilePane.getChildren().get(i);
 				   if(label.getId().equalsIgnoreCase(photos.get(userIndex).getPath())){
@@ -404,8 +428,9 @@ public class photoPaneController {
 		   load.setLocation(getClass().getResource("/view/move.fxml"));
 		   AnchorPane root = (AnchorPane)load.load();
 		   movePhotoController mpc= load.getController();
-		
-		   mpc.start(stageAdd,this,photos.get(getSelectedUser()),this.tilePane);
+		   int index = getSelectedUser();
+		   deselect();
+		   mpc.start(stageAdd,this,photos.get(index),this.tilePane,currentUser.getAlbums(), album);
 		   
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);

@@ -58,7 +58,12 @@ public class PhotoAlbum extends Application {
 	}
 	
 	public void stop() throws Exception{
-		Admin.writeAdmin(admin);
+		try{
+			Admin.writeAdmin(admin);
+		}
+		catch(Exception e){
+			return;
+		}
 	}
 	
 	public static void main(String[] args) {

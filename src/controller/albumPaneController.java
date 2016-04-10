@@ -146,7 +146,7 @@ public class albumPaneController {
 		   load.setLocation(getClass().getResource("/view/create.fxml"));
 		   AnchorPane root = (AnchorPane)load.load();
 		   createAlbumController cac= load.getController();
-		   cac.start(stageAdd,this,albums);
+		   cac.start(stageAdd,this,albums,null);
 		   
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);

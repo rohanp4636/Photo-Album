@@ -36,6 +36,7 @@ public class Admin implements Serializable{
 		ObjectOutputStream oos = new ObjectOutputStream(
 				new FileOutputStream(storeDir+File.separator+storeFile));
 		oos.writeObject(admin);
+		oos.close();
 	}
 	
 	public static Admin readAdmin() throws IOException, ClassNotFoundException{
@@ -46,6 +47,7 @@ public class Admin implements Serializable{
 		ObjectInputStream ois = new ObjectInputStream(
 				new FileInputStream(storeDir+File.separator+storeFile));
 		Admin admin = (Admin) ois.readObject();
+		ois.close();
 		return admin;
 	}
 	
