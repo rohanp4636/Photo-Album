@@ -6,12 +6,10 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
- 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #101010;" stylesheets="@search.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.searchController">
    <children>
       <Label layoutX="27.0" layoutY="68.0" text="Date" textFill="#ea2e49">
@@ -32,7 +30,6 @@
             <Font name="BebasNeueRegular" size="26.0" />
          </font>
       </Label>
-      <TextField fx:id="tagValue" layoutX="27.0" layoutY="320.0" prefHeight="25.0" prefWidth="344.0" promptText="Tag Value" />
       <TextArea fx:id="tagArea" editable="false" layoutX="27.0" layoutY="398.0" prefHeight="113.0" prefWidth="344.0" />
       <Button layoutX="163.0" layoutY="363.0" mnemonicParsing="false" onAction="#addTag" prefHeight="0.0" prefWidth="61.0" text="Add Tag" />
       <ButtonBar layoutX="74.0" layoutY="526.0" prefHeight="40.0" prefWidth="200.0">
@@ -42,5 +39,6 @@
         </buttons>
       </ButtonBar>
       <ComboBox fx:id="tagType" layoutX="27.0" layoutY="271.0" prefHeight="25.0" prefWidth="344.0" promptText="Choose Tag Type" />
+      <ComboBox fx:id="tagValue" layoutX="27.0" layoutY="314.0" prefHeight="25.0" prefWidth="344.0" promptText="Choose Tag Value" />
    </children>
 </AnchorPane>

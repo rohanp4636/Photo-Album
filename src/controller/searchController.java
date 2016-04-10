@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -29,29 +32,28 @@ import model.Photo;
 
 public class searchController {
 	
-	@FXML TextField albumName;
-	@FXML TreeView<String> treeView;
 	@FXML DatePicker from;
 	@FXML DatePicker to;
-	@FXML Button searchButton;
-	@FXML Button cancelButton;
+	@FXML ComboBox<Tag> tagType;
+	@FXML ComboBox<String> tagValue;
+	@FXML TextArea tagArea;
+
+
 	
 	private Stage localStage;
 	private albumPaneController apc;
 	ArrayList<Album> album;
 	ArrayList<Photo> photos;
-	 Date fromDate;
-	 Date toDate;
+	Date fromDate;
+	Date toDate;
+	ArrayList<Tag> searchTag;
 		
 	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> a) {
 		this.localStage=localStage;
 		this.apc=apc;
 		this.album=a;
-		TreeItem<String> dumb = new TreeItem<String>("dumb");
-		dumb.setExpanded(true);
-		treeView.setRoot(dumb);
-		treeView.setShowRoot(false);
 		ArrayList<Tag> treeTags = new ArrayList<Tag>();
+		searchTag = new ArrayList<Tag>();
 		for(int x = 0; x< a.size(); x++)
 		{
 			ArrayList<Photo> tempPhotos = a.get(x).getPhotos();
@@ -61,34 +63,126 @@ public class searchController {
 				for(int i = 0; i < temp.size(); i++){
 					if(!treeTags.contains(temp.get(i)))
 					{
-						temp.add(temp.get(i));					
+						treeTags.add(temp.get(i));					
 					}
 					else
 					{
-						for(int z=0; z<temp.get(i).getValue().size();z++)
+						ArrayList<String> val = temp.get(i).getValue();
+						for(int z=0; z<val.size();z++)
 						{
-							if(!treeTags.get(treeTags.indexOf(temp.get(i))).getValue().contains(temp.get(i).getValue().get(z)))
-							{
-								treeTags.get(treeTags.indexOf(temp.get(i))).getValue().add(temp.get(i).getValue().get(z));
+							int index=treeTags.indexOf(temp.get(i));
+							Boolean found = false;
+							for(int k = 0; k < treeTags.get(index).getValue().size(); k++){
+								if(!treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(z)))
+								{
+									found = true;
+									break;
+								}
 							}
+							if(!found){
+								treeTags.get(index).getValue().add(val.get(z));
+							}
+							
+							
 						}
 					}
 				}
-			
 			}
 		}
-		for(int i = 0; i < treeTags.size(); i++){
-			TreeItem<String> tagT = new TreeItem<String>(treeTags.get(i).toString());	
-			for(int j = 0; j < treeTags.get(i).getValue().size(); j++){
-				TreeItem<String> tagV = new TreeItem<String>(treeTags.get(i).getValue().get(j));
-				tagT.getChildren().add(tagV);
-			}
-			dumb.getChildren().add(tagT);
-		}	
+		tagType.setItems(FXCollections.observableArrayList(treeTags));
+		tagType.getSelectionModel().selectedItemProperty().addListener((obs,oldVal,newVal)->selectVal());
+		tagValue.setVisible(false);
 	}
-	
+	public void selectVal()
+	{
+		if(tagType.getSelectionModel().getSelectedItem()==null)
+		{
+			return;
+		}
+		else
+		{
+			tagValue.setVisible(true);
+			tagValue.setItems(FXCollections.observableArrayList(tagType.getSelectionModel().getSelectedItem().getValue()));
+		}
+	}
+	public void addTag(ActionEvent e){
+		
+		if(tagType.getSelectionModel().getSelectedItem()==null)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Search");
+			message.setHeaderText("Cannot Add Tag");
+			message.setContentText("Please select a Tag Type");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			tagType.getSelectionModel().clearSelection();
+			tagValue.getSelectionModel().clearSelection();
+			
+			return;
+		}
+		
+		if(tagType.getSelectionModel().getSelectedItem()==null || tagValue.getSelectionModel().getSelectedItem()==null)
+		{
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Search");
+			message.setHeaderText("Cannot Add Tag");
+			message.setContentText("Please select a Tag Type and Tag Value");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			tagType.getSelectionModel().clearSelection();
+			tagValue.getSelectionModel().clearSelection();
+			return;
+		}
 
-	public void createOK(ActionEvent e) throws ParseException {
+		Tag temp= tagType.getSelectionModel().getSelectedItem();
+		String s=tagValue.getSelectionModel().getSelectedItem();
+		Boolean add = true;;
+		int index = -1;
+		for(int j = 0; j < searchTag.size(); j++){
+			if(searchTag.get(j).getType().equalsIgnoreCase(temp.getType())){
+				add = false;
+				index = j;
+				break;
+			}
+		}
+		if(!add)
+		{
+			
+			Boolean found = false;
+			for(int i = 0; i < searchTag.get(index).getValue().size(); i ++){
+				if(searchTag.get(index).getValue().get(i).equalsIgnoreCase(s))
+				{
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				searchTag.get(index).addTag(s);
+				String out = tagArea.getText();
+				out = out+temp.getType()+" : "+ s+"\n";
+				tagArea.setText(out);
+			}
+			
+		}
+		else
+		{
+			Tag temp2= new Tag(temp.getType());
+			temp2.addTag(s);
+			searchTag.add(temp2);	
+			String out = tagArea.getText();
+			out = out+temp.getType()+" : "+ s+"\n";
+			tagArea.setText(out);
+		}
+		
+		tagType.getSelectionModel().clearSelection();
+		tagValue.getSelectionModel().clearSelection();
+	}
+
+	public void searchOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
 		
@@ -97,7 +191,7 @@ public class searchController {
 		{
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
-			message.setTitle("Search Album");
+			message.setTitle("Search");
 			message.setHeaderText("Cannot Search Album");
 			message.setContentText("Please enter both From and To dates.");
 			message.setGraphic(null);
@@ -105,14 +199,32 @@ public class searchController {
 			message.showAndWait();
 			return;
 		}
-		else if(from.getValue()==null && to.getValue()==null)
+		//IF ONLY TAGS
+		if(!searchTag.isEmpty())
 		{
-			//ONLY SEARCH FOR TAGS
+			ArrayList<Photo> tag = new ArrayList<Photo>();
+			Album currAlbum;
+			Photo currPhoto;
+			
+			for(int x=0; x<album.size();x++)
+			{
+				currAlbum = album.get(x);
+				for(int y=0; y<album.get(x).getPhotos().size(); y++)
+				{
+					currPhoto= currAlbum.getPhotos().get(y);
+					if()
+					{
+						if(!temp.contains(currPhoto))
+						{
+							temp.add(currPhoto);
+						}
+						
+					}
+				}
+			}
 		}
 		//CHECK FOR IF ONLY DATES
-		
-		//IT IS BOTH DATES AND TAGS. 
-		else 
+		if(searchTag.isEmpty())
 		{
 			Calendar fd = Calendar.getInstance();
 			fd.set(from.getValue().getYear(), from.getValue().getMonthValue()-1, from.getValue().getDayOfMonth());
@@ -122,66 +234,35 @@ public class searchController {
 			td.set(to.getValue().getYear(), to.getValue().getMonthValue()-1, to.getValue().getDayOfMonth());
 			td.set(Calendar.MILLISECOND, 0);
 			
-			ArrayList<Photo> temp = new ArrayList<Photo>();
+		
 			Album currAlbum;
 			Photo currPhoto;
 			
-			//incomplete dates
-
 			for(int x=0; x<album.size();x++)
 			{
 				currAlbum = album.get(x);
 				for(int y=0; y<album.get(x).getPhotos().size(); y++)
 				{
 					currPhoto= currAlbum.getPhotos().get(y);
-					if(currPhoto.getCal().before(td.getTime()) && currPhoto.getCal().after(fd))
+					if((currPhoto.getCal().before(td.getTime()) && currPhoto.getCal().after(fd)) ||())
 					{
-						if(!temp.contains(currPhoto.getPath()))
+						if(!temp.contains(currPhoto))
 						{
 							temp.add(currPhoto);
 						}
 						
 					}
 				}
-				
 			}
-			/*
-			for(int x=0;x<temp.size();x++)
-			{
-				//TAGS
-			}*/
-			
-			/*try{
-				
-				FXMLLoader load = new FXMLLoader();
-				load.setLocation(getClass().getResource("/view/photoPane.fxml"));
-				AnchorPane root = (AnchorPane)load.load();
-				photoPaneController ppc = load.getController();
-				ppc.start(primaryStage, user, currentUser, index, prev, apc, album, search);
-				ppc.start(localStage,users, currentUser, userIndex, primaryStage.getScene(),this, albums.get(getSelectedAlbum()), false);
-				deselect();
-				Scene scene = new Scene(root);
-				double w = primaryStage.getWidth();
-				double h = primaryStage.getHeight();
-				primaryStage.setScene(scene);
-				primaryStage.setWidth(w);
-				primaryStage.setHeight(h);
-				
-				root.requestFocus();
-				
-			}catch(Exception ee){
-				ee.printStackTrace();
-			}*/
-			
 		}
-		//check if tags are selected
-		//checjk
+		
+		
 		localStage.close();
 	}
 		
 
 
-	public void createCancel(ActionEvent e){
+	public void searchCancel(ActionEvent e){
 		localStage.close();
 	}
 	
