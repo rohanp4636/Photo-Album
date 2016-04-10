@@ -6,6 +6,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
 
 <AnchorPane fx:id="anchorPane" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@albumPane.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.slideShowController">
    <children>
@@ -20,7 +22,6 @@
       </ButtonBar>
       <AnchorPane fx:id="basePane" layoutY="67.0" style="-fx-background-color: #101010;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
          <children>
-            <ImageView fx:id="imageView" fitHeight="636.0" fitWidth="1132.0" layoutX="79.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="9.0" />
             <ButtonBar buttonMinWidth="26.0" layoutX="15.0" layoutY="310.0" prefHeight="29.0" prefWidth="26.0" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="310.0">
                <buttons>
                   <Button fx:id="prevButton" minWidth="16.0" mnemonicParsing="false" onAction="#prevPhoto" prefHeight="29.0" prefWidth="26.0" text="&lt;" />
@@ -31,6 +32,11 @@
                   <Button fx:id="nextButton" minWidth="16.0" mnemonicParsing="false" onAction="#nextPhoto" prefHeight="29.0" prefWidth="26.0" text="&gt;" />
                </buttons>
             </ButtonBar>
+            <HBox fx:id="imageBox" alignment="CENTER" layoutX="79.0" layoutY="9.0" prefHeight="636.0" prefWidth="1132.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <ImageView fitHeight="50.0" layoutX="-33.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-33.0" AnchorPane.topAnchor="8.0">
