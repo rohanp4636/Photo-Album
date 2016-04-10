@@ -56,7 +56,6 @@ public class movePhotoController {
 		   AnchorPane root = (AnchorPane)load.load();
 		   createAlbumController cac= load.getController();
 		   cac.start(localStage,ppc.apc,albums, this);
-		   
 		   Scene add = new Scene(root);
 		   localStage.setScene(add);
 		   localStage.setTitle("Create Album");

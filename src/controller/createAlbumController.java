@@ -70,6 +70,12 @@ public class createAlbumController {
 			
 			Album newAlbum = new Album(name);
 			albums.add(0, newAlbum);
+			if(mpc != null){ //moves one photo to another album. mpc is from movePhotoController
+				newAlbum.getPhotos().add(0,mpc.photo);
+				mpc.album.getPhotos().remove(mpc.photo);
+				mpc.tilePane.getChildren().remove(mpc.photo.getLabel());
+
+			}
 			apc.tilePane.getChildren().add(0, newAlbum.getLabel());
 		}
 		localStage.close();
