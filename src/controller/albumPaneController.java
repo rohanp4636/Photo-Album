@@ -50,7 +50,7 @@ public class albumPaneController {
 	
 	public static String selected;
 	public static Boolean isSelected = false;
-	
+
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName, ArrayList<Album> aList, User cUser, int uIndex, Admin admin) {
 		this.primaryStage = primaryStage;
 		this.users = user;

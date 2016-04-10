@@ -3,6 +3,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -78,8 +79,13 @@ public class slideShowController {
 	        fade.play();
 		}
 	}
-	
-	public void nextPhoto()
+	private class slideShowTimer extends TimerTask {
+	    public void run() {
+	      nextP();
+	    }
+	 }
+
+	public void nextP()
 	{
 		if(this.userIndex == (photos.size()-1)){
 			this.userIndex = 0;
@@ -92,8 +98,21 @@ public class slideShowController {
 	
 	public void autoSlideshow(ActionEvent e) throws InterruptedException
 	{
-		
-		
+		Timer t = new Timer();
+		if(auto.isSelected())
+		{
+			nextButton.setVisible(false);
+			prevButton.setVisible(false);
+			t.schedule(new slideShowTimer(), 5000);
+			
+		}
+		else
+		{
+			t.cancel();
+			t.purge();
+			nextButton.setVisible(true);
+			prevButton.setVisible(true);
+		}
 	}
 	public void back(ActionEvent e){
 		primaryStage.setScene(prev);

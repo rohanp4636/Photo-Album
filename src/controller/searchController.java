@@ -49,8 +49,7 @@ public class searchController {
 		this.apc=apc;
 		this.album=a;
 	}
-	
-	
+
 	public void createOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
