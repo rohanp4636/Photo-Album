@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -29,7 +30,7 @@ import model.Photo;
 public class searchController {
 	
 	@FXML TextField albumName;
-	@FXML TreeView<Tag> treeView;
+	@FXML TreeView<String> treeView;
 	@FXML DatePicker from;
 	@FXML DatePicker to;
 	@FXML Button searchButton;
@@ -39,8 +40,6 @@ public class searchController {
 	private albumPaneController apc;
 	ArrayList<Album> album;
 	ArrayList<Photo> photos;
-	private Date createdDate;
-	private SimpleDateFormat sdf;
 	 Date fromDate;
 	 Date toDate;
 		
@@ -48,7 +47,46 @@ public class searchController {
 		this.localStage=localStage;
 		this.apc=apc;
 		this.album=a;
+		TreeItem<String> dumb = new TreeItem<String>("dumb");
+		dumb.setExpanded(true);
+		treeView.setRoot(dumb);
+		treeView.setShowRoot(false);
+		ArrayList<Tag> treeTags = new ArrayList<Tag>();
+		for(int x = 0; x< a.size(); x++)
+		{
+			ArrayList<Photo> tempPhotos = a.get(x).getPhotos();
+			for(int y = 0; y < tempPhotos.size();y++)
+			{
+				ArrayList<Tag> temp = tempPhotos.get(y).getTags(); 
+				for(int i = 0; i < temp.size(); i++){
+					if(!treeTags.contains(temp.get(i)))
+					{
+						temp.add(temp.get(i));					
+					}
+					else
+					{
+						for(int z=0; z<temp.get(i).getValue().size();z++)
+						{
+							if(!treeTags.get(treeTags.indexOf(temp.get(i))).getValue().contains(temp.get(i).getValue().get(z)))
+							{
+								treeTags.get(treeTags.indexOf(temp.get(i))).getValue().add(temp.get(i).getValue().get(z));
+							}
+						}
+					}
+				}
+			
+			}
+		}
+		for(int i = 0; i < treeTags.size(); i++){
+			TreeItem<String> tagT = new TreeItem<String>(treeTags.get(i).toString());	
+			for(int j = 0; j < treeTags.get(i).getValue().size(); j++){
+				TreeItem<String> tagV = new TreeItem<String>(treeTags.get(i).getValue().get(j));
+				tagT.getChildren().add(tagV);
+			}
+			dumb.getChildren().add(tagT);
+		}	
 	}
+	
 
 	public void createOK(ActionEvent e) throws ParseException {
 		//check if valid date
