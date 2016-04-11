@@ -23,32 +23,111 @@ import model.Admin;
 import model.Album;
 import model.User;
 
-public class albumPaneController {
+/***
+ * Album Pane Controller controls the album pane FXML file and implements all the functionalities dealing with albums. 
+ * @author Daivik Sheth | Rohan Patel
+ */
 
+public class albumPaneController {
+	/***
+	 * Open Button - Button on the Pane that Opens the Album when Clicked. 
+	 */
 	@FXML Button openButton;
+	/***
+	 * Create Button - Button on the Pane that opens the create Dialog Box when Clicked. 
+	 */
 	@FXML Button createButton;
+	/***
+	 * Rename Button - Button on the Pane that opens the rename Dialog Box when Clicked. 
+	 */
 	@FXML Button renameButton;
+	/***
+	 * Delete Button - Button on the Pane that opens the delete Dialog Box when Clicked. 
+	 */
 	@FXML Button deleteButton;
+	/***
+	 * Search Button - Button on the Pane that opens the search Dialog Box when Clicked. 
+	 */
 	@FXML Button searchButton;
+	/***
+	 * Logout Button - Button on the Pane that logs the user out of the session. 
+	 */
 	@FXML Button logoutButton;
-	
+	/***
+	 * Tilepane - The pane where all the buttons and albums lie on. 
+	 */
 	@FXML TilePane tilePane;
-	
+	/***
+	 * Scrollpane - Scrolling Pane. 
+	 */
 	@FXML ScrollPane scrollPane;
 	
+	/***
+	 * Primarystage  - primaryStage Stage of the previous scene
+	 */
 	Stage primaryStage;
-	ArrayList<User> users;
-	Scene prev;
-	loginPaneController lpg;
-	String userName;
-	Admin admin;
-	public static ArrayList<Album> albums;
-	User currentUser;
-	int userIndex;
-	
-	public static String selected;
-	public static Boolean isSelected = false;
 
+	/***
+	 * Users  - ArrayList of all the users.  
+	 */
+	ArrayList<User> users;
+
+	/***
+	 * Prev  - Previous Scene
+	 */
+	Scene prev;
+
+	/***
+	 * lpg  - Login Pane Controller 
+	 */
+	loginPaneController lpg;
+
+	/***
+	 * username  - current username
+	 */
+	String userName;
+
+	/***
+	 * Admin  - admin object
+	 */
+	Admin admin;
+
+	/***
+	 * Albums  - Arraylist of all the albums 
+	 */
+	public static ArrayList<Album> albums;
+
+	/***
+	 * Current User  - Current User 
+	 */
+	User currentUser;
+
+	/***
+	 * User Index  - Current User Index
+	 */
+	int userIndex;
+
+	/***
+	 * Selected -  Selected Album Name. 
+	 */	
+	public static String selected;
+
+	/***
+	 * isSelected  - Tells you what is selected.
+	 */
+	public static Boolean isSelected = false;
+/**
+ * Start initializes the album pane controller.
+ * @param primaryStage Stage of the previous scene
+ * @param user list of users
+ * @param prev prev scene
+ * @param lpg login pane controller
+ * @param userName current username
+ * @param aList album list
+ * @param cUser current user object
+ * @param uIndex current user index
+ * @param admin admin object 
+ */
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, String userName, ArrayList<Album> aList, User cUser, int uIndex, Admin admin) {
 		this.primaryStage = primaryStage;
 		this.users = user;
@@ -82,7 +161,10 @@ public class albumPaneController {
 
 		
 	}
-	
+	/**
+	 * Open Album - When the open album button is clicked this method is executed. 
+	 * @param e ActionEvent e - On Click Execute this method. 
+	 */
 	public void openAlbum(ActionEvent e){
 		if(albums.size()==0)
 		{
@@ -135,7 +217,11 @@ public class albumPaneController {
 		}
 		deselect();
 	}
-	
+	/**
+	 * Create Album - When the Create album button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 * @throws IOException
+	 */
 	public void createAlbum(ActionEvent e) throws IOException{
 		   deselect();
 		   Stage stageAdd = new Stage();
@@ -158,7 +244,10 @@ public class albumPaneController {
 		   stageAdd.showAndWait();
 			primaryStage.setResizable(true);
 	}
-	
+	/**
+	 * Rename Album - When the Rename album button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 */
 	public void renameAlbum(ActionEvent e){
 		if(albums.size()==0)
 		{
@@ -214,6 +303,10 @@ public class albumPaneController {
 		deselect();
 	}
 	
+	/**
+	 * Delete Album  - When the Delete album button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 */
 	public void deleteAlbum(ActionEvent e){
 		if(albums.size()==0)
 		{
@@ -274,7 +367,10 @@ public class albumPaneController {
 			  deselect();
 		}
 	}
-	
+	/**
+	 * Search Album - When the Search album button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 */
 	public void searchAlbum(ActionEvent e){  // when you open photo album with searched photos make last parameter false in start method.  also check milisecond
 		if(albums.size()==0)
 		{
@@ -313,6 +409,10 @@ public class albumPaneController {
 		}
 		
 	}
+	/**
+	 * Logout - When the logout button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 */
 	public void logout(ActionEvent e) throws IOException{
 		deselect();
 		Admin.writeAdmin(admin);
@@ -322,6 +422,10 @@ public class albumPaneController {
 		primaryStage.centerOnScreen();
 		primaryStage.setResizable(false);
 	}
+	/**
+	 * Gets the selected album.
+	 * @return int - Selected ALbum Index
+	 */
 	public int getSelectedAlbum(){
 		if(!isSelected && selected == null){
 			return -1;
@@ -334,11 +438,16 @@ public class albumPaneController {
 		return -1;
 		
 	}
-	
+	/**
+	 * Gets the tilepane. 
+	 * 
+	 */
 	public TilePane getTPane(){
 		return this.tilePane;
 	}
-	
+	/**
+	 * Deselects an album. 
+	 */
 	public void deselect(){
 		int x = getSelectedAlbum();
 		if(x == -1){
@@ -355,10 +464,4 @@ public class albumPaneController {
 		selected = null;
 		isSelected = false;
 	}
-	
-	
-	
-	
-	
-	
 }
