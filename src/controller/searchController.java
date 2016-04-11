@@ -2,7 +2,6 @@ package controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
@@ -13,14 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -209,7 +203,7 @@ public class searchController {
 			Alert message = new Alert(AlertType.INFORMATION);
 			message.initOwner(localStage);
 			message.setTitle("Search");
-			message.setHeaderText("Cannot Search Album");
+			message.setHeaderText("Cannot Search");
 			message.setContentText("Please enter both From and To dates.");
 			message.setGraphic(null);
 			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
@@ -261,7 +255,17 @@ public class searchController {
 			Calendar td = Calendar.getInstance();
 			td.set(to.getValue().getYear(), to.getValue().getMonthValue()-1, to.getValue().getDayOfMonth());
 			td.set(Calendar.MILLISECOND, 0);
-			
+			if(td.before(fd)){
+				Alert message = new Alert(AlertType.INFORMATION);
+				message.initOwner(localStage);
+				message.setTitle("Search");
+				message.setHeaderText("Cannot Search");
+				message.setContentText("From Date must be before or equal to To Date.");
+				message.setGraphic(null);
+				message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+				message.showAndWait();
+				return;
+			}
 			ArrayList<Photo> date = new ArrayList<Photo>();
 			Album currAlbum;
 			Photo currPhoto;
@@ -272,7 +276,7 @@ public class searchController {
 				for(int y=0; y<album.get(x).getPhotos().size(); y++)
 				{
 					currPhoto= currAlbum.getPhotos().get(y);
-					if(( (currPhoto.getCal().before(td.getTime()) || isSameDay(currPhoto,td)) && (currPhoto.getCal().after(fd))|| isSameDay(currPhoto,fd) ) )
+					if( ((fd.before(currPhoto.getCal())) || isSameDay(currPhoto,fd)) && (td.after(currPhoto.getCal()) || isSameDay(currPhoto,td)) )
 					{
 						if(!date.contains(currPhoto))
 						{

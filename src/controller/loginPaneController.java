@@ -2,7 +2,6 @@ package controller;
 
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -10,11 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.Admin;
 import model.Album;
@@ -41,7 +38,6 @@ public class loginPaneController {
 	public void login(ActionEvent e) {
 		loginScene = primaryStage.getScene();
 		String s = userName.getText().trim().toLowerCase();
-		FXMLLoader loader= new FXMLLoader();
 		String admin = "admin";
 		if(s.equalsIgnoreCase(admin)){
 			userName.clear();

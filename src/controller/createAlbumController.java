@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Album;
-import model.User;
+import model.Photo;
 
 
 public class createAlbumController {
@@ -23,12 +23,16 @@ public class createAlbumController {
 	private albumPaneController apc;
 	ArrayList<Album> albums;
 	movePhotoController mpc;
+	ArrayList<Photo> searchPhoto;
+	photoPaneController ppc;
 	
-	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums, movePhotoController mpc) {
+	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums, movePhotoController mpc, ArrayList<Photo> searchPhoto,photoPaneController ppc) {
 		this.localStage = localStage;
 		this.apc = apc;
 		this.albums = albums;
 		this.mpc = mpc;
+		this.searchPhoto = searchPhoto;
+		this.ppc = ppc;
 	}
 	
 	
@@ -69,6 +73,10 @@ public class createAlbumController {
 		else{ // put in sorted order if you want.
 			
 			Album newAlbum = new Album(name);
+			if(searchPhoto != null){
+				newAlbum.getPhotos().addAll(searchPhoto);
+				ppc.createAlbumButton.setVisible(false);
+			}
 			albums.add(0, newAlbum);
 			if(mpc != null){ //moves one photo to another album. mpc is from movePhotoController
 				newAlbum.getPhotos().add(0,mpc.photo);

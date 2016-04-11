@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Photo;
-import model.User;
 
 
 public class captionController {
@@ -22,7 +20,7 @@ public class captionController {
 	@FXML Button cancelButton;
 	
 	private Stage localStage;
-	private photoPaneController ppc;
+	//private photoPaneController ppc;
 	Photo photo;
 	TilePane tilePane;
 	Boolean recaption = false;
@@ -30,7 +28,7 @@ public class captionController {
 	public void start(Stage localStage, photoPaneController ppc, Photo photo, boolean recaption, TilePane tilePane) {
 		this.tilePane = tilePane;
 		this.localStage = localStage;
-		this.ppc = ppc;
+		//this.ppc = ppc;
 		this.photo = photo;
 		caption.setWrapText(true);
 		this.recaption = recaption;

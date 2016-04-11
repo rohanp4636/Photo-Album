@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -18,13 +17,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Admin;
-import model.Album;
-import model.Photo;
 import model.User;
 
 public class adminPaneController {
@@ -96,7 +92,7 @@ public class adminPaneController {
 				 	users.get(select).selectImage();
 				 	Bounds vp = scrollPane.getViewportBounds();
 				 	double height = scrollPane.getContent().getBoundsInLocal().getHeight();
-				 	double width = scrollPane.getContent().getBoundsInLocal().getWidth();
+				 	//double width = scrollPane.getContent().getBoundsInLocal().getWidth();
 				 	double labelLow = ((Label)tilePane.getChildren().get(select)).getBoundsInParent().getMinY();
 				 	double labelHigh =  ((Label)tilePane.getChildren().get(select)).getBoundsInParent().getMaxY();
 				 		

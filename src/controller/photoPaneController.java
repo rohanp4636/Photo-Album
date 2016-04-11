@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -489,10 +487,30 @@ public class photoPaneController {
 		}
 		deselect();
 	}
-	public void createAlbum(ActionEvent e){ // create new album from searched photos.
+	public void createAlbum(ActionEvent e) throws IOException{ // create new album from searched photos.
 		if(!this.search){
 			return;
 		}
+		   deselect();
+		   Stage stageAdd = new Stage();
+		   
+		   FXMLLoader load = new FXMLLoader();
+		   load.setLocation(getClass().getResource("/view/create.fxml"));
+		   AnchorPane root = (AnchorPane)load.load();
+		   createAlbumController cac= load.getController();
+		   cac.start(stageAdd,this.apc,albumPaneController.albums,null,album.getPhotos(),this);
+		   
+		   Scene add = new Scene(root);
+		   stageAdd.setScene(add);
+		   stageAdd.setTitle("Create Album");
+		   stageAdd.setResizable(false);
+		   stageAdd.initModality(Modality.WINDOW_MODAL);
+		   stageAdd.initOwner(primaryStage);
+		   root.requestFocus();
+		   primaryStage.setResizable(false);
+
+		   stageAdd.showAndWait();
+			primaryStage.setResizable(true);
 	}
 	
 	

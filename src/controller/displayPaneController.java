@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
@@ -9,16 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import model.Album;
 import model.Photo;
-import model.User;
 
 public class displayPaneController {
 	

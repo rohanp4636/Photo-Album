@@ -14,10 +14,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 
 import javafx.stage.Stage;
-import model.Album;
 import model.Photo;
 
 public class slideShowController {

@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
@@ -22,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Admin;
 import model.Album;
-import model.Photo;
 import model.User;
 
 public class albumPaneController {
@@ -146,7 +144,7 @@ public class albumPaneController {
 		   load.setLocation(getClass().getResource("/view/create.fxml"));
 		   AnchorPane root = (AnchorPane)load.load();
 		   createAlbumController cac= load.getController();
-		   cac.start(stageAdd,this,albums,null);
+		   cac.start(stageAdd,this,albums,null,null,null);
 		   
 		   Scene add = new Scene(root);
 		   stageAdd.setScene(add);

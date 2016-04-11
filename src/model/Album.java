@@ -5,8 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import controller.adminPaneController;
-import controller.photoPaneController;
+
 import controller.albumPaneController;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContentDisplay;
@@ -17,6 +16,10 @@ import javafx.scene.text.TextAlignment;
 
 public class Album implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String albumName;
 	public int numPhotos;
 	Calendar oldest = null;   // when new photo is added compare time as well as date
@@ -36,7 +39,7 @@ public class Album implements Serializable{
 		numPhotos = photos.size();
 		label = new Label();
 		create = true;
-		Boolean test = setAlbumCover();
+		setAlbumCover();
 	}
 	public Label getLabel(){
 		return label;

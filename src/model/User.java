@@ -5,20 +5,22 @@ import java.util.ArrayList;
 
 import controller.adminPaneController;
 import controller.albumPaneController;
-import controller.photoPaneController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
-import javafx.scene.Node;
+
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.text.TextAlignment;
 
 public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public String userName;
 
@@ -39,7 +41,7 @@ public class User implements Serializable {
 		label = new Label();
 		label.setId(name);
 		create = true;
-		Boolean test = this.setUserImage();
+		this.setUserImage();
 	}
 	public ArrayList<Album> getAlbums(){
 		return albums;
@@ -85,8 +87,7 @@ public class User implements Serializable {
 		imageView.setFitHeight(280);
 		imageView.setPreserveRatio(true);
 		imageView.setId(this.userName);
-		imageView.setPickOnBounds(true);	
-		String s = imageView.getId();	
+		imageView.setPickOnBounds(true);		
 		label.setText(imageView.getId());
 		label.setGraphic(imageView);
 		label.setTextAlignment(TextAlignment.CENTER);

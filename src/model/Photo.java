@@ -17,6 +17,11 @@ import javafx.scene.text.TextAlignment;
 
 public class Photo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	String path;   // when reading from dat file. change file path to new path.
 	
 	String caption;
@@ -49,7 +54,7 @@ public class Photo implements Serializable{
 		this.dateTime.set(Calendar.MILLISECOND, 0);
 
 		
-		boolean test = setPhotoThumbnail();
+		setPhotoThumbnail();
 		album.numPhotos++;
 		//set time and date in dateTime
 	}

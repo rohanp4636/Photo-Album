@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 public class Admin implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	String userName = "admin";
 	
 	ArrayList<User> userList = new ArrayList<User>();
