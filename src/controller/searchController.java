@@ -57,7 +57,7 @@ public class searchController {
 				for(int tagIndex = 0; tagIndex < tags.size(); tagIndex++){
 					Boolean foundTag = false;
 					for(int treeTagIndex = 0; treeTagIndex < treeTags.size(); treeTagIndex++){
-						if(treeTags.get(tagIndex).getType().equalsIgnoreCase(tags.get(tagIndex).getType())){
+						if(treeTags.get(treeTagIndex).getType().equalsIgnoreCase(tags.get(tagIndex).getType())){
 							foundTag = true;
 						}
 					}
@@ -72,7 +72,10 @@ public class searchController {
 						ArrayList<String> val = tags.get(tagIndex).getValue();
 						for(int valueIndex=0; valueIndex<val.size();valueIndex++)
 						{
-							int index=indexTag(tags.get(tagIndex).getType(),tags);
+							int index=indexTag(tags.get(tagIndex).getType(),treeTags);
+							if(index == -1){
+								continue;
+							}
 							Boolean found = false;
 							for(int k = 0; k < treeTags.get(index).getValue().size(); k++){
 								if(treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(valueIndex)))
