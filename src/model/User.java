@@ -61,8 +61,8 @@ public class User implements Serializable {
 	
 	public boolean setUserImage(){
 		if(path.isEmpty()){
-			path = "/view/user.png";
-			image = new Image("/view/user.png");
+			path = "/view/user2.png";
+			image = new Image("/view/user2.png");
 	
 		}
 		else{
