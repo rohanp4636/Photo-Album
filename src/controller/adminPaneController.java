@@ -22,27 +22,78 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Admin;
 import model.User;
-
+/**
+ * Admin Pane Controller controls the admin pane FXML file and implements all the functionalities dealing with admin. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class adminPaneController {
+	/**
+	 * Username - Gets the username from the field
+	 */
 	@FXML TextField userName;
+	/**
+	 * Search Button - Button on the Pane that searches the users. 
+	 */
 	@FXML Button searchButton;
+	/**
+	 * Create Button - Button on the Pane that opens the create Dialog Box when Clicked.
+	 */
 	@FXML Button createButton;
+	/**
+	 * Delete Button - Button on the Pane that opens the delete Dialog Box when Clicked.
+	 */
 	@FXML Button deleteButton;
+	/**
+	 * Logout - Button on the Pane that logs user out
+	 */
 	@FXML Button logoutButton;
-	
+	/***
+	 * Tilepane - The pane where all the buttons and albums lie on. 
+	 */
 	@FXML TilePane tilePane;
-	
+	/***
+	 * Scrollpane - Scrolling Pane. 
+	 */
 	@FXML ScrollPane scrollPane;
+	/**
+	 * Admin  - Admin Object
+	 */
 	Admin admin;
+	/**
+	 * Primary Stage - primaryStage Stage of the previous scene 
+	 */
 	Stage primaryStage;
+	/**
+	 * Arraylist of all the users
+	 */
 	public static ArrayList<User> users;
+	/**
+	 * Link to the previous scene
+	 */
 	Scene prev;
+	/**
+	 * Login Pane Controller
+	 */
 	loginPaneController lpg;
 	
-	
+	/***
+	 * Selected -  Selected Album Name. 
+	 */	
 	public static String selected;
+	/***
+	 * isSelected  - Tells you what is selected.
+	 */
 	public static Boolean isSelected = false;
 	
+	/**
+	 * Start initializes the album pane controller.
+	 * @param primaryStage Stage of the previous scene
+	 * @param user list of users
+	 * @param prev prev scene
+	 * @param lpg login pane controller
+	 * @param admin - admin object
+	 */
 	public void start(Stage primaryStage, ArrayList<User> user, Scene prev, loginPaneController lpg, Admin admin) {
 		this.primaryStage = primaryStage;
 		adminPaneController.users = user;
@@ -61,7 +112,10 @@ public class adminPaneController {
 		
 		
 	}
-	
+	/**
+	 * Search Album - When the Search button is clicked this method is executed.
+	 * @param e ActionEvent e
+	 */
 	public void searchUser(ActionEvent e){  
 		
 		deselect();
@@ -123,7 +177,10 @@ public class adminPaneController {
 		
 		
 	}
-	
+	/**
+	 * Create User  - When the Create button is clicked this method is executed.
+	 * @param e ActionEvent e
+	 */
 	public void createUser(ActionEvent e) throws IOException{
 			deselect();
 		   Stage stageAdd = new Stage();
@@ -148,7 +205,10 @@ public class adminPaneController {
 
 		   
 	}
-	
+	/**
+	 * Delete User  - When the Create button is clicked this method is executed.
+	 * @param e ActionEvent e
+	 */
 	public void deleteUser(ActionEvent e) throws IOException{
 		
 		if(users.size() == 0){
@@ -205,7 +265,10 @@ public class adminPaneController {
 		   }
 		deselect();
 	}
-	
+	/**
+	 * Logout - When the logout button is clicked this method is executed. 
+	 * @param e ActionEvent E
+	 */
 	public void logout(ActionEvent e) throws IOException{  
 		deselect();
 		Admin.writeAdmin(admin);
@@ -214,7 +277,10 @@ public class adminPaneController {
 		primaryStage.setResizable(false);
 	}
 	
-	
+	/**
+	 * Gets the selected user.
+	 * @return int - Selected user Index
+	 */
 	public int getSelectedUser(){
 		if(!isSelected && selected == null){
 			return -1;
@@ -228,6 +294,9 @@ public class adminPaneController {
 		
 	}
 	
+	/**
+	 * Deselects an album. 
+	 */
 	public void deselect(){
 		int x = getSelectedUser();
 		if(x == -1){
