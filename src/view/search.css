@@ -108,6 +108,25 @@
     -fx-text-fill: #ea2e49;
 }
 
+.combo-box-popup .list-view  .scroll-bar {
+    -fx-background-color:#101010;
+}
+
+.combo-box-popup .list-view  .scroll-bar .thumb {
+    -fx-background-color:#1e1e1e;
+   
+}
+.combo-box-popup .list-view  .scroll-bar.increment-arrow {
+    -fx-background-color:#ea2e49;
+ }
+  
+.combo-box-popup .list-view  .scroll-bar .decrement-arrow {
+    -fx-background-color:#ea2e49;
+  }
+.combo-box-popup .list-view  > .corner {
+    -fx-background-color: #101010;
+}
+
 
 .text-area {
 	-fx-background-color:#000000;
