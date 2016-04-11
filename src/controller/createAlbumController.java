@@ -74,7 +74,8 @@ public class createAlbumController {
 			
 			Album newAlbum = new Album(name);
 			if(searchPhoto != null){
-				newAlbum.getPhotos().addAll(searchPhoto);
+				newAlbum = ppc.album;
+				newAlbum.setAlbum(name);
 				ppc.createAlbumButton.setVisible(false);
 			}
 			albums.add(0, newAlbum);

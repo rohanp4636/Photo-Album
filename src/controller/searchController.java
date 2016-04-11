@@ -75,7 +75,7 @@ public class searchController {
 							int index=indexTag(tags.get(tagIndex).getType(),tags);
 							Boolean found = false;
 							for(int k = 0; k < treeTags.get(index).getValue().size(); k++){
-								if(!treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(valueIndex)))
+								if(treeTags.get(index).getValue().get(k).equalsIgnoreCase(val.get(valueIndex)))
 								{
 									found = true;
 									break;
