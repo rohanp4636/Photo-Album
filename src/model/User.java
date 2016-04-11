@@ -61,18 +61,9 @@ public class User implements Serializable {
 	
 	public boolean setUserImage(){
 		if(path.isEmpty()){
-			if(adminPaneController.users.isEmpty()){
-				path = "/view/user.png";
-				image = new Image("/view/user.png");
-			}
-			else if(adminPaneController.users.size() % 2 == 0){
-				path = "/view/user.png";
-				image = new Image("/view/user.png");
-			}
-			else{
-				path = "/view/user2.png";
-				image = new Image("/view/user2.png");
-			}
+			path = "/view/user2.png";
+			image = new Image("/view/user2.png");
+	
 		}
 		else{
 			image = new Image(path);
