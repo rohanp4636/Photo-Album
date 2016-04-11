@@ -199,6 +199,7 @@ public class searchController {
 	public void searchOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
+		Boolean hasTags = false;
 		ArrayList<Photo> output = new ArrayList<Photo>();
 		//Check if incomplete search query.
 		if((from.getValue()!=null && to.getValue()==null) || (from.getValue()==null && to.getValue()!=null))
@@ -238,6 +239,7 @@ public class searchController {
 										if(!tag.contains(currPhoto))
 										{
 											tag.add(currPhoto);
+											hasTags = true;
 										}
 									}
 								}
@@ -289,20 +291,36 @@ public class searchController {
 					}
 				}
 			}
-			if(output.isEmpty())
-			{
+			ArrayList<Photo> both = new ArrayList<Photo>();
+			if(!hasTags && !date.isEmpty()){
 				output.addAll(date);
-			}
-			else
+			}	
+			else if(hasTags && !date.isEmpty())
 			{
+				
 				for(int x=0;x<date.size();x++)
 				{
-					if(!output.contains(date.get(x)))
+					if(output.contains(date.get(x)))
 					{
-						output.add(date.get(x));
+						both.add(date.get(x));
 					}
 				}
+				output = both;
 			}
+			else if(hasTags && date.isEmpty()){
+				output.clear();
+			}
+		}
+		if(output.isEmpty()){
+			Alert message = new Alert(AlertType.INFORMATION);
+			message.initOwner(localStage);
+			message.setTitle("Search");
+			message.setHeaderText("Cannot Search");
+			message.setContentText("No Photos Found with selected criteria");
+			message.setGraphic(null);
+			message.getDialogPane().getStylesheets().add("/view/loginPane.css");
+			message.showAndWait();
+			return;
 		}
 		try{
 			
