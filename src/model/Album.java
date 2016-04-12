@@ -13,26 +13,50 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextAlignment;
-
+/**
+ * The album class - defines attributes of the album. 
+ */
 public class Album implements Serializable{
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The album name. */
 	String albumName;
+	
+	/** The number photos. */
 	public int numPhotos;
+	
+	/** The oldest photo. */
 	Calendar oldest = null;   // when new photo is added compare time as well as date
+	
+	/** The newest photo */
 	Calendar newest = null;
+	
+	/** The photos arraylist */
 	ArrayList<Photo> photos;
+	
+	/** The path of the file */
 	String path = "";
 	
+	/** The create album */
 	transient Boolean create = false;
+	
+	/** Label*/
 	transient Label label;
+	
+	/** The image of the album */
 	transient Image image;
+	
+	/** The image view where image lies */
 	transient ImageView imageView;
 	
 	
+	/**
+	 * Instantiates a new album.
+	 *
+	 * @param name album name
+	 */
 	public Album(String name){
 		this.albumName = name;
 		photos = new ArrayList<Photo>();
@@ -41,17 +65,39 @@ public class Album implements Serializable{
 		create = true;
 		setAlbumCover();
 	}
+	
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
 	public Label getLabel(){
 		return label;
 	}
+	
+	/**
+	 * Gets the album name.
+	 *
+	 * @return the album name
+	 */
 	public String getAlbumName()
 	{
 		return albumName;
 	}
+	
+	/**
+	 * Sets the album.
+	 *
+	 * @param name the new album
+	 */
 	public void setAlbum(String name)
 	{
 		albumName = name;
 	}
+	
+	/**
+	 * Update dates.
+	 */
 	public void updateDates(){
 		if(photos.isEmpty()){
 			oldest = null;
@@ -71,9 +117,20 @@ public class Album implements Serializable{
 		}
 	}
 	
+	/**
+	 * Gets the photos.
+	 *
+	 * @return the photos
+	 */
 	public ArrayList<Photo> getPhotos(){
 		return photos;
 	}
+	
+	/**
+	 * Sets the album cover.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean setAlbumCover(){
 		if(path.isEmpty()){
 			path = "/view/albumIcon.png";
@@ -108,6 +165,9 @@ public class Album implements Serializable{
 	}
 		
 	
+	/**
+	 * Select image.
+	 */
 	public void selectImage(){
 		for(int i = 0; i < albumPaneController.albums.size(); i++){
 			if(albumPaneController.albums.get(i).label.getStylesheets().size() == 2){
@@ -131,6 +191,9 @@ public class Album implements Serializable{
 	//	}
 //	}
 	
+	/**
+	 * To string - Album. Print its attributes. 
+	 */
 	public String toString(){
 		String s = albumName + "  -  " + photos.size() + " photos\n";
 		if(oldest == null && newest == null){

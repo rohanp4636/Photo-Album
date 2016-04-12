@@ -8,13 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-
-
+/**
+ * Photo Album Class - defines attributes of the Photo Album
+ */
 public class PhotoAlbum extends Application {
+	
+	/** The admin obj. */
 	Admin admin;
 	
-
-	
+	/**
+	 * 
+	 */
 	public void init() throws Exception{
 		try{
 			admin = Admin.readAdmin();
@@ -26,7 +30,11 @@ public class PhotoAlbum extends Application {
 		
 	}
 	
+
 	//when saving make all static selection var false or nulll. also check other static stuff;
+	/**
+	 * 
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -55,6 +63,9 @@ public class PhotoAlbum extends Application {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void stop() throws Exception{
 		try{
 			Admin.writeAdmin(admin);
@@ -64,6 +75,11 @@ public class PhotoAlbum extends Application {
 		}
 	}
 	
+	/**
+	 * The main method runs the photo album.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

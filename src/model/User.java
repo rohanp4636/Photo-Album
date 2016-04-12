@@ -15,26 +15,42 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.text.TextAlignment;
 
+/**
+ * User Class - defines attributes of the User. 
+ */
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The user name. */
 	public String userName;
 
+	/** The albums arraylist */
 	ArrayList<Album> albums;
 		
+	/** The path */
 	String path = "";
 	
+	/** The create user */
 	transient Boolean create = false;
+	
+	/** The label. */
 	transient Label label;
+	
+	/** The image. */
 	transient Image image;
+	
+	/** The image view. */
 	transient ImageView imageView;
 	
 
 	
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param name username
+	 */
 	public User(String name){
 		albums = new ArrayList<Album>();
 		this.userName = name;
@@ -43,13 +59,31 @@ public class User implements Serializable {
 		create = true;
 		this.setUserImage();
 	}
+	
+	/**
+	 * Gets the albums.
+	 *
+	 * @return the albums
+	 */
 	public ArrayList<Album> getAlbums(){
 		return albums;
 	}
+	
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
 	public Label getLabel(){
 		return label;
 	}
 	
+	/**
+	 * Update album.
+	 *
+	 * @param apc the album pane controller
+	 * @param album the album
+	 */
 	public void updateAlbum(albumPaneController apc, Album album){
 		for(Album i: albums){
 			i.label.setText(i.toString());
@@ -59,6 +93,11 @@ public class User implements Serializable {
 	}
 	
 	
+	/**
+	 * Sets the user image.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean setUserImage(){
 		if(path.isEmpty()){
 			path = "/view/user2.png";
@@ -94,6 +133,9 @@ public class User implements Serializable {
 		return true;
 	}
 	
+	/**
+	 * Select image - method of listeners for selection of users. 
+	 */
 	public void selectImage(){
 		for(int i = 0; i < adminPaneController.users.size(); i++){
 			if(adminPaneController.users.get(i).label.getStylesheets().size() == 2){
