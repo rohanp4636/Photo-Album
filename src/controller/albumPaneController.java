@@ -412,6 +412,7 @@ public class albumPaneController {
 	/**
 	 * Logout - When the logout button is clicked this method is executed. 
 	 * @param e ActionEvent E
+	 * @throws IOException
 	 */
 	public void logout(ActionEvent e) throws IOException{
 		deselect();
@@ -440,7 +441,7 @@ public class albumPaneController {
 	}
 	/**
 	 * Gets the tilepane. 
-	 * 
+	 * @return tile pane
 	 */
 	public TilePane getTPane(){
 		return this.tilePane;

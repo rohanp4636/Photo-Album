@@ -17,7 +17,7 @@ public class PhotoAlbum extends Application {
 	Admin admin;
 	
 	/**
-	 * 
+	 * Close the read admin method and loads up the userdat file
 	 */
 	public void init() throws Exception{
 		try{
@@ -33,7 +33,7 @@ public class PhotoAlbum extends Application {
 
 	//when saving make all static selection var false or nulll. also check other static stuff;
 	/**
-	 * 
+	 * Starts the login pane controller
 	 */
 	@Override
 	public void start(Stage primaryStage) {
@@ -64,7 +64,7 @@ public class PhotoAlbum extends Application {
 	}
 	
 	/**
-	 * 
+	 * when the app is closed it saves it in the data file
 	 */
 	public void stop() throws Exception{
 		try{

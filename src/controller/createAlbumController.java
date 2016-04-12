@@ -53,7 +53,7 @@ public class createAlbumController {
 	 * @param apc album pane controller
 	 * @param albums album array
 	 * @param mpc move photo controller
-	 * @param arraylist of photos
+	 * @param searchPhoto arraylist of photos
 	 * @param ppc photo pane controller.
 	 */
 	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums, movePhotoController mpc, ArrayList<Photo> searchPhoto,photoPaneController ppc) {
