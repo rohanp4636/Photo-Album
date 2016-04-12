@@ -220,7 +220,7 @@ public class albumPaneController {
 	/**
 	 * Create Album - When the Create album button is clicked this method is executed. 
 	 * @param e ActionEvent E
-	 * @throws IOException
+	 * @throws IOException  throw an exception. 
 	 */
 	public void createAlbum(ActionEvent e) throws IOException{
 		   deselect();
@@ -412,7 +412,7 @@ public class albumPaneController {
 	/**
 	 * Logout - When the logout button is clicked this method is executed. 
 	 * @param e ActionEvent E
-	 * @throws IOException
+	 * @throws IOException  throw an exception. 
 	 */
 	public void logout(ActionEvent e) throws IOException{
 		deselect();
