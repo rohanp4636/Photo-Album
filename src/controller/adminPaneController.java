@@ -180,7 +180,7 @@ public class adminPaneController {
 	/**
 	 * Create User  - When the Create button is clicked this method is executed.
 	 * @param e ActionEvent e
-	 * @throws IOException throw an exception. 
+	 * @throws IOException 
 	 */
 	public void createUser(ActionEvent e) throws IOException{
 			deselect();
@@ -209,7 +209,7 @@ public class adminPaneController {
 	/**
 	 * Delete User  - When the Create button is clicked this method is executed.
 	 * @param e ActionEvent e
-	 * @throws IOException throws an exception.
+	 * @throws IOException 
 	 */
 	public void deleteUser(ActionEvent e) throws IOException{
 		
@@ -270,7 +270,7 @@ public class adminPaneController {
 	/**
 	 * Logout - When the logout button is clicked this method is executed. 
 	 * @param e ActionEvent E
-	 * @throws IOException  throw an exception. 
+	 * @throws IOException
 	 */
 	public void logout(ActionEvent e) throws IOException{  
 		deselect();
