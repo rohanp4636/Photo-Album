@@ -22,26 +22,58 @@ import model.Album;
 import model.Tag;
 import model.Photo;
 
-
-
+/**
+ * Search Controller controls the Search Dialog FXML file and implements all the functionalities dealing with Search. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class searchController {
 	
+	/** The from date */
 	@FXML DatePicker from;
+	
+	/** The to date */
 	@FXML DatePicker to;
+	
+	/** The tag type. */
 	@FXML ComboBox<Tag> tagType;
+	
+	/** The tag value. */
 	@FXML ComboBox<String> tagValue;
+	
+	/** The tag area where all the tags appear */
 	@FXML TextArea tagArea;
 
 
 	
+	/** Prev Stage */
 	private Stage localStage;
+	
+	/** The album pane controller. */
 	private albumPaneController apc;
+	
+	/** The album arraylist*/
 	ArrayList<Album> album;
+	
+	/** The photos arraylit */
 	ArrayList<Photo> photos;
+	
+	/** The from date. */
 	Date fromDate;
+	
+	/** The to date. */
 	Date toDate;
+	
+	/** The arraylist with all the tags */
 	ArrayList<Tag> searchTag;
 		
+	/**
+	 * Start initializes the search controller.
+	 *
+	 * @param localStage the previous stage
+	 * @param apc the album pane controller
+	 * @param a the arraylist of albums
+	 */
 	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> a) {
 		this.localStage=localStage;
 		this.apc=apc;
@@ -99,6 +131,13 @@ public class searchController {
 		tagValue.setVisible(false);
 	}
 	
+	/**
+	 * Index of the tag
+	 *
+	 * @param type the tag type
+	 * @param tags the arraylist of all tags tags
+	 * @return the int of index
+	 */
 	public int indexTag(String type, ArrayList<Tag> tags){
 		for(int i = 0; i < tags.size(); i ++){
 			if(tags.get(i).getType().equalsIgnoreCase(type)){
@@ -107,6 +146,10 @@ public class searchController {
 		}
 		return -1;
 	}
+	
+	/**
+	 * Select value appears if the tag type is selected and it populates with the values of the tag type. 
+	 */
 	public void selectVal()
 	{
 		if(tagType.getSelectionModel().getSelectedItem()==null)
@@ -119,6 +162,12 @@ public class searchController {
 			tagValue.setItems(FXCollections.observableArrayList(tagType.getSelectionModel().getSelectedItem().getValue()));
 		}
 	}
+	
+	/**
+	 * When the addtag button is clicked this method is executed. Adds the tag to the tag area to be added to be search. 
+	 *
+	 * @param e the e
+	 */
 	public void addTag(ActionEvent e){
 		
 		if(tagType.getSelectionModel().getSelectedItem()==null)
@@ -196,6 +245,12 @@ public class searchController {
 		tagValue.getSelectionModel().clearSelection();
 	}
 
+	/**
+	 * When the search button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 * @throws ParseException the parse exception
+	 */
 	public void searchOK(ActionEvent e) throws ParseException {
 		//check if valid date
 		//add based on date
@@ -349,6 +404,13 @@ public class searchController {
 		localStage.close();
 	}
 		
+	/**
+	 * Checks if it is same day.
+	 *
+	 * @param currPhoto the current photo
+	 * @param day the day
+	 * @return the boolean if its the same day or not
+	 */
 	public Boolean isSameDay(Photo currPhoto, Calendar day)
 	{
 		String date = new SimpleDateFormat("MM/dd/yyyy").format(day.getTime());
@@ -359,6 +421,11 @@ public class searchController {
 		return false;
 	}
 
+	/**
+	 * When you hit the cancel button this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void searchCancel(ActionEvent e){
 		localStage.close();
 	}

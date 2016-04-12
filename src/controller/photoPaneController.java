@@ -28,26 +28,67 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 import model.User;
-
+/**
+ * Photo Pane Controller controls the photo pane FXML file and implements all the functionalities dealing with photo. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class photoPaneController {
 	
+	/** The tile pane. */
 	@FXML TilePane tilePane;
 	
+	/** The scroll pane. */
 	@FXML ScrollPane scrollPane;
 	
+	/** The create album button used if the search function is used but disabled otherwise */
 	@FXML Button createAlbumButton;
+	
+	/** The primary stage. */
 	Stage primaryStage;
+	
+	/** The users arrayList.  */
 	ArrayList<User> users;
+	
+	/** The photos arrayList */
 	public static ArrayList<Photo> photos;
+	
+	/** The current user. */
 	User currentUser;
+	
+	/** The album index */
 	int userIndex;
+	
+	/** Previous scene */
 	Scene prev;
+	
+	/** Album pane controller. */
 	albumPaneController apc;
+	
+	/** The album obj */
 	Album album;
+	
+	/** The search boolean */
 	Boolean search;
+	
+	/** name of the selected album */
 	public static String selected;
+	
+	/** If the photo is selected */
 	public static Boolean isSelected = false;
 	
+	/**
+	 * Start initializes the photo pane controller.
+	 *
+	 * @param primaryStage the primary stage
+	 * @param user the user arraylist
+	 * @param currentUser the current user object
+	 * @param index the index of the album. 
+	 * @param prev the prev scene
+	 * @param apc the album pane controller
+	 * @param album the album obj
+	 * @param search the search if its activated from search or not. 
+	 */
 	public void start(Stage primaryStage, ArrayList<User> user, User currentUser, int index, Scene prev, albumPaneController apc, Album album, Boolean search) {
 		this.primaryStage = primaryStage;
 		this.users = user;
@@ -82,6 +123,11 @@ public class photoPaneController {
 		
 	}
 	
+	/**
+	 * When the add button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void addPhoto(ActionEvent e){  //use absolute path .. when using demo to submit create it from star???
 		deselect();
 		FileChooser filechooser = new FileChooser();
@@ -167,6 +213,13 @@ public class photoPaneController {
 		deselect();
 	}
 	
+	/**
+	 * Checks if there is photo in another album aswell. 
+	 *
+	 * @param temp temp string
+	 * @param file the file
+	 * @return the photo
+	 */
 	public Photo checkAlbums(String temp, File file){
 		for(int k = 0; k < currentUser.getAlbums().size(); k++){
 			for(int m = 0; m < currentUser.getAlbums().get(k).getPhotos().size(); m++){
@@ -178,6 +231,11 @@ public class photoPaneController {
 		return null;
 	}
 	
+	/**
+	 * When the Remove button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void removePhoto(ActionEvent e){
 		if(photos.size() == 0){
 			Alert message = new Alert(AlertType.INFORMATION);
@@ -242,6 +300,12 @@ public class photoPaneController {
 		deselect();
 	}
 	
+	/**
+	 * When the caption button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void captionPhoto(ActionEvent e) throws IOException{
 		if(photos.size() == 0){
 			Alert message = new Alert(AlertType.INFORMATION);
@@ -293,6 +357,11 @@ public class photoPaneController {
 			deselect();
 	}
 	
+	/**
+	 * When the display button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void displayPhoto(ActionEvent e){
 		if(photos.size()==0)
 		{
@@ -346,6 +415,12 @@ public class photoPaneController {
 		deselect();
 	}
 	
+	/**
+	 * When the tag button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void tagPhoto(ActionEvent e) throws IOException{
 		if(photos.size() == 0){
 			Alert message = new Alert(AlertType.INFORMATION);
@@ -395,6 +470,12 @@ public class photoPaneController {
 	
 	}
 	
+	/**
+	 * When the move button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void movePhoto(ActionEvent e) throws IOException{
 		if(photos.size() == 0){
 			Alert message = new Alert(AlertType.INFORMATION);
@@ -444,6 +525,11 @@ public class photoPaneController {
 			deselect();
 	}
 	
+	/**
+	 * When the Slideshow button is clicked this method is executed. .
+	 *
+	 * @param e the e
+	 */
 	public void slideshow(ActionEvent e){
 		if(photos.size()==0)
 		{
@@ -487,6 +573,13 @@ public class photoPaneController {
 		}
 		deselect();
 	}
+	
+	/**
+	 * create new album from searched photos.
+	 *
+	 * @param e the e
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void createAlbum(ActionEvent e) throws IOException{ // create new album from searched photos.
 		if(!this.search){
 			return;
@@ -514,6 +607,11 @@ public class photoPaneController {
 	}
 	
 	
+	/**
+	 * Back to previous scene
+	 *
+	 * @param e the e
+	 */
 	public void back(ActionEvent e){
 		deselect();
 		album.updateDates();
@@ -527,6 +625,11 @@ public class photoPaneController {
 	}
 	
 	
+	/**
+	 * Gets the selected user.
+	 *
+	 * @return the selected user
+	 */
 	public int getSelectedUser(){
 		if(!isSelected && selected == null){
 			return -1;
@@ -540,6 +643,9 @@ public class photoPaneController {
 		
 	}
 	
+	/**
+	 * Deselect the photo. 
+	 */
 	public void deselect(){
 		int x = getSelectedUser();
 		if(x == -1){

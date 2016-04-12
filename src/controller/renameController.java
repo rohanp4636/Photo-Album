@@ -10,19 +10,41 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Album;
-
-
+/**
+ * Rename Controller controls the rename dialog FXML file and implements all the functionalities dealing with rename. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class renameController {
 	
+	/** The album name. */
 	@FXML TextField albumName;
+	
+	/** The ok button. */
 	@FXML Button okButton;
+	
+	/** The cancel button. */
 	@FXML Button cancelButton;
 	
+	/** The local stage. */
 	private Stage localStage;
+	
+	/** The album pane controller. */
 	private albumPaneController apc;
+	
+	/** The album arraylist. */
 	ArrayList<Album> album;
+	
+	/** The index of the current photo. */
 	int index;
 		
+	/**
+	 * Start initializes the rename controller.
+	 * @param localStage the previous stage
+	 * @param apc the album pane controller
+	 * @param a the album arraylist
+	 * @param i the index of the current photo
+	 */
 	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> a,int i) {
 		this.localStage = localStage;
 		this.apc = apc;
@@ -32,6 +54,11 @@ public class renameController {
 	}
 	
 	
+	/**
+	 * When the OK button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void createOK(ActionEvent e) {
 		String name = albumName.getText().trim().toLowerCase();
 		if(name.isEmpty()){
@@ -76,10 +103,21 @@ public class renameController {
 		
 	}	
 
+	/**
+	 * When the cancel button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void createCancel(ActionEvent e){
 		localStage.close();
 	}
 	
+	/**
+	 * Checks if the album exits to avoid renamaing it to an album that exits. 
+	 *
+	 * @param name the name
+	 * @return the boolean
+	 */
 	public Boolean albumExists(String name){
 		if(album.isEmpty()){
 			return false;

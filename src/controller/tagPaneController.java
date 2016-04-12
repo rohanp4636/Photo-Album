@@ -15,16 +15,40 @@ import javafx.stage.Stage;
 import model.Photo;
 import model.Tag;
 
+/**
+ * tag Controller controls the tag dialog FXML file and implements all the functionalities dealing with tag. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class tagPaneController {
+	
+	/** The tag type. */
 	@FXML TextField tagType;
+	
+	/** The tag value. */
 	@FXML TextField tagValue;
 	
+	/** The tree view. */
 	@FXML TreeView<String>  treeView;
+	
+	/** The local stage. */
 	private Stage localStage;
+	
+	/** The photo obj. */
 	Photo photo;
+	
+	/** The input. */
 	ArrayList<String> input;
+	
+	/** The temp tags */
 	ArrayList<Tag> temp;
 
+	/**
+	 * Start initializes the controller.
+	 *
+	 * @param localStage the previous scene
+	 * @param photo the photo object
+	 */
 	public void start(Stage localStage,  Photo photo) {
 		this.localStage = localStage;
 		this.photo = photo;
@@ -60,6 +84,9 @@ public class tagPaneController {
 
 	}
 	
+	/**
+	 * Delete a tag
+	 */
 	public void delete(){
 		if(treeView.getSelectionModel().getSelectedItem() == null){
 			return;
@@ -96,6 +123,11 @@ public class tagPaneController {
 		
 	}
 	
+	/**
+	 * Add a tag. When the add button is clicked this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void add(ActionEvent e){
 		treeView.getSelectionModel().clearSelection();
 		if(tagType.getText().trim().isEmpty() || tagValue.getText().trim().isEmpty()){
@@ -212,11 +244,21 @@ public class tagPaneController {
 		
 	}
 	
+	/**
+	 * When the ok button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void ok(ActionEvent e){
 		photo.setTags(temp);
 		localStage.close();
 	}
 	
+	/**
+	 * WHen the cancel button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void cancel(ActionEvent e){
 		localStage.close();
 	}

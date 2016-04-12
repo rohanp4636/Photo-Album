@@ -12,20 +12,50 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 
-
+/**
+ * Create album  Controller controls the create album dialog FXML file and implements all the functionalities dealing with creating album. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class createAlbumController {
 	
+	/** The album name. */
 	@FXML TextField albumName;
+	
+	/** The ok button. */
 	@FXML Button okButton;
+	
+	/** The cancel button. */
 	@FXML Button cancelButton;
 	
+	/** The local stage. */
 	private Stage localStage;
+	
+	/** Album Pane controller. */
 	private albumPaneController apc;
+	
+	/** Arraylist of albums */
 	ArrayList<Album> albums;
+	
+	/** move photo controller. */
 	movePhotoController mpc;
+	
+	/** Arraylist of photos */
 	ArrayList<Photo> searchPhoto;
+	
+	/** Photo Pane Controller */
 	photoPaneController ppc;
 	
+	/**
+	 * Start - initializes the controller.
+	 *
+	 * @param localStage prev stage. 
+	 * @param apc album pane controller
+	 * @param albums album array
+	 * @param mpc move photo controller
+	 * @param arraylist of photos
+	 * @param ppc photo pane controller.
+	 */
 	public void start(Stage localStage, albumPaneController apc, ArrayList<Album> albums, movePhotoController mpc, ArrayList<Photo> searchPhoto,photoPaneController ppc) {
 		this.localStage = localStage;
 		this.apc = apc;
@@ -36,6 +66,11 @@ public class createAlbumController {
 	}
 	
 	
+	/**
+	 * OK - When the OK button is hit then this method is executed. 
+	 *
+	 * @param e actionevent e
+	 */
 	public void createOK(ActionEvent e) {
 		String name = albumName.getText().trim().toLowerCase();
 		if(name.isEmpty()){
@@ -93,10 +128,21 @@ public class createAlbumController {
 		
 	}	
 
+	/**
+	 * Cancel - When the Cancel button is hit then this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void createCancel(ActionEvent e){
 		localStage.close();
 	}
 	
+	/**
+	 * Checks if the album exists
+	 *
+	 * @param name the name of the akbum
+	 * @return  boolean if the album exists or not
+	 */
 	public Boolean albumExists(String name){
 		if(albums.isEmpty()){
 			return false;

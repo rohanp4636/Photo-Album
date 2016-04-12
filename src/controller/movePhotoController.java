@@ -17,18 +17,44 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 
+/**
+ * Move Photo Controller controls the Move dialog box's FXML file and implements all the functionalities dealing with move. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class movePhotoController {
 	
+	/** The album box. */
 	@FXML ComboBox<String> albumBox;
 	
-	
-	
+	/** The previous stage. */
 	Stage localStage;
+	
+	/** Photo pane controller*/
 	photoPaneController ppc;
+	
+	/** The photo. */
 	Photo photo;
+	
+	/** The tile pane. */
 	TilePane tilePane;
+	
+	/** The albums arraylist.  */
 	ArrayList<Album> albums;
+	
+	/** The album obj */
 	Album album;
+	
+	/**
+	 * Start initializes the move photo controller.
+	 *
+	 * @param localStage the previous stage
+	 * @param ppc the photo pane controller
+	 * @param photo the photo obj
+	 * @param tilePane the tile pane where elements populated
+	 * @param albums the albums list
+	 * @param album the album itself
+	 */
 	public void start(Stage localStage, photoPaneController ppc, Photo photo, TilePane tilePane,ArrayList<Album> albums, Album album) {
 		this.tilePane = tilePane;
 		this.localStage = localStage;
@@ -48,6 +74,12 @@ public class movePhotoController {
 		
 	}
 	
+	/**
+	 * Move to a new  album. When you hit the new album button this method is executed 
+	 *
+	 * @param e the e
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void newAlbum(ActionEvent e) throws IOException{	   
 		   FXMLLoader load = new FXMLLoader();
 		   load.setLocation(getClass().getResource("/view/create.fxml"));
@@ -61,6 +93,11 @@ public class movePhotoController {
 		   root.requestFocus();
 	}
 	
+	/**
+	 * When the Ok button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void okMove(ActionEvent e) {
 		if(albumBox.getSelectionModel().getSelectedItem() == null){
 			Alert message = new Alert(AlertType.INFORMATION);
@@ -113,6 +150,11 @@ public class movePhotoController {
 		
 	}	
 
+	/**
+	 * When the cancel button is hit this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void cancelMove(ActionEvent e){
 		localStage.close();
 	}

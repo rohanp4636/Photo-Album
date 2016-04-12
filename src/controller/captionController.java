@@ -11,24 +11,45 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Photo;
-
-
+/**
+ * Caption Controller controls the caption dialog box, the FXML file and implements all the functionalities dealing with Caption.
+ * @author Daivik Sheth | Rohan Patel
+ */
 public class captionController {
 	
+	/**caption */
 	@FXML TextArea caption;
+	
+	/**ok button*/
 	@FXML Button okButton;
+	
+	/**cancel button*/
 	@FXML Button cancelButton;
 	
+	/** local stage*/
 	private Stage localStage;
-	//private photoPaneController ppc;
+	
+	/**photo*/
 	Photo photo;
+	
+	/**tile pane */
 	TilePane tilePane;
+	
+	/** recaption */
 	Boolean recaption = false;
 		
+	/**
+	 *  Start initializes the caption pane controller.
+	 *
+	 * @param localStage previous
+	 * @param ppc Photo Pane Controller
+	 * @param photo Photo object that you are putting a caption on
+	 * @param recaption if its recaption or not. 
+	 * @param tilePane the tile pane where its populated. 
+	 */
 	public void start(Stage localStage, photoPaneController ppc, Photo photo, boolean recaption, TilePane tilePane) {
 		this.tilePane = tilePane;
 		this.localStage = localStage;
-		//this.ppc = ppc;
 		this.photo = photo;
 		caption.setWrapText(true);
 		this.recaption = recaption;
@@ -43,6 +64,11 @@ public class captionController {
 	}
 	
 	
+	/**
+	 * Ok Caption - When the Ok button is hit then this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void okCaption(ActionEvent e) {
 		String cap = caption.getText().trim();
 		if(cap.isEmpty() && !recaption){
@@ -75,6 +101,11 @@ public class captionController {
 		
 	}	
 
+	/**
+	 * Cancel Caption - When the Cancel button is hit then this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void cancelCaption(ActionEvent e){
 		localStage.close();
 	}

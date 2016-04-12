@@ -17,25 +17,63 @@ import javafx.scene.layout.HBox;
 
 import javafx.stage.Stage;
 import model.Photo;
-
+/**
+ * Slideshow Controller controls the sideshow pane FXML file and implements all the functionalities dealing with slideshow. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class slideShowController {
 	
+	/** The image box. */
 	@FXML HBox imageBox;
+	
+	/** The auto slideshow toggle. */
 	@FXML ToggleButton auto;
+	
+	/** The back button. */
 	@FXML Button backButton;
+	
+	/** The prev button. */
 	@FXML Button prevButton;
+	
+	/** The next button. */
 	@FXML Button nextButton;
+	
+	/** The image view where photo is displayed */
 	@FXML ImageView imageView;
 	
 
+	/** The primary stage prev stage */
 	Stage primaryStage;
+	
+	/** array list of photos*/
 	ArrayList<Photo> photos;
+	
+	/** The prev. */
 	Scene prev;
+	
+	/** photo pane controller. */
 	photoPaneController ppc;
+	
+	/** The user index. */
 	int userIndex;
+	
+	/** The photo. */
 	Photo photo;
+	
+	/** Timer */
 	Timer t;
 	
+	/**
+	 * Start initializes the controller.
+	 *
+	 * @param ps the previous stage
+	 * @param p the photos array
+	 * @param prev the prev scene
+	 * @param ppc the photo pane controller
+	 * @param i the index
+	 * @param pho the photo obj
+	 */
 	public void start(Stage ps,ArrayList<Photo> p, Scene prev,photoPaneController ppc,int i,Photo pho) {
 		this.primaryStage=ps;
 		this.photos=p;
@@ -45,8 +83,13 @@ public class slideShowController {
 		this.photo=pho;
 		setPhoto();
 		t=new Timer();
-		
 	}
+	
+	/**
+	 * Next photo.
+	 *
+	 * @param e the e
+	 */
 	public void nextPhoto(ActionEvent e){
 		if(this.userIndex == (photos.size()-1)){
 			this.userIndex = 0;
@@ -57,6 +100,11 @@ public class slideShowController {
 		setPhoto();
 	}
 	
+	/**
+	 * Prev photo.
+	 *
+	 * @param e the e
+	 */
 	public void prevPhoto(ActionEvent e){
 		if(this.userIndex == 0){
 			this.userIndex = photos.size()-1;
@@ -67,6 +115,9 @@ public class slideShowController {
 		setPhoto();
 	}
 	
+	/**
+	 * Sets the photo in the hbox and use an animation while setting photo. 
+	 */
 	public void setPhoto(){
 		
 		Image i = photos.get(userIndex).getImage();
@@ -83,12 +134,20 @@ public class slideShowController {
 	        fade.play();
 		}
 	}
+	
+	/**
+	 * Slideshow Timer Task
+	 */
 	private class slideShowTimer extends TimerTask {
-	    public void run() {
+	    
+    	public void run() {
 	      nextP();
 	    }
 	 }
 
+	/**
+	 * Next photo, remove the buttons since its auto. 
+	 */
 	public void nextP()
 	{
 		if(this.userIndex == (photos.size()-1)){
@@ -104,6 +163,12 @@ public class slideShowController {
 		t.schedule(new slideShowTimer(), 5000);
 	}
 	
+	/**
+	 * When the auto slideshow toggle is ued this method is executed. Auto slideshow with FADE transition. 
+	 *
+	 * @param e the e
+	 * @throws InterruptedException the interrupted exception
+	 */
 	public void autoSlideshow(ActionEvent e) throws InterruptedException
 	{
 		
@@ -123,6 +188,12 @@ public class slideShowController {
 			prevButton.setVisible(true);
 		}
 	}
+	
+	/**
+	 * Back to previous scene. 
+	 *
+	 * @param e the e
+	 */
 	public void back(ActionEvent e){
 		t.cancel();
 		t.purge();

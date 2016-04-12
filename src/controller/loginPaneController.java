@@ -17,16 +17,35 @@ import model.Admin;
 import model.Album;
 import model.User;
 
-
+/**
+ * Login Pane Controller controls the login pane FXML file and implements all the functionalities dealing with login. 
+ * @author Daivik Sheth | Rohan Patel
+ *
+ * */
 public class loginPaneController {
 	
+	/** The user name. */
 	@FXML TextField userName;
 	
+	/** The primary stage or previous stage */
 	Stage primaryStage;
+	
+	/** Arraylist of all the users*/
 	ArrayList<User> users;
+	
+	/** The admin obj */
 	Admin admin;
+	
+	/** The login scene. */
 	Scene loginScene;
 	
+	/**
+	 * Start initializes the login pane controller.
+	 *
+	 * @param primaryStage the previous stage
+	 * @param user list of users
+	 * @param admin admin obj
+	 */
 	public void start(Stage primaryStage, ArrayList<User> user, Admin admin) {
 		this.primaryStage = primaryStage;
 		this.users = user;
@@ -35,6 +54,11 @@ public class loginPaneController {
 	}
 	
 	
+	/**
+	 * WHen you hit the login button this method is executed. 
+	 *
+	 * @param e the e
+	 */
 	public void login(ActionEvent e) {
 		loginScene = primaryStage.getScene();
 		String s = userName.getText().trim().toLowerCase();
@@ -67,6 +91,10 @@ public class loginPaneController {
 		}		
 		
 	}	
+	
+	/**
+	 * Admin login.
+	 */
 	public void adminLogin() {
 		try{
 			FXMLLoader loader= new FXMLLoader();
@@ -83,6 +111,14 @@ public class loginPaneController {
 		}
 	}
 	
+	/**
+	 * User login.
+	 *
+	 * @param name username
+	 * @param album album list
+	 * @param user the current user obj
+	 * @param index the index of the user. 
+	 */
 	public void userLogin(String name, ArrayList<Album> album, User user, int index){
 		try{
 			FXMLLoader loader= new FXMLLoader();
